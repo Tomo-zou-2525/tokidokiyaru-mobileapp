@@ -1,0 +1,6 @@
+package com.example.tokidoki_mobile
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
