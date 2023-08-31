@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tokidoki_mobile/domain/task.dart';
 
 class EditTaskPage extends StatelessWidget {
-  final int id;
+  final Task task;
 
-  const EditTaskPage({Key? key, required this.id}) : super(key: key);
+  const EditTaskPage({Key? key, required this.task}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +13,7 @@ class EditTaskPage extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('タスク編集'),
       ),
-      body: Center(child: Text('タスク $id')),
+      body: Center(child: Text(task.name)),
     );
   }
 }
