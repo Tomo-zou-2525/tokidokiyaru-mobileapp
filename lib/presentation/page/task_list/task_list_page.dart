@@ -19,31 +19,33 @@ class TaskListPage extends ConsumerWidget {
         itemCount: taskList.length,
         itemBuilder: (BuildContext context, int index) {
           final task = taskList[index];
-          return Container(
+          return Padding(
             key: ValueKey(task.id),
-            // padding: const EdgeInsets.all(8.0),
-            height: 80,
-            decoration: BoxDecoration(
-              border:
-                  Border.all(color: Theme.of(context).colorScheme.secondary),
-              color: Theme.of(context).colorScheme.surface,
-            ),
-            child: ListTile(
-              contentPadding: const EdgeInsets.all(8.0),
-              title: Text(
-                '${task.name} ${task.getLastRunDate()}',
-                style: const TextStyle(fontSize: 20),
+            padding: const EdgeInsets.all(1.0),
+            child: Container(
+              height: 80,
+              decoration: BoxDecoration(
+                border:
+                    Border.all(color: Theme.of(context).colorScheme.secondary),
+                color: Theme.of(context).colorScheme.surface,
               ),
-              trailing: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EditTaskPage(task: task),
-                    ),
-                  );
-                },
-                child: const Icon(Icons.punch_clock, size: 40),
+              child: ListTile(
+                contentPadding: const EdgeInsets.all(8.0),
+                title: Text(
+                  '${task.name} ${task.getLastRunDate()}',
+                  style: const TextStyle(fontSize: 20),
+                ),
+                trailing: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditTaskPage(task: task),
+                      ),
+                    );
+                  },
+                  child: const Icon(Icons.punch_clock, size: 40),
+                ),
               ),
             ),
           );
