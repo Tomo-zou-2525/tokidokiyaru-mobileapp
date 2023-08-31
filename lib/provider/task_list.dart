@@ -1,5 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:tokidoki_mobile/domain/task.dart';
+import 'package:tokidoki_mobile/model/task.dart';
 part 'task_list.g.dart';
 
 @riverpod
@@ -7,7 +7,7 @@ class TaskListNotifier extends _$TaskListNotifier {
   @override
   Future<List<Task>> build() async {
     // TODO: API呼び出しで取得したデータを返す代わりに、3秒待ってモックデータを返す
-    const sec3 = Duration(seconds: 10);
+    const sec3 = Duration(seconds: 3);
     await Future.delayed(sec3);
     // mock data
     return [

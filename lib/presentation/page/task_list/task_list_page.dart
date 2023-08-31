@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tokidoki_mobile/provider/task_list.dart';
 import 'package:tokidoki_mobile/presentation/page/add_task/add_task_page.dart';
 import 'package:tokidoki_mobile/presentation/page/edit_task/edit_task_page.dart';
+import 'package:tokidoki_mobile/presentation/component/loader.dart';
 
 class TaskListPage extends ConsumerWidget {
   const TaskListPage({Key? key}) : super(key: key);
@@ -11,11 +12,7 @@ class TaskListPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final taskListFuture = ref.watch(taskListNotifierProvider);
     final mainWidget = taskListFuture.when(
-      loading: () => Container(
-          alignment: Alignment.center,
-          child: CircularProgressIndicator(
-            color: Theme.of(context).colorScheme.primary,
-          )),
+      loading: () => createProgressIndicator(context),
       error: (e, s) => const Text('タスク一覧の取得に失敗しました。'),
       data: (taskList) => ReorderableListView.builder(
         padding: const EdgeInsets.all(8),

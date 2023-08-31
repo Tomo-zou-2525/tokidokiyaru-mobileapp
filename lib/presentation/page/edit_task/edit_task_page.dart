@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tokidoki_mobile/domain/task.dart';
+import 'package:tokidoki_mobile/model/task.dart';
 
 class EditTaskPage extends StatelessWidget {
   final Task task;
