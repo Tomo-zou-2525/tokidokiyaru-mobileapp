@@ -33,10 +33,17 @@ class TaskListNotifier extends _$TaskListNotifier {
   }
 
   void updateOrder(List<Task> taskList) async {
+    List<Task> newTaskList = [];
     taskList.asMap().forEach((index, task) {
-      task.order = index + 1;
+      Task(
+        id: task.id,
+        name: task.name,
+        order: index + 1,
+        runAtList: task.runAtList,
+      );
+      newTaskList.add(task);
     });
     // TODO: APIを呼び出して更新する
-    state = AsyncValue.data(taskList);
+    state = AsyncValue.data(newTaskList);
   }
 }

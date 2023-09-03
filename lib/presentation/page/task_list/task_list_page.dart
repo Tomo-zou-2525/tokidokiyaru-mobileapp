@@ -32,7 +32,7 @@ class TaskListPage extends ConsumerWidget {
               child: ListTile(
                 contentPadding: const EdgeInsets.all(8.0),
                 title: Text(
-                  '${task.name} ${task.getLastRunDate()}',
+                  '${task.name} ${task.lastRunDate}',
                   style: const TextStyle(fontSize: 20),
                 ),
                 trailing: ElevatedButton(
