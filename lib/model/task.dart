@@ -2,7 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'task.freezed.dart';
 
 @freezed
-abstract class Task with _$Task {
+abstract class Task implements _$Task {
   const factory Task({
     required int id,
     required String name,
@@ -11,9 +11,6 @@ abstract class Task with _$Task {
   }) = _Task;
 
   const Task._();
-
-  @override
-  List<DateTime> get runAtList;
 
   String get lastRunDate =>
       '${runAtList.last.year}/${runAtList.last.month}/${runAtList.last.day}';

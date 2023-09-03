@@ -35,13 +35,7 @@ class TaskListNotifier extends _$TaskListNotifier {
   void updateOrder(List<Task> taskList) async {
     List<Task> newTaskList = [];
     taskList.asMap().forEach((index, task) {
-      Task(
-        id: task.id,
-        name: task.name,
-        order: index + 1,
-        runAtList: task.runAtList,
-      );
-      newTaskList.add(task);
+      newTaskList.add(task.copyWith(order: index + 1));
     });
     // TODO: APIを呼び出して更新する
     state = AsyncValue.data(newTaskList);

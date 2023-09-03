@@ -13,7 +13,15 @@ class EditTaskPage extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('タスク編集'),
       ),
-      body: Center(child: Text(task.name)),
+      body: Center(
+          child: Column(
+        children: [
+          Text('id: ${task.id.toString()}'),
+          Text('name: ${task.name}'),
+          Text('order: ${task.order.toString()}'),
+          Text('lastRunDate: ${task.lastRunDate}'),
+        ],
+      )),
     );
   }
 }
