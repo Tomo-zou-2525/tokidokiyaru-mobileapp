@@ -1,5 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:tokidoki_mobile/model/task.dart';
+import 'package:tokidoki_mobile/domain/task.dart';
 part 'task_list.g.dart';
 
 @riverpod
