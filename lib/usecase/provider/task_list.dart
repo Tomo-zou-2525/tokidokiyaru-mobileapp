@@ -27,7 +27,10 @@ class TaskListNotifier extends _$TaskListNotifier {
   }
 
   Future<void> addTask(String name) async {
-    await _repository.addTask(name);
+    final task = <String, dynamic>{
+      'name': name,
+    };
+    await _repository.addTask(task);
     await getTaskList();
   }
 }

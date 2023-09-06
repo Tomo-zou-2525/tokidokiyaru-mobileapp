@@ -2,9 +2,6 @@ import 'dart:convert';
 
 import 'package:tokidoki_mobile/domain/task.dart';
 import 'package:tokidoki_mobile/infrastructure/api/client.dart';
-import 'package:tokidoki_mobile/infrastructure/api/dto/add_task/add_task.dart';
-// import 'package:tokidoki_mobile/infrastructure/api/dto/get_task/get_task.dart';
-import 'package:tokidoki_mobile/infrastructure/api/dto/update_task/update_task.dart';
 
 // TODO: エラーハンドリング
 // TODO: Mockできない？ので、Providerで管理したい（方法がわからない）
@@ -23,11 +20,8 @@ class API {
 
   Future<List<Task>> getTaskList() async {
     // final response = await _client.get('$_baseEndpoint/tasks');
-    // final jsonResponse =
-    //     jsonDecode(response.body) as List<Map<String, dynamic>>;
-    // return jsonResponse
-    //     .map((data) => GetTask.fromJson(data).toDomain())
-    //     .toList();
+    // final jsonTasks = jsonDecode(response.body) as List<Map<String, dynamic>>;
+    // return jsonTasks.map((json) => Task.fromJson(json)).toList();
 
     // TODO: APIを呼び出す代わりに、3秒待ってモックデータを返す
     const duration = Duration(seconds: 3);
@@ -55,19 +49,18 @@ class API {
   }
 
   Future<void> updateTaskList(List<Task> taskList) async {
-    String jsonList = jsonEncode(
-        taskList.map((task) => UpdateTask.fromDomain(task)).toList());
-    // await _client.put('$_baseEndpoint/tasks', body: jsonList);
+    String jsonTasks = jsonEncode(taskList);
+    // await _client.put('$_baseEndpoint/tasks', body: jsonTasks);
 
     // TODO: APIを呼び出す代わりに、1秒待つ
-    print(jsonList);
+    print(jsonTasks);
     const duration = Duration(seconds: 1);
     await Future.delayed(duration);
   }
 
-  Future<void> addTask(String name) async {
-    String json = jsonEncode(AddTask(name: name).toJson());
-    // await _client.post('$_baseEndpoint/task', body: json);
+  Future<void> addTask(Map<String, dynamic> task) async {
+    String json = jsonEncode(task);
+    // await _client.post('$_baseEndpoint/tasks', body: json);
 
     // TODO: APIを呼び出す代わりに、1秒待つ
     print(json);
