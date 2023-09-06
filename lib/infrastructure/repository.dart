@@ -4,10 +4,18 @@ import 'dart:convert';
 import 'package:tokidoki_mobile/domain/task.dart';
 
 // TODO: エラーハンドリング
+// TODO: Mockできない？ので、シングルトンではなくてProviderで管理したい（方法がわからない）
 
 class Repository {
+  static final Repository _singleton = Repository._internal();
   // TODO: エンドポイントを直す（Flavorで分ける？）
-  String baseEndpoint = 'localhost:8000';
+  static const String _baseEndpoint = 'localhost:8000';
+
+  factory Repository() {
+    return _singleton;
+  }
+
+  Repository._internal();
 
   Future<List<Task>> getTaskList() async {
     // final response = await http.get(Uri.parse('$baseEndpoint/tasks'));
