@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+Task _$TaskFromJson(Map<String, dynamic> json) {
+  return _Task.fromJson(json);
+}
+
 /// @nodoc
 mixin _$Task {
   int get id => throw _privateConstructorUsedError;
@@ -21,6 +25,7 @@ mixin _$Task {
   int get order => throw _privateConstructorUsedError;
   List<DateTime> get runAtList => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $TaskCopyWith<Task> get copyWith => throw _privateConstructorUsedError;
 }
@@ -117,7 +122,7 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res, _$_Task>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_Task extends _Task {
   const _$_Task(
       {required this.id,
@@ -126,6 +131,8 @@ class _$_Task extends _Task {
       required final List<DateTime> runAtList})
       : _runAtList = runAtList,
         super._();
+
+  factory _$_Task.fromJson(Map<String, dynamic> json) => _$$_TaskFromJson(json);
 
   @override
   final int id;
@@ -158,6 +165,7 @@ class _$_Task extends _Task {
                 .equals(other._runAtList, _runAtList));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, order,
       const DeepCollectionEquality().hash(_runAtList));
@@ -167,6 +175,13 @@ class _$_Task extends _Task {
   @pragma('vm:prefer-inline')
   _$$_TaskCopyWith<_$_Task> get copyWith =>
       __$$_TaskCopyWithImpl<_$_Task>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_TaskToJson(
+      this,
+    );
+  }
 }
 
 abstract class _Task extends Task {
@@ -176,6 +191,8 @@ abstract class _Task extends Task {
       required final int order,
       required final List<DateTime> runAtList}) = _$_Task;
   const _Task._() : super._();
+
+  factory _Task.fromJson(Map<String, dynamic> json) = _$_Task.fromJson;
 
   @override
   int get id;

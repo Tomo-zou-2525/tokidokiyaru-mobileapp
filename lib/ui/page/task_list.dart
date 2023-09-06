@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tokidoki_mobile/application/provider/task_list.dart';
-import 'package:tokidoki_mobile/presentation/page/add_task.dart';
-import 'package:tokidoki_mobile/presentation/page/edit_task.dart';
-import 'package:tokidoki_mobile/presentation/component/loader.dart';
+import 'package:tokidoki_mobile/usecase/provider/task_list.dart';
+import 'package:tokidoki_mobile/ui/page/add_task.dart';
+import 'package:tokidoki_mobile/ui/page/edit_task.dart';
+import 'package:tokidoki_mobile/ui/component/loader.dart';
 
 class TaskListPage extends ConsumerWidget {
   const TaskListPage({Key? key}) : super(key: key);

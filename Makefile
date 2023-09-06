@@ -1,7 +1,10 @@
-.PHONY: setup generate
+.PHONY: setup generate generate-watch
 setup:
 	flutter clean
 	flutter pub get
 
-generate:
+gen:
 	flutter pub run build_runner build --delete-conflicting-outputs
+
+gen_watch:
+	flutter pub run build_runner watch --delete-conflicting-outputs
