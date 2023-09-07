@@ -28,6 +28,9 @@ linter:
 # https://dart.dev/guides/language/analysis-options
 
 # TODO: riverpodが提供しているLinter。テストのワーニングが消えないので、解決策が見つかるまで無効化
-# analyzer:
-#   plugins:
-#     - custom_lint
+analyzer:
+  # plugins:
+  #   - custom_lint
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
