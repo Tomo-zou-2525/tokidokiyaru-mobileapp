@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tokidoki_mobile/usecase/provider/task_list.dart';
+import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 
 // TODO: 一覧にタスクを表示するために仮実装しただけ。後でデザインは整える。
 
