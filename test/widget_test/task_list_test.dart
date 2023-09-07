@@ -3,17 +3,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
 import 'package:tokidoki_mobile/domain/repository/repository.dart';
-import 'package:tokidoki_mobile/main.dart';
+import 'package:tokidoki_mobile/ui/page/task_list.dart';
 
-import './fake_api.dart';
-import './utility.dart';
+import '../fake_api.dart';
+import '../utility.dart';
 
 void main() {
   testWidgets('タスク一覧が空の時にメッセージが表示されること', (WidgetTester tester) async {
     await tester.pumpWidget(
       ProviderScope(overrides: [
         repositoryProvider.overrideWithValue(FakeAPI(taskList: []))
-      ], child: const App()),
+      ], child: const MaterialApp(home: TaskListPage())),
     );
 
     await tester.pumpAndSettle();
@@ -44,7 +44,7 @@ void main() {
             runAtList: [DateTime.parse('2023-04-29 18:53:55.000')],
           ),
         ]))
-      ], child: const App()),
+      ], child: const MaterialApp(home: TaskListPage())),
     );
 
     await tester.pumpAndSettle();
