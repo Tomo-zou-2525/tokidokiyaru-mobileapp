@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tokidoki_mobile/domain/repository/repository.dart';
+import 'package:tokidoki_mobile/infrastructure/api/api.dart';
 import 'package:tokidoki_mobile/ui/page/task_list.dart';
 
 void main() {
-  runApp(const ProviderScope(child: App()));
+  runApp(
+    ProviderScope(
+        overrides: [repositoryProvider.overrideWithValue(API())],
+        child: const App()),
+  );
 }
 
 class App extends StatelessWidget {

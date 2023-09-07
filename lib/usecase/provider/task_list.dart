@@ -1,16 +1,15 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:tokidoki_mobile/domain/task.dart';
-import 'package:tokidoki_mobile/infrastructure/api/api.dart';
+import 'package:tokidoki_mobile/domain/entity/task.dart';
+import 'package:tokidoki_mobile/domain/repository/repository.dart';
 
 part 'task_list.g.dart';
 
 @riverpod
 class TaskListNotifier extends _$TaskListNotifier {
-  final API _repository = API();
-
   @override
   Future<List<Task>> build() async {
-    return await _repository.getTaskList();
+    final repository = ref.read(repositoryProvider);
+    return await repository.getTaskList();
   }
 
   Future<void> getTaskList() async {
@@ -18,19 +17,18 @@ class TaskListNotifier extends _$TaskListNotifier {
   }
 
   Future<void> updateOrder(List<Task> taskList) async {
+    final repository = ref.read(repositoryProvider);
     List<Task> newTaskList = [];
     taskList.asMap().forEach((index, task) {
       newTaskList.add(task.copyWith(order: index + 1));
     });
     state = AsyncValue.data(newTaskList);
-    await _repository.updateTaskList(newTaskList);
+    await repository.updateTaskList(newTaskList);
   }
 
   Future<void> addTask(String name) async {
-    final task = <String, dynamic>{
-      'name': name,
-    };
-    await _repository.addTask(task);
+    final repository = ref.read(repositoryProvider);
+    await repository.addTask(name);
     await getTaskList();
   }
 }

@@ -1,23 +1,17 @@
 import 'dart:convert';
 
-import 'package:tokidoki_mobile/domain/task.dart';
+import 'package:tokidoki_mobile/domain/entity/task.dart';
+import 'package:tokidoki_mobile/domain/repository/repository.dart';
 import 'package:tokidoki_mobile/infrastructure/api/client.dart';
 
 // TODO: エラーハンドリング
-// TODO: Mockできない？ので、Providerで管理したい（方法がわからない）
 
-class API {
-  static final _singleton = API._internal();
+class API implements Repository{
   // TODO: エンドポイントを直す（Flavorで分ける？）
-  static const String _baseEndpoint = 'localhost:8000';
-  static final _client = CustomHttpClient();
+  final String _baseEndpoint = 'localhost:8000';
+  final _client = CustomHttpClient();
 
-  factory API() {
-    return _singleton;
-  }
-
-  API._internal();
-
+  @override
   Future<List<Task>> getTaskList() async {
     // final response = await _client.get('$_baseEndpoint/tasks');
     // final jsonTasks = jsonDecode(response.body) as List<Map<String, dynamic>>;
@@ -48,6 +42,7 @@ class API {
     ];
   }
 
+  @override
   Future<void> updateTaskList(List<Task> taskList) async {
     String jsonTasks = jsonEncode(taskList);
     // await _client.put('$_baseEndpoint/tasks', body: jsonTasks);
@@ -58,8 +53,11 @@ class API {
     await Future.delayed(duration);
   }
 
-  Future<void> addTask(Map<String, dynamic> task) async {
-    String json = jsonEncode(task);
+  @override
+  Future<void> addTask(String name) async {
+    String json = jsonEncode(<String, dynamic>{
+      'name': name,
+    });
     // await _client.post('$_baseEndpoint/tasks', body: json);
 
     // TODO: APIを呼び出す代わりに、1秒待つ
