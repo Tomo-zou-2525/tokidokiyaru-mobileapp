@@ -8,6 +8,7 @@ part 'task_list.g.dart';
 class TaskListNotifier extends _$TaskListNotifier {
   @override
   Future<List<Task>> build() async {
+    state = const AsyncValue.loading();
     final repository = ref.read(repositoryProvider);
     return await repository.getTaskList();
   }

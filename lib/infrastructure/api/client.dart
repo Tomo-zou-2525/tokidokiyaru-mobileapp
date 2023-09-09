@@ -1,9 +1,7 @@
 import 'package:http/http.dart' as http;
 
 class CustomHttpClient {
-  final http.Client _client;
-
-  CustomHttpClient() : _client = http.Client();
+  final http.Client _client = http.Client();
 
   Future<http.Response> post(String url, {String? body}) {
     return _client.post(

@@ -4,12 +4,13 @@ import 'package:tokidoki_mobile/domain/entity/task.dart';
 import 'package:tokidoki_mobile/ui/component/loader.dart';
 import 'package:tokidoki_mobile/ui/page/add_task.dart';
 import 'package:tokidoki_mobile/ui/page/edit_task.dart';
+import 'package:tokidoki_mobile/usecase/state/app_lifecycle_state.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 
 class TaskListPage extends ConsumerWidget {
   const TaskListPage({Key? key}) : super(key: key);
 
-  Widget createTaskList(List<Task> taskList, WidgetRef ref) {
+  Widget createTaskListWidget(List<Task> taskList, WidgetRef ref) {
     return ReorderableListView.builder(
       padding: const EdgeInsets.all(8),
       itemCount: taskList.length,
@@ -71,7 +72,12 @@ class TaskListPage extends ConsumerWidget {
                 'タスクを追加して下さい。',
                 style: TextStyle(fontSize: 20),
               )
-            : createTaskList(taskList, ref));
+            : createTaskListWidget(taskList, ref));
+    ref.listen<AppLifecycleState>(appLifecycleStateProvider, (previous, next) {
+      if (next.isResumed) {
+        ref.read(taskListNotifierProvider.notifier).getTaskList();
+      }
+    });
 
     return Scaffold(
       appBar: AppBar(
