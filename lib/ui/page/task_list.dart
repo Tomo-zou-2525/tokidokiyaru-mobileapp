@@ -61,6 +61,13 @@ class TaskListPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final taskListFuture = ref.watch(taskListNotifierProvider);
+
+    ref.listen<AppLifecycleState>(appLifecycleStateProvider, (previous, next) {
+      if (next.isResumed) {
+        ref.read(taskListNotifierProvider.notifier).getTaskList();
+      }
+    });
+
     final mainWidget = taskListFuture.when(
         loading: () => createProgressIndicator(context),
         error: (e, s) => const Text(
@@ -73,11 +80,6 @@ class TaskListPage extends ConsumerWidget {
                 style: TextStyle(fontSize: 20),
               )
             : createTaskListWidget(taskList, ref));
-    ref.listen<AppLifecycleState>(appLifecycleStateProvider, (previous, next) {
-      if (next.isResumed) {
-        ref.read(taskListNotifierProvider.notifier).getTaskList();
-      }
-    });
 
     return Scaffold(
       appBar: AppBar(
