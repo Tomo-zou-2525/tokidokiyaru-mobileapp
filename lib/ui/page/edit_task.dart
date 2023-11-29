@@ -18,8 +18,8 @@ class EditTaskPage extends StatelessWidget {
         children: [
           Text('id: ${task.id.toString()}'),
           Text('name: ${task.name}'),
-          Text('order: ${task.order.toString()}'),
-          Text('lastRunDate: ${task.lastRunDate}'),
+          Text('order: ${task.orderNum.toString()}'),
+          Text('lastRunDate: ${task.lastDoneDate}'),
         ],
       )),
     );

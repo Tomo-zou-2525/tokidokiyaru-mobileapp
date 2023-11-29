@@ -9,15 +9,15 @@ part of 'task.dart';
 _$_Task _$$_TaskFromJson(Map<String, dynamic> json) => _$_Task(
       id: json['id'] as int,
       name: json['name'] as String,
-      order: json['order'] as int,
-      runAtList: (json['runAtList'] as List<dynamic>)
-          .map((e) => DateTime.parse(e as String))
+      orderNum: json['orderNum'] as int,
+      dones: (json['dones'] as List<dynamic>)
+          .map((e) => Done.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
 Map<String, dynamic> _$$_TaskToJson(_$_Task instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'order': instance.order,
-      'runAtList': instance.runAtList.map((e) => e.toIso8601String()).toList(),
+      'orderNum': instance.orderNum,
+      'dones': instance.dones,
     };

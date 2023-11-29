@@ -21,7 +21,7 @@ class TaskListNotifier extends _$TaskListNotifier {
     final repository = ref.read(repositoryProvider);
     List<Task> newTaskList = [];
     taskList.asMap().forEach((index, task) {
-      newTaskList.add(task.copyWith(order: index + 1));
+      newTaskList.add(task.copyWith(orderNum: index + 1));
     });
     state = AsyncValue.data(newTaskList);
     await repository.updateTaskList(newTaskList);

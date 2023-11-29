@@ -22,8 +22,8 @@ Task _$TaskFromJson(Map<String, dynamic> json) {
 mixin _$Task {
   int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  int get order => throw _privateConstructorUsedError;
-  List<DateTime> get runAtList => throw _privateConstructorUsedError;
+  int get orderNum => throw _privateConstructorUsedError;
+  List<Done> get dones => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ abstract class $TaskCopyWith<$Res> {
   factory $TaskCopyWith(Task value, $Res Function(Task) then) =
       _$TaskCopyWithImpl<$Res, Task>;
   @useResult
-  $Res call({int id, String name, int order, List<DateTime> runAtList});
+  $Res call({int id, String name, int orderNum, List<Done> dones});
 }
 
 /// @nodoc
@@ -53,8 +53,8 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? order = null,
-    Object? runAtList = null,
+    Object? orderNum = null,
+    Object? dones = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -65,14 +65,14 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      order: null == order
-          ? _value.order
-          : order // ignore: cast_nullable_to_non_nullable
+      orderNum: null == orderNum
+          ? _value.orderNum
+          : orderNum // ignore: cast_nullable_to_non_nullable
               as int,
-      runAtList: null == runAtList
-          ? _value.runAtList
-          : runAtList // ignore: cast_nullable_to_non_nullable
-              as List<DateTime>,
+      dones: null == dones
+          ? _value.dones
+          : dones // ignore: cast_nullable_to_non_nullable
+              as List<Done>,
     ) as $Val);
   }
 }
@@ -83,7 +83,7 @@ abstract class _$$_TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
       __$$_TaskCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name, int order, List<DateTime> runAtList});
+  $Res call({int id, String name, int orderNum, List<Done> dones});
 }
 
 /// @nodoc
@@ -97,8 +97,8 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res, _$_Task>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? order = null,
-    Object? runAtList = null,
+    Object? orderNum = null,
+    Object? dones = null,
   }) {
     return _then(_$_Task(
       id: null == id
@@ -109,14 +109,14 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res, _$_Task>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      order: null == order
-          ? _value.order
-          : order // ignore: cast_nullable_to_non_nullable
+      orderNum: null == orderNum
+          ? _value.orderNum
+          : orderNum // ignore: cast_nullable_to_non_nullable
               as int,
-      runAtList: null == runAtList
-          ? _value._runAtList
-          : runAtList // ignore: cast_nullable_to_non_nullable
-              as List<DateTime>,
+      dones: null == dones
+          ? _value._dones
+          : dones // ignore: cast_nullable_to_non_nullable
+              as List<Done>,
     ));
   }
 }
@@ -127,9 +127,9 @@ class _$_Task extends _Task {
   const _$_Task(
       {required this.id,
       required this.name,
-      required this.order,
-      required final List<DateTime> runAtList})
-      : _runAtList = runAtList,
+      required this.orderNum,
+      required final List<Done> dones})
+      : _dones = dones,
         super._();
 
   factory _$_Task.fromJson(Map<String, dynamic> json) => _$$_TaskFromJson(json);
@@ -139,18 +139,18 @@ class _$_Task extends _Task {
   @override
   final String name;
   @override
-  final int order;
-  final List<DateTime> _runAtList;
+  final int orderNum;
+  final List<Done> _dones;
   @override
-  List<DateTime> get runAtList {
-    if (_runAtList is EqualUnmodifiableListView) return _runAtList;
+  List<Done> get dones {
+    if (_dones is EqualUnmodifiableListView) return _dones;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_runAtList);
+    return EqualUnmodifiableListView(_dones);
   }
 
   @override
   String toString() {
-    return 'Task(id: $id, name: $name, order: $order, runAtList: $runAtList)';
+    return 'Task(id: $id, name: $name, orderNum: $orderNum, dones: $dones)';
   }
 
   @override
@@ -160,15 +160,15 @@ class _$_Task extends _Task {
             other is _$_Task &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.order, order) || other.order == order) &&
-            const DeepCollectionEquality()
-                .equals(other._runAtList, _runAtList));
+            (identical(other.orderNum, orderNum) ||
+                other.orderNum == orderNum) &&
+            const DeepCollectionEquality().equals(other._dones, _dones));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, order,
-      const DeepCollectionEquality().hash(_runAtList));
+  int get hashCode => Object.hash(runtimeType, id, name, orderNum,
+      const DeepCollectionEquality().hash(_dones));
 
   @JsonKey(ignore: true)
   @override
@@ -188,8 +188,8 @@ abstract class _Task extends Task {
   const factory _Task(
       {required final int id,
       required final String name,
-      required final int order,
-      required final List<DateTime> runAtList}) = _$_Task;
+      required final int orderNum,
+      required final List<Done> dones}) = _$_Task;
   const _Task._() : super._();
 
   factory _Task.fromJson(Map<String, dynamic> json) = _$_Task.fromJson;
@@ -199,9 +199,9 @@ abstract class _Task extends Task {
   @override
   String get name;
   @override
-  int get order;
+  int get orderNum;
   @override
-  List<DateTime> get runAtList;
+  List<Done> get dones;
   @override
   @JsonKey(ignore: true)
   _$$_TaskCopyWith<_$_Task> get copyWith => throw _privateConstructorUsedError;
