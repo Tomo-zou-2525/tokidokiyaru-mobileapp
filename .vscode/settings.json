@@ -1,6 +1,11 @@
 {
   "[dart]": {
     "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true,
+      "source.organizeImports": true,
+      "source.addMissingImports": true
+    },
     "editor.formatOnType": true,
     "editor.rulers": [80],
     "editor.selectionHighlight": false,

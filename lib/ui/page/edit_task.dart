@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tokidoki_mobile/domain/task.dart';
+import 'package:tokidoki_mobile/domain/entity/task.dart';
 
 class EditTaskPage extends StatelessWidget {
   final Task task;
@@ -18,8 +18,8 @@ class EditTaskPage extends StatelessWidget {
         children: [
           Text('id: ${task.id.toString()}'),
           Text('name: ${task.name}'),
-          Text('order: ${task.order.toString()}'),
-          Text('lastRunDate: ${task.lastRunDate}'),
+          Text('order: ${task.orderNum.toString()}'),
+          Text('lastRunDate: ${task.lastDoneDate}'),
         ],
       )),
     );

@@ -6,7 +6,7 @@ part of 'task_list.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$taskListNotifierHash() => r'f4be102bc87e5b8321c62fba0c5691476419d735';
+String _$taskListNotifierHash() => r'0833a595d7f2d0bc1805194d890b72ec1a81421b';
 
 /// See also [TaskListNotifier].
 @ProviderFor(TaskListNotifier)
@@ -23,4 +23,4 @@ final taskListNotifierProvider =
 
 typedef _$TaskListNotifier = AutoDisposeAsyncNotifier<List<Task>>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

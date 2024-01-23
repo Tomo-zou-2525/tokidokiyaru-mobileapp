@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tokidoki_mobile/presentation/page/task_list.dart';
+import 'package:tokidoki_mobile/domain/repository/repository.dart';
+import 'package:tokidoki_mobile/infrastructure/api/api.dart';
+import 'package:tokidoki_mobile/ui/page/task_list.dart';
 
 void main() {
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(
+    ProviderScope(
+        overrides: [repositoryProvider.overrideWithValue(API())],
+        child: const App()),
+  );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
