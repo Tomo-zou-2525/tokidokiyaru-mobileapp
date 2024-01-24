@@ -29,7 +29,8 @@ class TaskListPage extends ConsumerWidget {
             child: ListTile(
               contentPadding: const EdgeInsets.all(8.0),
               title: Text(
-                '${task.name} ${task.lastDoneDate}',
+                // TODO: 実行したことがない場合の表記は別途考える。空文字でも良いかも。
+                '${task.name} ${task.lastDoneDate ?? '未実施'}',
                 style: const TextStyle(fontSize: 20),
               ),
               trailing: ElevatedButton(

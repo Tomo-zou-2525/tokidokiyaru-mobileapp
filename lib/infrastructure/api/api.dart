@@ -5,6 +5,7 @@ import 'package:tokidoki_mobile/domain/repository/repository.dart';
 import 'package:tokidoki_mobile/infrastructure/api/client.dart';
 
 // TODO: エラーハンドリング
+// TODO: ドメインと直接変換するのではなくて、DTOを経由した方が良い
 
 class API implements Repository {
   // TODO: エンドポイントを直す（Flavorで分ける？）
