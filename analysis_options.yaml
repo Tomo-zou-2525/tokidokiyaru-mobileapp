@@ -27,10 +27,13 @@ linter:
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
 
-# TODO: riverpodが提供しているLinter。テストのワーニングが消えないので、解決策が見つかるまで無効化
 analyzer:
+  # TODO: riverpodが提供しているLinter。テストのワーニングが消えないので、解決策が見つかるまで無効化
   # plugins:
   #   - custom_lint
   exclude:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
+  errors:
+    # こちらに従ってignore: https://pub.dev/packages/freezed#disabling-invalid_annotation_target-warning-and-warning-in-generates-files
+    invalid_annotation_target: ignore
