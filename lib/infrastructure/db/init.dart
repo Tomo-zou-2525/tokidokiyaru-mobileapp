@@ -7,6 +7,7 @@ Future<Database> open() async {
   // await deleteDatabase(path);
   final db = await openDatabase(path, onCreate: (db, version) async {
     // TODO: とりあえず適当に作成。created_atとかupdated_atとか必要かも。
+    // TODO: DBマイグレーションとかは別途検討。
     await db.execute(
       '''
       CREATE TABLE tasks (
