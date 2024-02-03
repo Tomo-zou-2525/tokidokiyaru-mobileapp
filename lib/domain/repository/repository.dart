@@ -15,4 +15,6 @@ abstract interface class Repository {
   Future<void> addTask(String name);
 
   Future<void> updateTask(int id, String name);
+
+  Future<void> deleteTask(int id);
 }

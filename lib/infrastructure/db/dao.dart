@@ -76,4 +76,13 @@ class DAO implements Repository {
       whereArgs: [id],
     );
   }
+
+  @override
+  Future<void> deleteTask(int id) async {
+    await db.delete(
+      "tasks",
+      where: "id = ?",
+      whereArgs: [id],
+    );
+  }
 }

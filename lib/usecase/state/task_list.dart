@@ -38,4 +38,10 @@ class TaskListNotifier extends _$TaskListNotifier {
     await repository.updateTask(id, name);
     await getTaskList();
   }
+
+  Future<void> deleteTask(int id) async {
+    final repository = ref.read(repositoryProvider);
+    await repository.deleteTask(id);
+    await getTaskList();
+  }
 }
