@@ -23,7 +23,7 @@ class EditTaskPage extends HookConsumerWidget {
             actions: [
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop(); // ダイアログを閉じる
+                  Navigator.of(context).pop();
                 },
                 child: const Text('キャンセル'),
               ),
@@ -32,8 +32,8 @@ class EditTaskPage extends HookConsumerWidget {
                   ref
                       .read(taskListNotifierProvider.notifier)
                       .deleteTask(task.id);
-                  Navigator.of(context).pop(); // ダイアログを閉じる
-                  Navigator.pop(context); // EditTaskPageを閉じる
+                  Navigator.of(context).pop();
+                  Navigator.pop(context);
                 },
                 child: const Text('削除'),
               ),
