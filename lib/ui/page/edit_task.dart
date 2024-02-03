@@ -13,6 +13,36 @@ class EditTaskPage extends HookConsumerWidget {
     TextEditingController textEditingController =
         TextEditingController(text: task.name);
 
+    void showDeleteConfirmationDialog() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('削除の確認'),
+            content: const Text('このタスクを削除しますか？'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop(); // ダイアログを閉じる
+                },
+                child: const Text('キャンセル'),
+              ),
+              TextButton(
+                onPressed: () {
+                  ref
+                      .read(taskListNotifierProvider.notifier)
+                      .deleteTask(task.id);
+                  Navigator.of(context).pop(); // ダイアログを閉じる
+                  Navigator.pop(context); // EditTaskPageを閉じる
+                },
+                child: const Text('削除'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -38,12 +68,7 @@ class EditTaskPage extends HookConsumerWidget {
                 child: const Text('更新'),
               ),
               ElevatedButton(
-                onPressed: () {
-                  ref
-                      .read(taskListNotifierProvider.notifier)
-                      .deleteTask(task.id);
-                  Navigator.pop(context);
-                },
+                onPressed: showDeleteConfirmationDialog,
                 child: const Text('削除'),
               ),
             ],
