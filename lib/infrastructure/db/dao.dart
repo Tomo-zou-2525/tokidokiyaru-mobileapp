@@ -64,4 +64,16 @@ class DAO implements Repository {
       },
     );
   }
+
+  @override
+  Future<void> updateTask(int id, String name) async {
+    await db.update(
+      "tasks",
+      {
+        "name": name,
+      },
+      where: "id = ?",
+      whereArgs: [id],
+    );
+  }
 }
