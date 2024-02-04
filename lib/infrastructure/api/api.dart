@@ -42,4 +42,11 @@ class API implements Repository {
     const duration = Duration(seconds: 1);
     await Future.delayed(duration);
   }
+
+  // NOTE: apiを使うようになったら正式に実装する
+  @override
+  Future<void> updateTask(int id, String name) async {}
+
+  @override
+  Future<void> deleteTask(int id) async {}
 }

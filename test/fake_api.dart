@@ -20,4 +20,11 @@ class FakeAPI implements Repository {
   Future<void> addTask(String name) async {
     await Future.delayed(const Duration(seconds: 0));
   }
+
+  // NOTE: apiを使うようになったら正式に実装する
+  @override
+  Future<void> updateTask(int id, String name) async {}
+
+  @override
+  Future<void> deleteTask(int id) async {}
 }
