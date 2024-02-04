@@ -42,13 +42,13 @@ class App extends StatelessWidget {
         '/privacy_policy': (context) => const PrivacyPolicyPage(),
       },
       initialRoute: "/",
-      title: 'tokidoki',
+      title: 'Tokidoki',
       theme: ThemeData(
         appBarTheme: const AppBarTheme(backgroundColor: Color(0xFFDBE1FF)),
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2764EF)),
         useMaterial3: true,
       ),
-      // home: const TaskListPage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
