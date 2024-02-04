@@ -35,11 +35,16 @@ class EditTaskPage extends HookConsumerWidget {
           child: Column(
             children: [
               isEditState.value
-                  ? TextField(
-                      controller: textEditingController,
-                      decoration: const InputDecoration(
-                        hintText: 'タスク名を入力してください',
-                      ),
+                  ? Column(
+                      children: [
+                        const Text('タスク名を変更'),
+                        TextField(
+                          controller: textEditingController,
+                          decoration: const InputDecoration(
+                            hintText: 'タスク名を入力してください',
+                          ),
+                        ),
+                      ],
                     )
                   : Text(task.name),
               const Text('実施履歴'),
