@@ -17,6 +17,7 @@ class EditTaskPage extends HookConsumerWidget {
     TextEditingController textEditingController =
         TextEditingController(text: task.name);
 
+    // TODO: 実施履歴をDBから取得する
     final nowStr = DateFormat('yyyy/MM/dd HH:mm').format(DateTime.now());
     List<String> doneAtList = [
       nowStr,
