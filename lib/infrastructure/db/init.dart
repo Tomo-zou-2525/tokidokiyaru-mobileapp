@@ -4,16 +4,17 @@ import 'package:sqflite/sqflite.dart';
 Future<Database> open() async {
   final path = join(await getDatabasesPath(), 'tokidokiyaru.db');
   // TODO: DB綺麗にしたいときはコメントアウト外す。諸々整えたら消す。
-  // await deleteDatabase(path);
+  await deleteDatabase(path);
   final db = await openDatabase(path, onCreate: (db, version) async {
-    // TODO: とりあえず適当に作成。created_atとかupdated_atとか必要かも。
     // TODO: DBマイグレーションとかは別途検討。
     await db.execute(
       '''
       CREATE TABLE tasks (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL DEFAULT '',
-        order_num INTEGER NOT NULL DEFAULT 0
+        order_num INTEGER NOT NULL DEFAULT 0,
+        created_at TEXT NOT NULL DEFAULT (datetime('now', 'localtime')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now', 'localtime'))
       );
       ''',
     );
@@ -22,7 +23,9 @@ Future<Database> open() async {
       CREATE TABLE dones (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         task_id INTEGER NOT NULL,
-        done_at TEXT NOT NULL DEFAULT (datetime('now')),
+        done_at TEXT NOT NULL DEFAULT (datetime('now', 'localtime')),
+        created_at TEXT NOT NULL DEFAULT (datetime('now', 'localtime')),
+        updated_at TEXT NOT NULL DEFAULT (datetime('now', 'localtime')),
         FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
       );
       ''',
