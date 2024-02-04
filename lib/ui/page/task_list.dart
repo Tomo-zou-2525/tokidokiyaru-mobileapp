@@ -98,6 +98,24 @@ class TaskListPage extends ConsumerWidget {
         },
         child: const Icon(Icons.add),
       ),
+      endDrawer: Drawer(
+        child: ListView(
+          children: [
+            ListTile(
+              title: const Text("利用規約"),
+              onTap: () {
+                Navigator.pushNamed(context, '/terms_of_service');
+              },
+            ),
+            ListTile(
+              title: const Text("プライバシーポリシー"),
+              onTap: () {
+                Navigator.pushNamed(context, '/privacy_policy');
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

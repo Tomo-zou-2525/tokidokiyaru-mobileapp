@@ -5,6 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tokidoki_mobile/domain/repository/repository.dart';
 import 'package:tokidoki_mobile/infrastructure/db/dao.dart';
 import 'package:tokidoki_mobile/infrastructure/db/init.dart';
+import 'package:tokidoki_mobile/privacy_policy_page.dart';
+import 'package:tokidoki_mobile/terms_page.dart';
 import 'package:tokidoki_mobile/tutorial_page.dart';
 import 'package:tokidoki_mobile/ui/page/task_list.dart';
 
@@ -36,6 +38,8 @@ class App extends StatelessWidget {
       routes: {
         '/': (context) => const TaskListPage(),
         '/tutorial': (context) => const TutorialPage(),
+        '/terms_of_service': (context) => const TermsPage(),
+        '/privacy_policy': (context) => const PrivacyPolicyPage(),
       },
       initialRoute: "/",
       title: 'tokidoki',
