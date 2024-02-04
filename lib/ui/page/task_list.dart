@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
 import 'package:tokidoki_mobile/ui/component/loader.dart';
+import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
 import 'package:tokidoki_mobile/ui/page/add_task.dart';
 import 'package:tokidoki_mobile/ui/page/edit_task.dart';
 import 'package:tokidoki_mobile/usecase/state/app_lifecycle_state.dart';
@@ -83,10 +84,7 @@ class TaskListPage extends ConsumerWidget {
             : createTaskListWidget(taskList, ref));
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('やったこと一覧'),
-      ),
+      appBar: SimpleAppBar(title: 'やったこと一覧'),
       body: Center(child: mainWidget),
       floatingActionButton: FloatingActionButton(
         onPressed: () {

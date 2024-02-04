@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
 import 'package:tokidoki_mobile/ui/page/task_list.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 
@@ -12,10 +13,7 @@ class AddTaskPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     String name = '';
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: const Text('タスク作成'),
-        ),
+        appBar: SimpleAppBar(title: 'タスク作成'),
         body: SizedBox(
           width: double.infinity,
           child: Column(

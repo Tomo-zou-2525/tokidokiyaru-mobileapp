@@ -23,6 +23,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'tokidoki',
       theme: ThemeData(
+        appBarTheme: const AppBarTheme(backgroundColor: Color(0xFFDBE1FF)),
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2764EF)),
         useMaterial3: true,
       ),
