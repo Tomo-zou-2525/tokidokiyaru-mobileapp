@@ -3,10 +3,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 
-class DeleteConfirmationDialog extends ConsumerWidget {
+class DeleteTaskConfirmationDialog extends ConsumerWidget {
   final Task task;
 
-  const DeleteConfirmationDialog({Key? key, required this.task})
+  const DeleteTaskConfirmationDialog({Key? key, required this.task})
       : super(key: key);
 
   @override

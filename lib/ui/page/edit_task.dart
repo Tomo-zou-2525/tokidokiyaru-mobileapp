@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
-import 'package:tokidoki_mobile/ui/component/delete_confirmation_dialog.dart';
+import 'package:tokidoki_mobile/ui/component/dialog/delete_task_confirmation_dialog.dart';
 import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 
@@ -71,7 +71,7 @@ class EditTaskPage extends HookConsumerWidget {
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return DeleteConfirmationDialog(task: task);
+                          return DeleteTaskConfirmationDialog(task: task);
                         },
                       );
                     },
