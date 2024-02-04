@@ -34,24 +34,14 @@ class EditTaskPage extends HookConsumerWidget {
           child: Column(
             children: [
               isEditState.value
-                  ? Column(children: [
-                      TextField(
-                        controller: textEditingController,
-                        decoration: const InputDecoration(
-                          hintText: 'タスク名を入力してください',
-                        ),
+                  ? TextField(
+                      controller: textEditingController,
+                      decoration: const InputDecoration(
+                        hintText: 'タスク名を入力してください',
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          ref
-                              .read(taskListNotifierProvider.notifier)
-                              .updateTask(task.id, textEditingController.text);
-                          Navigator.pop(context);
-                        },
-                        child: const Text('更新'),
-                      ),
-                    ])
+                    )
                   : Text(task.name),
+              const Text('実施履歴'),
               Column(
                 children: doneAtList
                     .asMap()
@@ -75,7 +65,13 @@ class EditTaskPage extends HookConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          ref
+              .read(taskListNotifierProvider.notifier)
+              .updateTask(task.id, textEditingController.text);
           isEditState.value = !isEditState.value;
+          if (!isEditState.value) {
+            Navigator.pop(context);
+          }
         },
         child: Icon(
           isEditState.value ? Icons.check : Icons.edit,
