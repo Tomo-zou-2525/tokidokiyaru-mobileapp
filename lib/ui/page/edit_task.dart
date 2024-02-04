@@ -28,35 +28,30 @@ class EditTaskPage extends HookConsumerWidget {
     final ValueNotifier<bool> isEditState = useState(false);
 
     return Scaffold(
-      appBar: SimpleAppBar(title: 'タスク編集'),
+      appBar: SimpleAppBar(title: task.name),
       body: Center(
         child: SizedBox(
           child: Column(
             children: [
-              Column(
-                children: [
-                  isEditState.value
-                      ? Column(children: [
-                          TextField(
-                            controller: textEditingController,
-                            decoration: const InputDecoration(
-                              hintText: 'タスク名を入力してください',
-                            ),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              ref
-                                  .read(taskListNotifierProvider.notifier)
-                                  .updateTask(
-                                      task.id, textEditingController.text);
-                              Navigator.pop(context);
-                            },
-                            child: const Text('更新'),
-                          ),
-                        ])
-                      : Text(task.name),
-                ],
-              ),
+              isEditState.value
+                  ? Column(children: [
+                      TextField(
+                        controller: textEditingController,
+                        decoration: const InputDecoration(
+                          hintText: 'タスク名を入力してください',
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          ref
+                              .read(taskListNotifierProvider.notifier)
+                              .updateTask(task.id, textEditingController.text);
+                          Navigator.pop(context);
+                        },
+                        child: const Text('更新'),
+                      ),
+                    ])
+                  : Text(task.name),
               Column(
                 children: doneAtList
                     .asMap()
