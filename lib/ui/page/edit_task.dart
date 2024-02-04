@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
+import 'package:tokidoki_mobile/ui/component/delete_confirmation_dialog.dart';
 import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 
@@ -13,36 +14,6 @@ class EditTaskPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     TextEditingController textEditingController =
         TextEditingController(text: task.name);
-
-    void showDeleteConfirmationDialog() {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('削除の確認'),
-            content: const Text('このタスクを削除しますか？'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('キャンセル'),
-              ),
-              TextButton(
-                onPressed: () {
-                  ref
-                      .read(taskListNotifierProvider.notifier)
-                      .deleteTask(task.id);
-                  Navigator.of(context).pop();
-                  Navigator.pop(context);
-                },
-                child: const Text('削除'),
-              ),
-            ],
-          );
-        },
-      );
-    }
 
     return Scaffold(
       appBar: SimpleAppBar(title: 'タスク編集'),
@@ -66,7 +37,14 @@ class EditTaskPage extends HookConsumerWidget {
                 child: const Text('更新'),
               ),
               ElevatedButton(
-                onPressed: showDeleteConfirmationDialog,
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return DeleteConfirmationDialog(task: task);
+                    },
+                  );
+                },
                 child: const Text('削除'),
               ),
             ],
