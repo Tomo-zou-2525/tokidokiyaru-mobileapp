@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
 import 'package:tokidoki_mobile/ui/component/loader.dart';
 import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
@@ -62,6 +63,8 @@ class TaskListPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    WidgetsBinding.instance.addPostFrameCallback((_) => _showTutorial(context));
+
     final taskListFuture = ref.watch(taskListNotifierProvider);
 
     ref.listen<AppLifecycleState>(appLifecycleStateProvider, (previous, next) {
@@ -97,4 +100,12 @@ class TaskListPage extends ConsumerWidget {
       ),
     );
   }
+}
+
+void _showTutorial(BuildContext context) {
+  SharedPreferences.getInstance().then((prefs) {
+    if (prefs.getBool('isFirst') != true) {
+      Navigator.pushNamed(context, '/tutorial');
+    }
+  });
 }
