@@ -58,7 +58,14 @@ class EditTaskPage extends HookConsumerWidget {
                               ? ElevatedButton(
                                   child: const Icon(Icons.delete),
                                   onPressed: () {
-                                    // TODO: deleteDoneAtを実装
+                                    // TODO: doneを取得して渡す
+                                    // showDialog(
+                                    //   context: context,
+                                    //   builder: (BuildContext context) {
+                                    //     return DeleteDoneAtConfirmationDialog(
+                                    //         done: done);
+                                    //   },
+                                    // );
                                   },
                                 )
                               : null,
