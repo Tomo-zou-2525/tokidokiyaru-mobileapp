@@ -5,10 +5,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tokidoki_mobile/domain/repository/repository.dart';
 import 'package:tokidoki_mobile/infrastructure/db/dao.dart';
 import 'package:tokidoki_mobile/infrastructure/db/init.dart';
-import 'package:tokidoki_mobile/privacy_policy_page.dart';
-import 'package:tokidoki_mobile/terms_page.dart';
-import 'package:tokidoki_mobile/tutorial_page.dart';
+import 'package:tokidoki_mobile/ui/page/privacy_policy_page.dart';
 import 'package:tokidoki_mobile/ui/page/task_list.dart';
+import 'package:tokidoki_mobile/ui/page/terms_page.dart';
+import 'package:tokidoki_mobile/ui/page/tutorial_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
