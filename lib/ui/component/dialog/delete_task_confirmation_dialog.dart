@@ -13,7 +13,7 @@ class DeleteTaskConfirmationDialog extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return AlertDialog(
       title: const Text('削除の確認'),
-      content: const Text('このタスクを削除しますか？'),
+      content: Text("タスク「${task.name}」を削除しますか？"),
       actions: [
         TextButton(
           onPressed: () {

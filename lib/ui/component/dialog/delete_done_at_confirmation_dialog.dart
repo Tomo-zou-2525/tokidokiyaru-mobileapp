@@ -12,7 +12,7 @@ class DeleteDoneAtConfirmationDialog extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return AlertDialog(
       title: const Text('削除の確認'),
-      content: const Text('この履歴を削除しますか？'),
+      content: Text("履歴「${done.doneAt}」を削除しますか？"),
       actions: [
         TextButton(
           onPressed: () {
