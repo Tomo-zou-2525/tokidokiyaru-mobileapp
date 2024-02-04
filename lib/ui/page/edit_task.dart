@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
+import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 
 class EditTaskPage extends HookConsumerWidget {
@@ -44,10 +45,7 @@ class EditTaskPage extends HookConsumerWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('タスク編集'),
-      ),
+      appBar: SimpleAppBar(title: 'タスク編集'),
       body: Center(
         child: SizedBox(
           child: Column(
