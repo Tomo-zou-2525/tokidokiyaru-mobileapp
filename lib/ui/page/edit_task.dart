@@ -98,7 +98,7 @@ class EditTaskPage extends HookConsumerWidget {
         onPressed: () {
           ref
               .read(taskListNotifierProvider.notifier)
-              .updateTask(task.id, textEditingController.text);
+              .updateTask(task, textEditingController.text);
           isEditState.value = !isEditState.value;
           if (!isEditState.value) {
             Navigator.pop(context);

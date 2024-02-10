@@ -29,19 +29,21 @@ class TaskListNotifier extends _$TaskListNotifier {
 
   Future<void> addTask(String name) async {
     final repository = ref.read(repositoryProvider);
-    await repository.addTask(name);
+    final task = Task.init(name: name);
+    await repository.addTask(task);
     await getTaskList();
   }
 
-  Future<void> updateTask(int id, String name) async {
+  Future<void> updateTask(Task task, String name) async {
     final repository = ref.read(repositoryProvider);
-    await repository.updateTask(id, name);
+    final newTask = task.copyWith(name: name);
+    await repository.updateTask(newTask);
     await getTaskList();
   }
 
-  Future<void> deleteTask(int id) async {
+  Future<void> deleteTask(Task task) async {
     final repository = ref.read(repositoryProvider);
-    await repository.deleteTask(id);
+    await repository.deleteTask(task.id);
     await getTaskList();
   }
 }

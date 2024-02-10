@@ -1,5 +1,6 @@
 import 'package:tokidoki_mobile/domain/entity/task.dart';
 import 'package:tokidoki_mobile/domain/repository/repository.dart';
+import 'package:tokidoki_mobile/domain/valueObject/id.dart';
 
 class FakeAPI implements Repository {
   final List<Task> taskList;
@@ -17,14 +18,14 @@ class FakeAPI implements Repository {
   }
 
   @override
-  Future<void> addTask(String name) async {
+  Future<void> addTask(Task task) async {
     await Future.delayed(const Duration(seconds: 0));
   }
 
   // NOTE: apiを使うようになったら正式に実装する
   @override
-  Future<void> updateTask(int id, String name) async {}
+  Future<void> updateTask(Task task) async {}
 
   @override
-  Future<void> deleteTask(int id) async {}
+  Future<void> deleteTask(Id id) async {}
 }

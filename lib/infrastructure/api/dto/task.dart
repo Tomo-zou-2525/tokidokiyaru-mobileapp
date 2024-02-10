@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
 import 'package:tokidoki_mobile/domain/valueObject/id.dart';
@@ -15,8 +17,6 @@ abstract class TaskDTO implements _$TaskDTO {
     @JsonKey(name: 'name') required String name,
     @JsonKey(name: 'order_num') required int orderNum,
     @JsonKey(name: 'dones') List<DoneDTO>? dones,
-    @JsonKey(name: 'created_at') required DateTime createdAt,
-    @JsonKey(name: 'updated_at') required DateTime updatedAt,
   }) = _Task;
 
   factory TaskDTO.fromJson(Map<String, dynamic> json) =>
@@ -26,11 +26,9 @@ abstract class TaskDTO implements _$TaskDTO {
         id: entity.id.value,
         name: entity.name,
         orderNum: entity.orderNum,
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
       );
 
-  Task convertToEntity() {
+  Task toEntity() {
     return Task(
         id: Id(value: id),
         name: name,
@@ -38,18 +36,19 @@ abstract class TaskDTO implements _$TaskDTO {
         dones: dones?.map((done) => done.convertToEntity()).toList() ?? []);
   }
 
-  Map<String, dynamic> toInsertMap() {
+  String toInsertJSON() {
     final map = toJson();
     map.remove('id');
+    map.remove('order_num');
     map.remove('dones');
-    return map;
+    return jsonEncode(map);
   }
 
-  Map<String, dynamic> toUpdateMap() {
+  Map<String, dynamic> toUpdateJSON() {
     final map = toJson();
     map.remove('id');
+    map.remove('order_num');
     map.remove('dones');
-    map.remove('created_at');
     return map;
   }
 }

@@ -1,11 +1,10 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
 import 'package:tokidoki_mobile/domain/repository/repository.dart';
+import 'package:tokidoki_mobile/domain/valueObject/id.dart';
 import 'package:tokidoki_mobile/infrastructure/db/dto/task.dart';
 
 // TODO: エラーハンドリング
-// TODO: トランザクション
-
 class DAO implements Repository {
   final Database db;
 
@@ -61,30 +60,28 @@ class DAO implements Repository {
   }
 
   @override
-  Future<void> addTask(String name) async {
-    // TODO: DTO作って、そのDTOにtoMapメソッドを作るのが良さげ。
+  Future<void> addTask(Task task) async {
+    final dto = TaskDTO.fromEntity(entity: task);
     await db.insert(
       "tasks",
-      {
-        "name": name,
-      },
+      dto.toInsertMap(),
     );
   }
 
   @override
-  Future<void> updateTask(int id, String name) async {
+  Future<void> updateTask(Task task) async {
+    final dto = TaskDTO.fromEntity(entity: task);
+
     await db.update(
       "tasks",
-      {
-        "name": name,
-      },
+      dto.toUpdateMap(),
       where: "id = ?",
-      whereArgs: [id],
+      whereArgs: [task.id],
     );
   }
 
   @override
-  Future<void> deleteTask(int id) async {
+  Future<void> deleteTask(Id id) async {
     await db.delete(
       "tasks",
       where: "id = ?",

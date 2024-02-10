@@ -8,10 +8,12 @@ part of 'done.dart';
 
 _$_Done _$$_DoneFromJson(Map<String, dynamic> json) => _$_Done(
       id: json['id'] as int,
-      doneAt: DateTime.parse(json['doneAt'] as String),
+      taskId: json['task_id'] as int,
+      doneAt: DateTime.parse(json['done_at'] as String),
     );
 
 Map<String, dynamic> _$$_DoneToJson(_$_Done instance) => <String, dynamic>{
       'id': instance.id,
-      'doneAt': instance.doneAt.toIso8601String(),
+      'task_id': instance.taskId,
+      'done_at': instance.doneAt.toIso8601String(),
     };

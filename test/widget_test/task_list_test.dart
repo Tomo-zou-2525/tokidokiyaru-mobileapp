@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:tokidoki_mobile/domain/entity/done.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
 import 'package:tokidoki_mobile/domain/repository/repository.dart';
+import 'package:tokidoki_mobile/domain/valueObject/id.dart';
 import 'package:tokidoki_mobile/ui/page/task_list.dart';
 
 import '../fake_api.dart';
@@ -27,34 +28,34 @@ void main() {
       ProviderScope(overrides: [
         repositoryProvider.overrideWithValue(FakeAPI(taskList: [
           Task(
-            id: 1,
+            id: const Id(value: 1),
             name: 'タスク1',
             orderNum: 1,
             dones: [
               Done(
-                id: 1,
+                id: const Id(value: 1),
                 doneAt: DateTime.parse('2023-03-20 10:05:30.000'),
               )
             ],
           ),
           Task(
-            id: 3,
+            id: const Id(value: 3),
             name: 'タスク2',
             orderNum: 2,
             dones: [
               Done(
-                id: 1,
+                id: const Id(value: 3),
                 doneAt: DateTime.parse('2023-05-01 01:04:11.000'),
               )
             ],
           ),
           Task(
-            id: 2,
+            id: const Id(value: 2),
             name: 'タスク3',
             orderNum: 3,
             dones: [
               Done(
-                id: 1,
+                id: const Id(value: 2),
                 doneAt: DateTime.parse('2023-04-29 18:53:55.000'),
               ),
             ],

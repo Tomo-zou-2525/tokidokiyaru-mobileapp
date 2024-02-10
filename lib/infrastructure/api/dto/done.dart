@@ -14,8 +14,6 @@ abstract class DoneDTO implements _$DoneDTO {
     @JsonKey(name: 'id') required int id,
     @JsonKey(name: 'task_id') required int taskId,
     @JsonKey(name: 'done_at') required DateTime doneAt,
-    @JsonKey(name: 'created_at') required DateTime createdAt,
-    @JsonKey(name: 'updated_at') required DateTime updatedAt,
   }) = _Done;
 
   factory DoneDTO.fromJson(Map<String, dynamic> json) =>
@@ -25,27 +23,26 @@ abstract class DoneDTO implements _$DoneDTO {
         id: done.id.value,
         taskId: task.id.value,
         doneAt: done.doneAt,
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
       );
 
-  Done convertToEntity() {
+  Done toEntity() {
     return Done(
       id: Id(value: id),
       doneAt: doneAt,
     );
   }
 
-  Map<String, dynamic> toInsertMap() {
+  Map<String, dynamic> toInsertJSON() {
     final map = toJson();
     map.remove('id');
+    map.remove('task_id');
     return map;
   }
 
   Map<String, dynamic> toUpdateMap() {
     final map = toJson();
     map.remove('id');
-    map.remove('created_at');
+    map.remove('task_id');
     return map;
   }
 }

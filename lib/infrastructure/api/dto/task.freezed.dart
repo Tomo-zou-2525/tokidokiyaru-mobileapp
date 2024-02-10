@@ -14,31 +14,42 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+TaskDTO _$TaskDTOFromJson(Map<String, dynamic> json) {
+  return _Task.fromJson(json);
+}
+
 /// @nodoc
-mixin _$Task {
-  Id get id => throw _privateConstructorUsedError;
+mixin _$TaskDTO {
+  @JsonKey(name: 'id')
+  int get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'name')
   String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'order_num')
   int get orderNum => throw _privateConstructorUsedError;
-  List<Done> get dones => throw _privateConstructorUsedError;
+  @JsonKey(name: 'dones')
+  List<DoneDTO>? get dones => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $TaskCopyWith<Task> get copyWith => throw _privateConstructorUsedError;
+  $TaskDTOCopyWith<TaskDTO> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TaskCopyWith<$Res> {
-  factory $TaskCopyWith(Task value, $Res Function(Task) then) =
-      _$TaskCopyWithImpl<$Res, Task>;
+abstract class $TaskDTOCopyWith<$Res> {
+  factory $TaskDTOCopyWith(TaskDTO value, $Res Function(TaskDTO) then) =
+      _$TaskDTOCopyWithImpl<$Res, TaskDTO>;
   @useResult
-  $Res call({Id id, String name, int orderNum, List<Done> dones});
-
-  $IdCopyWith<$Res> get id;
+  $Res call(
+      {@JsonKey(name: 'id') int id,
+      @JsonKey(name: 'name') String name,
+      @JsonKey(name: 'order_num') int orderNum,
+      @JsonKey(name: 'dones') List<DoneDTO>? dones});
 }
 
 /// @nodoc
-class _$TaskCopyWithImpl<$Res, $Val extends Task>
-    implements $TaskCopyWith<$Res> {
-  _$TaskCopyWithImpl(this._value, this._then);
+class _$TaskDTOCopyWithImpl<$Res, $Val extends TaskDTO>
+    implements $TaskDTOCopyWith<$Res> {
+  _$TaskDTOCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -51,13 +62,13 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
     Object? id = null,
     Object? name = null,
     Object? orderNum = null,
-    Object? dones = null,
+    Object? dones = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as Id,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -66,36 +77,29 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
           ? _value.orderNum
           : orderNum // ignore: cast_nullable_to_non_nullable
               as int,
-      dones: null == dones
+      dones: freezed == dones
           ? _value.dones
           : dones // ignore: cast_nullable_to_non_nullable
-              as List<Done>,
+              as List<DoneDTO>?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $IdCopyWith<$Res> get id {
-    return $IdCopyWith<$Res>(_value.id, (value) {
-      return _then(_value.copyWith(id: value) as $Val);
-    });
   }
 }
 
 /// @nodoc
-abstract class _$$_TaskCopyWith<$Res> implements $TaskCopyWith<$Res> {
+abstract class _$$_TaskCopyWith<$Res> implements $TaskDTOCopyWith<$Res> {
   factory _$$_TaskCopyWith(_$_Task value, $Res Function(_$_Task) then) =
       __$$_TaskCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Id id, String name, int orderNum, List<Done> dones});
-
-  @override
-  $IdCopyWith<$Res> get id;
+  $Res call(
+      {@JsonKey(name: 'id') int id,
+      @JsonKey(name: 'name') String name,
+      @JsonKey(name: 'order_num') int orderNum,
+      @JsonKey(name: 'dones') List<DoneDTO>? dones});
 }
 
 /// @nodoc
-class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res, _$_Task>
+class __$$_TaskCopyWithImpl<$Res> extends _$TaskDTOCopyWithImpl<$Res, _$_Task>
     implements _$$_TaskCopyWith<$Res> {
   __$$_TaskCopyWithImpl(_$_Task _value, $Res Function(_$_Task) _then)
       : super(_value, _then);
@@ -106,13 +110,13 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res, _$_Task>
     Object? id = null,
     Object? name = null,
     Object? orderNum = null,
-    Object? dones = null,
+    Object? dones = freezed,
   }) {
     return _then(_$_Task(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as Id,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -121,42 +125,50 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskCopyWithImpl<$Res, _$_Task>
           ? _value.orderNum
           : orderNum // ignore: cast_nullable_to_non_nullable
               as int,
-      dones: null == dones
+      dones: freezed == dones
           ? _value._dones
           : dones // ignore: cast_nullable_to_non_nullable
-              as List<Done>,
+              as List<DoneDTO>?,
     ));
   }
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_Task extends _Task {
   const _$_Task(
-      {required this.id,
-      required this.name,
-      required this.orderNum,
-      required final List<Done> dones})
+      {@JsonKey(name: 'id') required this.id,
+      @JsonKey(name: 'name') required this.name,
+      @JsonKey(name: 'order_num') required this.orderNum,
+      @JsonKey(name: 'dones') final List<DoneDTO>? dones})
       : _dones = dones,
         super._();
 
+  factory _$_Task.fromJson(Map<String, dynamic> json) => _$$_TaskFromJson(json);
+
   @override
-  final Id id;
+  @JsonKey(name: 'id')
+  final int id;
   @override
+  @JsonKey(name: 'name')
   final String name;
   @override
+  @JsonKey(name: 'order_num')
   final int orderNum;
-  final List<Done> _dones;
+  final List<DoneDTO>? _dones;
   @override
-  List<Done> get dones {
+  @JsonKey(name: 'dones')
+  List<DoneDTO>? get dones {
+    final value = _dones;
+    if (value == null) return null;
     if (_dones is EqualUnmodifiableListView) return _dones;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_dones);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
   String toString() {
-    return 'Task(id: $id, name: $name, orderNum: $orderNum, dones: $dones)';
+    return 'TaskDTO(id: $id, name: $name, orderNum: $orderNum, dones: $dones)';
   }
 
   @override
@@ -171,6 +183,7 @@ class _$_Task extends _Task {
             const DeepCollectionEquality().equals(other._dones, _dones));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, orderNum,
       const DeepCollectionEquality().hash(_dones));
@@ -180,24 +193,37 @@ class _$_Task extends _Task {
   @pragma('vm:prefer-inline')
   _$$_TaskCopyWith<_$_Task> get copyWith =>
       __$$_TaskCopyWithImpl<_$_Task>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_TaskToJson(
+      this,
+    );
+  }
 }
 
-abstract class _Task extends Task {
+abstract class _Task extends TaskDTO {
   const factory _Task(
-      {required final Id id,
-      required final String name,
-      required final int orderNum,
-      required final List<Done> dones}) = _$_Task;
+      {@JsonKey(name: 'id') required final int id,
+      @JsonKey(name: 'name') required final String name,
+      @JsonKey(name: 'order_num') required final int orderNum,
+      @JsonKey(name: 'dones') final List<DoneDTO>? dones}) = _$_Task;
   const _Task._() : super._();
 
+  factory _Task.fromJson(Map<String, dynamic> json) = _$_Task.fromJson;
+
   @override
-  Id get id;
+  @JsonKey(name: 'id')
+  int get id;
   @override
+  @JsonKey(name: 'name')
   String get name;
   @override
+  @JsonKey(name: 'order_num')
   int get orderNum;
   @override
-  List<Done> get dones;
+  @JsonKey(name: 'dones')
+  List<DoneDTO>? get dones;
   @override
   @JsonKey(ignore: true)
   _$$_TaskCopyWith<_$_Task> get copyWith => throw _privateConstructorUsedError;
