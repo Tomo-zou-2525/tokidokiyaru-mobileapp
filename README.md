@@ -14,3 +14,14 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+# リリース時の注意点
+リリース担当者：左近
+
+## Android
+```
+// リリースコマンド ※ --no-tree-shake-icons 必須
+flutter build appbundle --release --no-tree-shake-icons
+```
+## iOS
+加筆中
