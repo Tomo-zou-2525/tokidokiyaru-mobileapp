@@ -1,4 +1,4 @@
-package com.example.tokidoki_mobile
+package com.skn.Tokidoki
 
 import io.flutter.embedding.android.FlutterActivity
 
