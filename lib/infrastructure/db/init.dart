@@ -4,7 +4,7 @@ import 'package:sqflite/sqflite.dart';
 Future<Database> open() async {
   final path = join(await getDatabasesPath(), 'tokidokiyaru.db');
   // TODO: DB綺麗にしたいときはコメントアウト外す。諸々整えたら消す。
-  await deleteDatabase(path);
+  // await deleteDatabase(path);
   final db = await openDatabase(path, onCreate: (db, version) async {
     // TODO: DBマイグレーションとかは別途検討。
     await db.execute(

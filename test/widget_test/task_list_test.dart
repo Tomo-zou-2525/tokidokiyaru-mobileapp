@@ -31,7 +31,10 @@ void main() {
             name: 'タスク1',
             orderNum: 1,
             dones: [
-              Done(id: 1, doneAt: DateTime.parse('2023-03-20 10:05:30.000'))
+              Done(
+                id: 1,
+                doneAt: DateTime.parse('2023-03-20 10:05:30.000'),
+              )
             ],
           ),
           Task(
@@ -39,7 +42,10 @@ void main() {
             name: 'タスク2',
             orderNum: 2,
             dones: [
-              Done(id: 1, doneAt: DateTime.parse('2023-05-01 01:04:11.000'))
+              Done(
+                id: 1,
+                doneAt: DateTime.parse('2023-05-01 01:04:11.000'),
+              )
             ],
           ),
           Task(
@@ -47,7 +53,10 @@ void main() {
             name: 'タスク3',
             orderNum: 3,
             dones: [
-              Done(id: 1, doneAt: DateTime.parse('2023-04-29 18:53:55.000'))
+              Done(
+                id: 1,
+                doneAt: DateTime.parse('2023-04-29 18:53:55.000'),
+              ),
             ],
           ),
         ]))

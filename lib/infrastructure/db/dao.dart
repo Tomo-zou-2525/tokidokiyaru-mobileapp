@@ -14,7 +14,9 @@ class DAO implements Repository {
   @override
   Future<List<Task>> getTaskList() async {
     List<Map<String, dynamic>> results = await db.rawQuery('''
-    SELECT tasks.*, dones.id as done_id, dones.done_at
+    SELECT
+      tasks.id, tasks.name, tasks.order_num, tasks.created_at, tasks.updated_at,
+      dones.id as done_id, dones.done_at as dones_done_at, dones.created_at as dones_created_at, dones.updated_at as dones_updated_at
     FROM tasks
     LEFT JOIN dones ON tasks.id = dones.task_id
     ORDER BY tasks.order_num ASC, dones.done_at ASC
@@ -28,6 +30,8 @@ class DAO implements Repository {
           'id': taskId,
           'name': row['name'],
           'order_num': row['order_num'],
+          'created_at': row['created_at'],
+          'updated_at': row['updated_at'],
           'dones': [],
         };
       }
@@ -37,6 +41,8 @@ class DAO implements Repository {
           'id': row['done_id'],
           'task_id': taskId,
           'done_at': row['done_at'],
+          'created_at': row['created_at'],
+          'updated_at': row['updated_at'],
         };
         tasksMap[taskId]?['dones'].add(doneMap);
       }

@@ -27,7 +27,11 @@ mixin _$TaskDTO {
   @JsonKey(name: 'order_num')
   int get orderNum => throw _privateConstructorUsedError;
   @JsonKey(name: 'dones')
-  List<DoneDTO> get dones => throw _privateConstructorUsedError;
+  List<DoneDTO>? get dones => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at')
+  DateTime get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,7 +47,9 @@ abstract class $TaskDTOCopyWith<$Res> {
       {@JsonKey(name: 'id') int id,
       @JsonKey(name: 'name') String name,
       @JsonKey(name: 'order_num') int orderNum,
-      @JsonKey(name: 'dones') List<DoneDTO> dones});
+      @JsonKey(name: 'dones') List<DoneDTO>? dones,
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'updated_at') DateTime updatedAt});
 }
 
 /// @nodoc
@@ -62,7 +68,9 @@ class _$TaskDTOCopyWithImpl<$Res, $Val extends TaskDTO>
     Object? id = null,
     Object? name = null,
     Object? orderNum = null,
-    Object? dones = null,
+    Object? dones = freezed,
+    Object? createdAt = null,
+    Object? updatedAt = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -77,10 +85,18 @@ class _$TaskDTOCopyWithImpl<$Res, $Val extends TaskDTO>
           ? _value.orderNum
           : orderNum // ignore: cast_nullable_to_non_nullable
               as int,
-      dones: null == dones
+      dones: freezed == dones
           ? _value.dones
           : dones // ignore: cast_nullable_to_non_nullable
-              as List<DoneDTO>,
+              as List<DoneDTO>?,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ) as $Val);
   }
 }
@@ -95,7 +111,9 @@ abstract class _$$_TaskCopyWith<$Res> implements $TaskDTOCopyWith<$Res> {
       {@JsonKey(name: 'id') int id,
       @JsonKey(name: 'name') String name,
       @JsonKey(name: 'order_num') int orderNum,
-      @JsonKey(name: 'dones') List<DoneDTO> dones});
+      @JsonKey(name: 'dones') List<DoneDTO>? dones,
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'updated_at') DateTime updatedAt});
 }
 
 /// @nodoc
@@ -110,7 +128,9 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskDTOCopyWithImpl<$Res, _$_Task>
     Object? id = null,
     Object? name = null,
     Object? orderNum = null,
-    Object? dones = null,
+    Object? dones = freezed,
+    Object? createdAt = null,
+    Object? updatedAt = null,
   }) {
     return _then(_$_Task(
       id: null == id
@@ -125,10 +145,18 @@ class __$$_TaskCopyWithImpl<$Res> extends _$TaskDTOCopyWithImpl<$Res, _$_Task>
           ? _value.orderNum
           : orderNum // ignore: cast_nullable_to_non_nullable
               as int,
-      dones: null == dones
+      dones: freezed == dones
           ? _value._dones
           : dones // ignore: cast_nullable_to_non_nullable
-              as List<DoneDTO>,
+              as List<DoneDTO>?,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -140,7 +168,9 @@ class _$_Task extends _Task {
       {@JsonKey(name: 'id') required this.id,
       @JsonKey(name: 'name') required this.name,
       @JsonKey(name: 'order_num') required this.orderNum,
-      @JsonKey(name: 'dones') required final List<DoneDTO> dones})
+      @JsonKey(name: 'dones') final List<DoneDTO>? dones,
+      @JsonKey(name: 'created_at') required this.createdAt,
+      @JsonKey(name: 'updated_at') required this.updatedAt})
       : _dones = dones,
         super._();
 
@@ -155,18 +185,27 @@ class _$_Task extends _Task {
   @override
   @JsonKey(name: 'order_num')
   final int orderNum;
-  final List<DoneDTO> _dones;
+  final List<DoneDTO>? _dones;
   @override
   @JsonKey(name: 'dones')
-  List<DoneDTO> get dones {
+  List<DoneDTO>? get dones {
+    final value = _dones;
+    if (value == null) return null;
     if (_dones is EqualUnmodifiableListView) return _dones;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_dones);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
+  @JsonKey(name: 'created_at')
+  final DateTime createdAt;
+  @override
+  @JsonKey(name: 'updated_at')
+  final DateTime updatedAt;
+
+  @override
   String toString() {
-    return 'TaskDTO(id: $id, name: $name, orderNum: $orderNum, dones: $dones)';
+    return 'TaskDTO(id: $id, name: $name, orderNum: $orderNum, dones: $dones, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -178,13 +217,17 @@ class _$_Task extends _Task {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.orderNum, orderNum) ||
                 other.orderNum == orderNum) &&
-            const DeepCollectionEquality().equals(other._dones, _dones));
+            const DeepCollectionEquality().equals(other._dones, _dones) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, orderNum,
-      const DeepCollectionEquality().hash(_dones));
+      const DeepCollectionEquality().hash(_dones), createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -202,10 +245,13 @@ class _$_Task extends _Task {
 
 abstract class _Task extends TaskDTO {
   const factory _Task(
-      {@JsonKey(name: 'id') required final int id,
-      @JsonKey(name: 'name') required final String name,
-      @JsonKey(name: 'order_num') required final int orderNum,
-      @JsonKey(name: 'dones') required final List<DoneDTO> dones}) = _$_Task;
+          {@JsonKey(name: 'id') required final int id,
+          @JsonKey(name: 'name') required final String name,
+          @JsonKey(name: 'order_num') required final int orderNum,
+          @JsonKey(name: 'dones') final List<DoneDTO>? dones,
+          @JsonKey(name: 'created_at') required final DateTime createdAt,
+          @JsonKey(name: 'updated_at') required final DateTime updatedAt}) =
+      _$_Task;
   const _Task._() : super._();
 
   factory _Task.fromJson(Map<String, dynamic> json) = _$_Task.fromJson;
@@ -221,7 +267,13 @@ abstract class _Task extends TaskDTO {
   int get orderNum;
   @override
   @JsonKey(name: 'dones')
-  List<DoneDTO> get dones;
+  List<DoneDTO>? get dones;
+  @override
+  @JsonKey(name: 'created_at')
+  DateTime get createdAt;
+  @override
+  @JsonKey(name: 'updated_at')
+  DateTime get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$_TaskCopyWith<_$_Task> get copyWith => throw _privateConstructorUsedError;
