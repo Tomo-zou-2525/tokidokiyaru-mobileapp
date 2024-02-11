@@ -32,7 +32,7 @@ abstract class DoneDTO implements _$DoneDTO {
     );
   }
 
-  Map<String, dynamic> toInsertJSON() {
+  Map<String, dynamic> toInsertJson() {
     final map = toJson();
     map.remove('id');
     map.remove('task_id');

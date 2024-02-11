@@ -36,7 +36,7 @@ abstract class TaskDTO implements _$TaskDTO {
         dones: dones?.map((done) => done.convertToEntity()).toList() ?? []);
   }
 
-  String toInsertJSON() {
+  String toInsertJson() {
     final map = toJson();
     map.remove('id');
     map.remove('order_num');
