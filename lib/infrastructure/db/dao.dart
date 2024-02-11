@@ -71,7 +71,7 @@ class DAO implements Repository {
       dones.id as done_id, dones.done_at as dones_done_at, dones.created_at as dones_created_at, dones.updated_at as dones_updated_at
     FROM tasks
     LEFT JOIN dones ON tasks.id = dones.task_id
-    ORDER BY tasks.order_num ASC, dones.done_at ASC
+    ORDER BY tasks.order_num ASC
 ''');
 
     Map<int, Map<String, dynamic>> tasksMap = {};
