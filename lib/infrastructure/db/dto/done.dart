@@ -20,7 +20,7 @@ abstract class DoneDTO implements _$DoneDTO {
   factory DoneDTO.fromJson(Map<String, dynamic> json) =>
       _$DoneDTOFromJson(json);
 
-  Done convertToEntity() {
+  Done toEntity() {
     return Done(
       id: Id(value: id),
       doneAt: doneAt,

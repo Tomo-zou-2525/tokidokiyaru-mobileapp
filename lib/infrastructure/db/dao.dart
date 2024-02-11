@@ -99,7 +99,7 @@ class DAO implements Repository {
 
     final taskDTOs =
         tasksMap.values.map((taskMap) => TaskDTO.fromJson(taskMap)).toList();
-    return taskDTOs.map((e) => e.convertToEntity()).toList();
+    return taskDTOs.map((e) => e.toEntity()).toList();
   }
 
   @override
