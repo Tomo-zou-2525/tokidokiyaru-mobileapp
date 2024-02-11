@@ -47,4 +47,9 @@ class API implements Repository {
   Future<void> deleteTask(Id id) async {
     // 実装する
   }
+
+  @override
+  Future<void> addDoneAt(Task task, DateTime doneAt) async {
+    // 実装する
+  }
 }

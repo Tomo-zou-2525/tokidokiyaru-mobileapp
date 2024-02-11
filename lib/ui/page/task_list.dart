@@ -35,14 +35,19 @@ class TaskListPage extends ConsumerWidget {
                 '${task.name} ${task.lastDoneDate ?? '未実施'}',
                 style: const TextStyle(fontSize: 20),
               ),
+              onTap: () => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EditTaskPage(task: task),
+                  ),
+                )
+              },
               trailing: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EditTaskPage(task: task),
-                    ),
-                  );
+                  ref
+                      .read(taskListNotifierProvider.notifier)
+                      .recordDoneAt(task);
                 },
                 child: const Icon(Icons.punch_clock, size: 40),
               ),

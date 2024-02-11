@@ -89,9 +89,9 @@ class DAO implements Repository {
         var doneMap = {
           'id': row['done_id'],
           'task_id': taskId,
-          'done_at': row['done_at'],
-          'created_at': row['created_at'],
-          'updated_at': row['updated_at'],
+          'done_at': row['dones_done_at'],
+          'created_at': row['dones_created_at'],
+          'updated_at': row['dones_updated_at'],
         };
         tasksMap[taskId]?['dones'].add(doneMap);
       }
@@ -132,5 +132,13 @@ class DAO implements Repository {
   @override
   Future<void> deleteTask(Id id) async {
     await deleteById("tasks", id: id);
+  }
+
+  @override
+  Future<void> addDoneAt(Task task, DateTime doneAt) async {
+    await add(
+      "dones",
+      {"done_at": formatter.format(doneAt), "task_id": task.id.value},
+    );
   }
 }

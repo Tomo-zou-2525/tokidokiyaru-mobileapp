@@ -18,4 +18,6 @@ abstract interface class Repository {
   Future<void> updateTask(Task task);
 
   Future<void> deleteTask(Id id);
+
+  Future<void> addDoneAt(Task task, DateTime doneAt);
 }
