@@ -15,12 +15,5 @@ abstract class Task implements _$Task {
     required List<Done> dones,
   }) = _Task;
 
-  factory Task.init({required String name}) => Task(
-        id: const Id(),
-        name: name,
-        orderNum: 0,
-        dones: [],
-      );
-
   String? get lastDoneDate => dones.isEmpty ? null : dones.last.doneDate;
 }

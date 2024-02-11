@@ -13,7 +13,7 @@ abstract interface class Repository {
 
   Future<void> updateTaskList(List<Task> taskList);
 
-  Future<void> addTask(Task task);
+  Future<void> addTask(String name);
 
   Future<void> updateTask(Task task);
 

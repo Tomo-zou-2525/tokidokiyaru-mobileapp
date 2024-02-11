@@ -22,34 +22,11 @@ abstract class TaskDTO implements _$TaskDTO {
   factory TaskDTO.fromJson(Map<String, dynamic> json) =>
       _$TaskDTOFromJson(json);
 
-  factory TaskDTO.fromEntity({required Task entity}) => TaskDTO(
-        id: entity.id.value,
-        name: entity.name,
-        orderNum: entity.orderNum,
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-      );
-
   Task convertToEntity() {
     return Task(
         id: Id(value: id),
         name: name,
         orderNum: orderNum,
         dones: dones?.map((done) => done.convertToEntity()).toList() ?? []);
-  }
-
-  Map<String, dynamic> toInsertMap() {
-    final map = toJson();
-    map.remove('id');
-    map.remove('dones');
-    return map;
-  }
-
-  Map<String, dynamic> toUpdateMap() {
-    final map = toJson();
-    map.remove('id');
-    map.remove('dones');
-    map.remove('created_at');
-    return map;
   }
 }

@@ -12,8 +12,5 @@ abstract class Done implements _$Done {
     required DateTime doneAt,
   }) = _Done;
 
-  factory Done.init({required String name}) =>
-      Done(id: const Id(), doneAt: DateTime.now());
-
   String get doneDate => '${doneAt.year}/${doneAt.month}/${doneAt.day}';
 }

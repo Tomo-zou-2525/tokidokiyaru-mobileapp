@@ -85,10 +85,9 @@ class __$$_IdCopyWithImpl<$Res> extends _$IdCopyWithImpl<$Res, _$_Id>
 /// @nodoc
 
 class _$_Id extends _Id {
-  const _$_Id({this.value = -1}) : super._();
+  const _$_Id({required this.value}) : super._();
 
   @override
-  @JsonKey()
   final int value;
 
   @override
@@ -115,7 +114,7 @@ class _$_Id extends _Id {
 }
 
 abstract class _Id extends Id {
-  const factory _Id({final int value}) = _$_Id;
+  const factory _Id({required final int value}) = _$_Id;
   const _Id._() : super._();
 
   @override

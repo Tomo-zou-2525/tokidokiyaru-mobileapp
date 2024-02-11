@@ -7,14 +7,14 @@ import 'package:tokidoki_mobile/domain/repository/repository.dart';
 import 'package:tokidoki_mobile/domain/valueObject/id.dart';
 import 'package:tokidoki_mobile/ui/page/task_list.dart';
 
-import '../fake_api.dart';
+import '../fake_repository.dart';
 import '../utility.dart';
 
 void main() {
   testWidgets('タスク一覧が空の時にメッセージが表示されること', (WidgetTester tester) async {
     await tester.pumpWidget(
       ProviderScope(overrides: [
-        repositoryProvider.overrideWithValue(FakeAPI(taskList: []))
+        repositoryProvider.overrideWithValue(FakeRepository(taskList: []))
       ], child: const MaterialApp(home: TaskListPage())),
     );
 
@@ -26,7 +26,7 @@ void main() {
   testWidgets('タスク一覧が表示されること', (WidgetTester tester) async {
     await tester.pumpWidget(
       ProviderScope(overrides: [
-        repositoryProvider.overrideWithValue(FakeAPI(taskList: [
+        repositoryProvider.overrideWithValue(FakeRepository(taskList: [
           Task(
             id: const Id(value: 1),
             name: 'タスク1',

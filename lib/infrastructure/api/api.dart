@@ -6,9 +6,12 @@ import 'package:tokidoki_mobile/domain/valueObject/id.dart';
 import 'package:tokidoki_mobile/infrastructure/api/client.dart';
 import 'package:tokidoki_mobile/infrastructure/api/dto/task.dart';
 
-// TODO: エラーハンドリング
-// TODO: エンドポイントを直す（Flavorで分ける？）
-// NOTE: 全て仮実装。apiを使うようになったら正式に実装する
+/*
+TODO:
+- 全て仮実装。apiを使うようになったら正式に実装する
+- エラーハンドリング
+- エンドポイントを直す（Flavorで分ける？）
+*/
 class API implements Repository {
   final String _baseEndpoint = 'http://localhost:8000';
   final _client = CustomHttpClient();
@@ -24,13 +27,13 @@ class API implements Repository {
 
   @override
   Future<void> updateTaskList(List<Task> taskList) async {
-// 実装する
+    // 実装する
   }
 
   @override
-  Future<void> addTask(Task task) async {
+  Future<void> addTask(String name) async {
     String json = jsonEncode(<String, dynamic>{
-      'name': task.name,
+      'name': name,
     });
     await _client.post('$_baseEndpoint/tasks', body: json);
   }

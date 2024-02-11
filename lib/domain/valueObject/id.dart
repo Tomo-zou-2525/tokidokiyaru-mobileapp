@@ -7,8 +7,6 @@ class Id with _$Id {
   const Id._();
 
   const factory Id({
-    @Default(-1) int value,
+    required int value,
   }) = _Id;
-
-  bool get isTemporary => value == -1;
 }
