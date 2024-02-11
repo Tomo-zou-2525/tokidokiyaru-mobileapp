@@ -8,7 +8,7 @@
 PRODUCT_NAME = tokidoki_mobile
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.tokidokiMobile
+PRODUCT_BUNDLE_IDENTIFIER = com.skn.Tokidoki
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2023 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2023 com.skn. All rights reserved.
