@@ -27,13 +27,16 @@ class AddTaskPage extends ConsumerWidget {
                   }),
               ElevatedButton(
                 onPressed: () {
-                  ref.read(taskListNotifierProvider.notifier).addTask(name);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const TaskListPage(),
-                    ),
-                  );
+                  ref
+                      .read(taskListNotifierProvider.notifier)
+                      .addTask(name)
+                      .then(
+                        (_) => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const TaskListPage(),
+                            )),
+                      );
                 },
                 child: const Text('作成'),
               ),

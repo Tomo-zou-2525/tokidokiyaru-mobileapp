@@ -48,8 +48,8 @@ class TaskListPage extends ConsumerWidget {
                 onPressed: () {
                   ref
                       .read(taskListNotifierProvider.notifier)
-                      .recordDoneAt(task);
-                  showSnackbar(context, 'やったぜ！！');
+                      .recordDoneAt(task)
+                      .then((_) => showSnackbar(context, 'やったぜ！！'));
                 },
                 child: const Icon(Icons.punch_clock, size: 40),
               ),
