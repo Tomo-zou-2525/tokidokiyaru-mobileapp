@@ -1,6 +1,6 @@
+import 'package:tokidoki_mobile/domain/entity/done.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
 import 'package:tokidoki_mobile/domain/repository/repository.dart';
-import 'package:tokidoki_mobile/domain/valueObject/id.dart';
 
 class FakeRepository implements Repository {
   final List<Task> taskList;
@@ -28,7 +28,17 @@ class FakeRepository implements Repository {
   }
 
   @override
-  Future<void> deleteTask(Id id) async {
+  Future<void> deleteTask(Task task) async {
+    await Future.delayed(const Duration(seconds: 0));
+  }
+
+  @override
+  Future<void> addDone(Task task, DateTime doneAt) async {
+    await Future.delayed(const Duration(seconds: 0));
+  }
+
+  @override
+  Future<void> deleteDone(Done done) async {
     await Future.delayed(const Duration(seconds: 0));
   }
 }

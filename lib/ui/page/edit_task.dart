@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
 import 'package:tokidoki_mobile/ui/component/dialog/delete_task_confirmation_dialog.dart';
 import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
@@ -16,16 +15,6 @@ class EditTaskPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     TextEditingController textEditingController =
         TextEditingController(text: task.name);
-
-    // TODO: 実施履歴をDBから取得する
-    final nowStr = DateFormat('yyyy/MM/dd HH:mm').format(DateTime.now());
-    List<String> doneAtList = [
-      nowStr,
-      nowStr,
-      nowStr,
-      nowStr,
-      nowStr,
-    ];
 
     final ValueNotifier<bool> isEditState = useState(false);
 
@@ -50,11 +39,9 @@ class EditTaskPage extends HookConsumerWidget {
                   : Text(task.name),
               const Text('実施履歴'),
               Column(
-                children: doneAtList
-                    .asMap()
-                    .entries
-                    .map((entry) => ListTile(
-                          title: Text(entry.value),
+                children: task.dones
+                    .map((done) => ListTile(
+                          title: Text(done.doneDateAtString),
                           trailing: isEditState.value
                               ? ElevatedButton(
                                   child: const Icon(Icons.delete),

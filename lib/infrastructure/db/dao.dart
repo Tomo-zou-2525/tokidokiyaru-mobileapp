@@ -1,22 +1,25 @@
-import 'package:intl/intl.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:tokidoki_mobile/domain/entity/done.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
 import 'package:tokidoki_mobile/domain/repository/repository.dart';
 import 'package:tokidoki_mobile/domain/valueObject/id.dart';
 import 'package:tokidoki_mobile/infrastructure/db/dto/task.dart';
+import 'package:tokidoki_mobile/util/date.dart';
 
 // TODO: エラーハンドリング
 // TODO: トランザクション
 
 class DAO implements Repository {
   final Database db;
-  // SQLiteのdatetime関数のフォーマットと合わせている。
-  final formatter = DateFormat('yyyy-MM-dd HH:mm:ss');
 
   DAO({required this.db});
 
+  String getNow() {
+    return formatFromDateTime(DateTime.now(), DateFormatType.dbFormat);
+  }
+
   Future<int> add(String table, Map<String, Object?> values) async {
-    final now = formatter.format(DateTime.now());
+    final now = getNow();
     values.remove("id");
     values.addAll({"created_at": now, "updated_at": now});
     return await db.insert(
@@ -31,7 +34,7 @@ class DAO implements Repository {
     String? where,
     List<Object?>? whereArgs,
   }) async {
-    final now = formatter.format(DateTime.now());
+    final now = getNow();
     values.remove("created_at");
     values.addAll({"updated_at": now});
     return await db.update(
@@ -130,15 +133,23 @@ class DAO implements Repository {
   }
 
   @override
-  Future<void> deleteTask(Id id) async {
-    await deleteById("tasks", id: id);
+  Future<void> deleteTask(Task task) async {
+    await deleteById("tasks", id: task.id);
   }
 
   @override
-  Future<void> addDoneAt(Task task, DateTime doneAt) async {
+  Future<void> addDone(Task task, DateTime doneAt) async {
     await add(
       "dones",
-      {"done_at": formatter.format(doneAt), "task_id": task.id.value},
+      {
+        "done_at": formatFromDateTime(doneAt, DateFormatType.dbFormat),
+        "task_id": task.id.value
+      },
     );
+  }
+
+  @override
+  Future<void> deleteDone(Done done) async {
+    await deleteById("dones", id: done.id);
   }
 }

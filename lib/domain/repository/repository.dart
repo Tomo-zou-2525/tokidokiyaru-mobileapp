@@ -1,6 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
-import 'package:tokidoki_mobile/domain/valueObject/id.dart';
+
+import '../entity/done.dart';
 
 part 'repository.g.dart';
 
@@ -17,7 +18,9 @@ abstract interface class Repository {
 
   Future<void> updateTask(Task task);
 
-  Future<void> deleteTask(Id id);
+  Future<void> deleteTask(Task task);
 
-  Future<void> addDoneAt(Task task, DateTime doneAt);
+  Future<void> addDone(Task task, DateTime doneAt);
+
+  Future<void> deleteDone(Done done);
 }
