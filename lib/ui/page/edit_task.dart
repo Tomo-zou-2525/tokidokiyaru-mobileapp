@@ -7,6 +7,7 @@ import 'package:tokidoki_mobile/ui/component/dialog/delete_task_confirmation_dia
 import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 
+// TODO: doneAt削除後にタスクが更新されていないので修正する
 class EditTaskPage extends HookConsumerWidget {
   final Task task;
 
