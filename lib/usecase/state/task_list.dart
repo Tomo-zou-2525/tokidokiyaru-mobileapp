@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:tokidoki_mobile/domain/entity/done.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
 import 'package:tokidoki_mobile/domain/repository/repository.dart';
 
@@ -50,6 +51,12 @@ class TaskListNotifier extends _$TaskListNotifier {
     final repository = ref.read(repositoryProvider);
     final doneAt = DateTime.now();
     await repository.addDone(task, doneAt);
+    await getTaskList();
+  }
+
+  Future<void> deleteDoneAt(Done done) async {
+    final repository = ref.read(repositoryProvider);
+    await repository.deleteDone(done);
     await getTaskList();
   }
 }
