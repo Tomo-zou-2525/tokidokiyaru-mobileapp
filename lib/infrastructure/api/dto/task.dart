@@ -15,8 +15,6 @@ abstract class TaskDTO implements _$TaskDTO {
     @JsonKey(name: 'name') required String name,
     @JsonKey(name: 'order_num') required int orderNum,
     @JsonKey(name: 'dones') List<DoneDTO>? dones,
-    @JsonKey(name: 'created_at') required DateTime createdAt,
-    @JsonKey(name: 'updated_at') required DateTime updatedAt,
   }) = _Task;
 
   factory TaskDTO.fromJson(Map<String, dynamic> json) =>

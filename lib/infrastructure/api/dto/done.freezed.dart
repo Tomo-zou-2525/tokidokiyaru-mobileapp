@@ -14,29 +14,39 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+DoneDTO _$DoneDTOFromJson(Map<String, dynamic> json) {
+  return _Done.fromJson(json);
+}
+
 /// @nodoc
-mixin _$Done {
-  Id get id => throw _privateConstructorUsedError;
+mixin _$DoneDTO {
+  @JsonKey(name: 'id')
+  int get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'task_id')
+  int get taskId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'done_at')
   DateTime get doneAt => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $DoneCopyWith<Done> get copyWith => throw _privateConstructorUsedError;
+  $DoneDTOCopyWith<DoneDTO> get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $DoneCopyWith<$Res> {
-  factory $DoneCopyWith(Done value, $Res Function(Done) then) =
-      _$DoneCopyWithImpl<$Res, Done>;
+abstract class $DoneDTOCopyWith<$Res> {
+  factory $DoneDTOCopyWith(DoneDTO value, $Res Function(DoneDTO) then) =
+      _$DoneDTOCopyWithImpl<$Res, DoneDTO>;
   @useResult
-  $Res call({Id id, DateTime doneAt});
-
-  $IdCopyWith<$Res> get id;
+  $Res call(
+      {@JsonKey(name: 'id') int id,
+      @JsonKey(name: 'task_id') int taskId,
+      @JsonKey(name: 'done_at') DateTime doneAt});
 }
 
 /// @nodoc
-class _$DoneCopyWithImpl<$Res, $Val extends Done>
-    implements $DoneCopyWith<$Res> {
-  _$DoneCopyWithImpl(this._value, this._then);
+class _$DoneDTOCopyWithImpl<$Res, $Val extends DoneDTO>
+    implements $DoneDTOCopyWith<$Res> {
+  _$DoneDTOCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -47,43 +57,40 @@ class _$DoneCopyWithImpl<$Res, $Val extends Done>
   @override
   $Res call({
     Object? id = null,
+    Object? taskId = null,
     Object? doneAt = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as Id,
+              as int,
+      taskId: null == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
+              as int,
       doneAt: null == doneAt
           ? _value.doneAt
           : doneAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ) as $Val);
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $IdCopyWith<$Res> get id {
-    return $IdCopyWith<$Res>(_value.id, (value) {
-      return _then(_value.copyWith(id: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
-abstract class _$$_DoneCopyWith<$Res> implements $DoneCopyWith<$Res> {
+abstract class _$$_DoneCopyWith<$Res> implements $DoneDTOCopyWith<$Res> {
   factory _$$_DoneCopyWith(_$_Done value, $Res Function(_$_Done) then) =
       __$$_DoneCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Id id, DateTime doneAt});
-
-  @override
-  $IdCopyWith<$Res> get id;
+  $Res call(
+      {@JsonKey(name: 'id') int id,
+      @JsonKey(name: 'task_id') int taskId,
+      @JsonKey(name: 'done_at') DateTime doneAt});
 }
 
 /// @nodoc
-class __$$_DoneCopyWithImpl<$Res> extends _$DoneCopyWithImpl<$Res, _$_Done>
+class __$$_DoneCopyWithImpl<$Res> extends _$DoneDTOCopyWithImpl<$Res, _$_Done>
     implements _$$_DoneCopyWith<$Res> {
   __$$_DoneCopyWithImpl(_$_Done _value, $Res Function(_$_Done) _then)
       : super(_value, _then);
@@ -92,13 +99,18 @@ class __$$_DoneCopyWithImpl<$Res> extends _$DoneCopyWithImpl<$Res, _$_Done>
   @override
   $Res call({
     Object? id = null,
+    Object? taskId = null,
     Object? doneAt = null,
   }) {
     return _then(_$_Done(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as Id,
+              as int,
+      taskId: null == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
+              as int,
       doneAt: null == doneAt
           ? _value.doneAt
           : doneAt // ignore: cast_nullable_to_non_nullable
@@ -108,18 +120,29 @@ class __$$_DoneCopyWithImpl<$Res> extends _$DoneCopyWithImpl<$Res, _$_Done>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_Done extends _Done {
-  const _$_Done({required this.id, required this.doneAt}) : super._();
+  const _$_Done(
+      {@JsonKey(name: 'id') required this.id,
+      @JsonKey(name: 'task_id') required this.taskId,
+      @JsonKey(name: 'done_at') required this.doneAt})
+      : super._();
+
+  factory _$_Done.fromJson(Map<String, dynamic> json) => _$$_DoneFromJson(json);
 
   @override
-  final Id id;
+  @JsonKey(name: 'id')
+  final int id;
   @override
+  @JsonKey(name: 'task_id')
+  final int taskId;
+  @override
+  @JsonKey(name: 'done_at')
   final DateTime doneAt;
 
   @override
   String toString() {
-    return 'Done(id: $id, doneAt: $doneAt)';
+    return 'DoneDTO(id: $id, taskId: $taskId, doneAt: $doneAt)';
   }
 
   @override
@@ -128,27 +151,45 @@ class _$_Done extends _Done {
         (other.runtimeType == runtimeType &&
             other is _$_Done &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.taskId, taskId) || other.taskId == taskId) &&
             (identical(other.doneAt, doneAt) || other.doneAt == doneAt));
   }
 
+  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, doneAt);
+  int get hashCode => Object.hash(runtimeType, id, taskId, doneAt);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$_DoneCopyWith<_$_Done> get copyWith =>
       __$$_DoneCopyWithImpl<_$_Done>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_DoneToJson(
+      this,
+    );
+  }
 }
 
-abstract class _Done extends Done {
-  const factory _Done({required final Id id, required final DateTime doneAt}) =
-      _$_Done;
+abstract class _Done extends DoneDTO {
+  const factory _Done(
+      {@JsonKey(name: 'id') required final int id,
+      @JsonKey(name: 'task_id') required final int taskId,
+      @JsonKey(name: 'done_at') required final DateTime doneAt}) = _$_Done;
   const _Done._() : super._();
 
+  factory _Done.fromJson(Map<String, dynamic> json) = _$_Done.fromJson;
+
   @override
-  Id get id;
+  @JsonKey(name: 'id')
+  int get id;
   @override
+  @JsonKey(name: 'task_id')
+  int get taskId;
+  @override
+  @JsonKey(name: 'done_at')
   DateTime get doneAt;
   @override
   @JsonKey(ignore: true)

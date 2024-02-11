@@ -13,8 +13,6 @@ abstract class DoneDTO implements _$DoneDTO {
     @JsonKey(name: 'id') required int id,
     @JsonKey(name: 'task_id') required int taskId,
     @JsonKey(name: 'done_at') required DateTime doneAt,
-    @JsonKey(name: 'created_at') required DateTime createdAt,
-    @JsonKey(name: 'updated_at') required DateTime updatedAt,
   }) = _Done;
 
   factory DoneDTO.fromJson(Map<String, dynamic> json) =>

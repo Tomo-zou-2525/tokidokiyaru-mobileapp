@@ -26,6 +26,10 @@ mixin _$DoneDTO {
   int get taskId => throw _privateConstructorUsedError;
   @JsonKey(name: 'done_at')
   DateTime get doneAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
+  DateTime get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at')
+  DateTime get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -40,7 +44,9 @@ abstract class $DoneDTOCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'id') int id,
       @JsonKey(name: 'task_id') int taskId,
-      @JsonKey(name: 'done_at') DateTime doneAt});
+      @JsonKey(name: 'done_at') DateTime doneAt,
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'updated_at') DateTime updatedAt});
 }
 
 /// @nodoc
@@ -59,6 +65,8 @@ class _$DoneDTOCopyWithImpl<$Res, $Val extends DoneDTO>
     Object? id = null,
     Object? taskId = null,
     Object? doneAt = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -73,6 +81,14 @@ class _$DoneDTOCopyWithImpl<$Res, $Val extends DoneDTO>
           ? _value.doneAt
           : doneAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ) as $Val);
   }
 }
@@ -86,7 +102,9 @@ abstract class _$$_DoneCopyWith<$Res> implements $DoneDTOCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'id') int id,
       @JsonKey(name: 'task_id') int taskId,
-      @JsonKey(name: 'done_at') DateTime doneAt});
+      @JsonKey(name: 'done_at') DateTime doneAt,
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'updated_at') DateTime updatedAt});
 }
 
 /// @nodoc
@@ -101,6 +119,8 @@ class __$$_DoneCopyWithImpl<$Res> extends _$DoneDTOCopyWithImpl<$Res, _$_Done>
     Object? id = null,
     Object? taskId = null,
     Object? doneAt = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
   }) {
     return _then(_$_Done(
       id: null == id
@@ -115,6 +135,14 @@ class __$$_DoneCopyWithImpl<$Res> extends _$DoneDTOCopyWithImpl<$Res, _$_Done>
           ? _value.doneAt
           : doneAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -125,7 +153,9 @@ class _$_Done extends _Done {
   const _$_Done(
       {@JsonKey(name: 'id') required this.id,
       @JsonKey(name: 'task_id') required this.taskId,
-      @JsonKey(name: 'done_at') required this.doneAt})
+      @JsonKey(name: 'done_at') required this.doneAt,
+      @JsonKey(name: 'created_at') required this.createdAt,
+      @JsonKey(name: 'updated_at') required this.updatedAt})
       : super._();
 
   factory _$_Done.fromJson(Map<String, dynamic> json) => _$$_DoneFromJson(json);
@@ -139,10 +169,16 @@ class _$_Done extends _Done {
   @override
   @JsonKey(name: 'done_at')
   final DateTime doneAt;
+  @override
+  @JsonKey(name: 'created_at')
+  final DateTime createdAt;
+  @override
+  @JsonKey(name: 'updated_at')
+  final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'DoneDTO(id: $id, taskId: $taskId, doneAt: $doneAt)';
+    return 'DoneDTO(id: $id, taskId: $taskId, doneAt: $doneAt, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -152,12 +188,17 @@ class _$_Done extends _Done {
             other is _$_Done &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.taskId, taskId) || other.taskId == taskId) &&
-            (identical(other.doneAt, doneAt) || other.doneAt == doneAt));
+            (identical(other.doneAt, doneAt) || other.doneAt == doneAt) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, taskId, doneAt);
+  int get hashCode =>
+      Object.hash(runtimeType, id, taskId, doneAt, createdAt, updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -175,9 +216,12 @@ class _$_Done extends _Done {
 
 abstract class _Done extends DoneDTO {
   const factory _Done(
-      {@JsonKey(name: 'id') required final int id,
-      @JsonKey(name: 'task_id') required final int taskId,
-      @JsonKey(name: 'done_at') required final DateTime doneAt}) = _$_Done;
+          {@JsonKey(name: 'id') required final int id,
+          @JsonKey(name: 'task_id') required final int taskId,
+          @JsonKey(name: 'done_at') required final DateTime doneAt,
+          @JsonKey(name: 'created_at') required final DateTime createdAt,
+          @JsonKey(name: 'updated_at') required final DateTime updatedAt}) =
+      _$_Done;
   const _Done._() : super._();
 
   factory _Done.fromJson(Map<String, dynamic> json) = _$_Done.fromJson;
@@ -191,6 +235,12 @@ abstract class _Done extends DoneDTO {
   @override
   @JsonKey(name: 'done_at')
   DateTime get doneAt;
+  @override
+  @JsonKey(name: 'created_at')
+  DateTime get createdAt;
+  @override
+  @JsonKey(name: 'updated_at')
+  DateTime get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$_DoneCopyWith<_$_Done> get copyWith => throw _privateConstructorUsedError;
