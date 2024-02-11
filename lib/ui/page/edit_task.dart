@@ -63,12 +63,16 @@ class EditTaskPage extends HookConsumerWidget {
               if (isEditState.value)
                 ElevatedButton(
                     onPressed: () {
-                      showDialog(
+                      showDialog<bool>(
                         context: context,
                         builder: (BuildContext context) {
                           return DeleteTaskConfirmationDialog(task: task);
                         },
-                      );
+                      ).then((result) {
+                        if (result == true) {
+                          Navigator.pop(context);
+                        }
+                      });
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,

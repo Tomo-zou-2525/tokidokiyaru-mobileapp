@@ -28,7 +28,6 @@ class DeleteDoneAtConfirmationDialog extends ConsumerWidget {
                 .deleteDoneAt(done)
                 .then((_) {
               Navigator.pop(context);
-              Navigator.pop(context);
             });
           },
           child: const Text('削除'),
