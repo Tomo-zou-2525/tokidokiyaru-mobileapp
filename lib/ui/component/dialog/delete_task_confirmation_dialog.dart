@@ -17,15 +17,16 @@ class DeleteTaskConfirmationDialog extends ConsumerWidget {
       actions: [
         TextButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.pop(context, false);
           },
           child: const Text('キャンセル'),
         ),
         TextButton(
           onPressed: () {
-            ref.read(taskListNotifierProvider.notifier).deleteTask(task);
-            Navigator.of(context).pop();
-            Navigator.pop(context);
+            ref
+                .read(taskListNotifierProvider.notifier)
+                .deleteTask(task)
+                .then((_) => Navigator.pop(context, true));
           },
           child: const Text('削除'),
         ),

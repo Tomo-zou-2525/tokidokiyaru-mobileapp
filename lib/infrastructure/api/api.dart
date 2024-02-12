@@ -1,8 +1,8 @@
 import 'dart:convert';
 
+import 'package:tokidoki_mobile/domain/entity/done.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
 import 'package:tokidoki_mobile/domain/repository/repository.dart';
-import 'package:tokidoki_mobile/domain/valueObject/id.dart';
 import 'package:tokidoki_mobile/infrastructure/api/client.dart';
 import 'package:tokidoki_mobile/infrastructure/api/dto/task.dart';
 
@@ -44,7 +44,17 @@ class API implements Repository {
   }
 
   @override
-  Future<void> deleteTask(Id id) async {
+  Future<void> deleteTask(Task task) async {
+    // 実装する
+  }
+
+  @override
+  Future<void> addDone(Task task, DateTime doneAt) async {
+    // 実装する
+  }
+
+  @override
+  Future<void> deleteDone(Done done) async {
     // 実装する
   }
 }

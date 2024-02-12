@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tokidoki_mobile/domain/entity/done.dart';
+import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 
 class DeleteDoneAtConfirmationDialog extends ConsumerWidget {
   final Done done;
@@ -22,10 +23,12 @@ class DeleteDoneAtConfirmationDialog extends ConsumerWidget {
         ),
         TextButton(
           onPressed: () {
-            // TODO: doneAtの削除処理を行う
-            // ref.read(taskListNotifierProvider.notifier).deleteTask(task.id);
-            Navigator.of(context).pop();
-            // Navigator.pop(context);
+            ref
+                .read(taskListNotifierProvider.notifier)
+                .deleteDoneAt(done)
+                .then((_) {
+              Navigator.pop(context);
+            });
           },
           child: const Text('削除'),
         ),

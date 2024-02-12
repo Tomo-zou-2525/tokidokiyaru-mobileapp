@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
+import 'package:tokidoki_mobile/ui/component/dialog/delete_done_at_confirmation_dialog.dart';
 import 'package:tokidoki_mobile/ui/component/dialog/delete_task_confirmation_dialog.dart';
 import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 
+// TODO: doneAt削除後にタスクが更新されていないので修正する
 class EditTaskPage extends HookConsumerWidget {
   final Task task;
 
@@ -17,20 +18,22 @@ class EditTaskPage extends HookConsumerWidget {
     TextEditingController textEditingController =
         TextEditingController(text: task.name);
 
-    // TODO: 実施履歴をDBから取得する
-    final nowStr = DateFormat('yyyy/MM/dd HH:mm').format(DateTime.now());
-    List<String> doneAtList = [
-      nowStr,
-      nowStr,
-      nowStr,
-      nowStr,
-      nowStr,
-    ];
-
     final ValueNotifier<bool> isEditState = useState(false);
 
+    /*
+    FIXME:
+    doneAtを削除した後に反映させるためにwatchしているが、少し乱暴かも。
+    when使って、loading, error, data時の場合分けした方が安全だと思うが、
+    appBarなどもtaskに依存しているので、これらもloadingで消えると見栄え悪いかもと思い、一旦この形にした。
+    */
+    final taskListFuture = ref.watch(taskListNotifierProvider);
+    final watchedTask = taskListFuture.value?.firstWhere(
+            (Task watchedTask) => watchedTask.id == task.id,
+            orElse: () => task) ??
+        task;
+
     return Scaffold(
-      appBar: SimpleAppBar(title: task.name),
+      appBar: SimpleAppBar(title: watchedTask.name),
       body: Center(
         child: SizedBox(
           child: Column(
@@ -47,26 +50,23 @@ class EditTaskPage extends HookConsumerWidget {
                         ),
                       ],
                     )
-                  : Text(task.name),
+                  : Text(watchedTask.name),
               const Text('実施履歴'),
               Column(
-                children: doneAtList
-                    .asMap()
-                    .entries
-                    .map((entry) => ListTile(
-                          title: Text(entry.value),
+                children: watchedTask.dones
+                    .map((done) => ListTile(
+                          title: Text(done.doneDateAtString),
                           trailing: isEditState.value
                               ? ElevatedButton(
                                   child: const Icon(Icons.delete),
                                   onPressed: () {
-                                    // TODO: doneを取得して渡す
-                                    // showDialog(
-                                    //   context: context,
-                                    //   builder: (BuildContext context) {
-                                    //     return DeleteDoneAtConfirmationDialog(
-                                    //         done: done);
-                                    //   },
-                                    // );
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return DeleteDoneAtConfirmationDialog(
+                                            done: done);
+                                      },
+                                    );
                                   },
                                 )
                               : null,
@@ -76,12 +76,17 @@ class EditTaskPage extends HookConsumerWidget {
               if (isEditState.value)
                 ElevatedButton(
                     onPressed: () {
-                      showDialog(
+                      showDialog<bool>(
                         context: context,
                         builder: (BuildContext context) {
-                          return DeleteTaskConfirmationDialog(task: task);
+                          return DeleteTaskConfirmationDialog(
+                              task: watchedTask);
                         },
-                      );
+                      ).then((result) {
+                        if (result == true) {
+                          Navigator.pop(context);
+                        }
+                      });
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
@@ -96,13 +101,20 @@ class EditTaskPage extends HookConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          isEditState.value = !isEditState.value;
+          if (isEditState.value) {
+            return;
+          }
+          if (textEditingController.text == watchedTask.name) {
+            Navigator.pop(context);
+            return;
+          }
           ref
               .read(taskListNotifierProvider.notifier)
-              .updateTask(task, textEditingController.text);
-          isEditState.value = !isEditState.value;
-          if (!isEditState.value) {
+              .updateTask(watchedTask, textEditingController.text)
+              .then((_) {
             Navigator.pop(context);
-          }
+          });
         },
         child: Icon(
           isEditState.value ? Icons.check : Icons.edit,
