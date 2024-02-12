@@ -11,7 +11,7 @@ Repository repository(RepositoryRef ref) =>
 abstract interface class Repository {
   Future<List<Task>> getTaskList();
 
-  Future<void> updateTaskListOrder(List<Task> taskList);
+  Future<void> updateTaskOrder(List<Task> taskList);
 
   Future<void> addTask(String name);
 

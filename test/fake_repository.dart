@@ -13,7 +13,7 @@ class FakeRepository implements Repository {
   }
 
   @override
-  Future<void> updateTaskListOrder(List<Task> taskList) async {
+  Future<void> updateTaskOrder(List<Task> taskList) async {
     await Future.delayed(const Duration(seconds: 0));
   }
 

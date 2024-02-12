@@ -25,7 +25,7 @@ class TaskListNotifier extends _$TaskListNotifier {
       newTaskList.add(task.copyWith(orderNum: index + 1));
     });
     state = AsyncValue.data(newTaskList);
-    await repository.updateTaskListOrder(newTaskList);
+    await repository.updateTaskOrder(newTaskList);
   }
 
   Future<void> addTask(String name) async {

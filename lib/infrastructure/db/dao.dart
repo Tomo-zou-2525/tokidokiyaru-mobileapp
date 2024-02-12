@@ -106,10 +106,15 @@ class DAO implements Repository {
   }
 
   @override
-  Future<void> updateTaskListOrder(List<Task> taskList) async {
-    // TODO: 実装する。とりあえず1秒待つ
-    const duration = Duration(seconds: 1);
-    await Future.delayed(duration);
+  Future<void> updateTaskOrder(List<Task> taskList) async {
+    await Future.forEach(taskList, (task) async {
+      await updateById(
+          "tasks",
+          {
+            "order_num": task.orderNum,
+          },
+          id: task.id);
+    });
   }
 
   @override
@@ -127,7 +132,7 @@ class DAO implements Repository {
     await updateById(
         "tasks",
         {
-          "name": task.name,
+          "order_num": task.name,
         },
         id: task.id);
   }
