@@ -26,7 +26,7 @@ class API implements Repository {
   }
 
   @override
-  Future<void> updateTaskList(List<Task> taskList) async {
+  Future<void> updateTaskOrder(List<Task> taskList) async {
     // 実装する
   }
 
@@ -39,7 +39,7 @@ class API implements Repository {
   }
 
   @override
-  Future<void> updateTask(Task task) async {
+  Future<void> updateTaskName(Task task) async {
     // 実装する
   }
 

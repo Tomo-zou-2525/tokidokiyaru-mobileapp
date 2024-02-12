@@ -63,7 +63,7 @@ class TaskListPage extends ConsumerWidget {
         }
         final task = taskList.removeAt(oldIndex);
         taskList.insert(newIndex, task);
-        ref.read(taskListNotifierProvider.notifier).updateOrder(taskList);
+        ref.read(taskListNotifierProvider.notifier).sortTaskList(taskList);
       },
     );
   }

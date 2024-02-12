@@ -18,14 +18,14 @@ class TaskListNotifier extends _$TaskListNotifier {
     state = AsyncValue.data(await build());
   }
 
-  Future<void> updateOrder(List<Task> taskList) async {
+  Future<void> sortTaskList(List<Task> taskList) async {
     final repository = ref.read(repositoryProvider);
     List<Task> newTaskList = [];
     taskList.asMap().forEach((index, task) {
       newTaskList.add(task.copyWith(orderNum: index + 1));
     });
     state = AsyncValue.data(newTaskList);
-    await repository.updateTaskList(newTaskList);
+    await repository.updateTaskOrder(newTaskList);
   }
 
   Future<void> addTask(String name) async {
@@ -34,10 +34,10 @@ class TaskListNotifier extends _$TaskListNotifier {
     await getTaskList();
   }
 
-  Future<void> updateTask(Task task, String name) async {
+  Future<void> updateTaskName(Task task, String name) async {
     final repository = ref.read(repositoryProvider);
     final newTask = task.copyWith(name: name);
-    await repository.updateTask(newTask);
+    await repository.updateTaskName(newTask);
     await getTaskList();
   }
 
