@@ -105,15 +105,22 @@ class DAO implements Repository {
     return taskDTOs.map((e) => e.toEntity()).toList();
   }
 
+  // TODO: トランザクションの処理は共通化しつつ、共通で定義しているupdate関数を使えるように書き換える。
   @override
   Future<void> updateTaskOrder(List<Task> taskList) async {
-    await Future.forEach(taskList, (task) async {
-      await updateById(
+    await db.transaction((txn) async {
+      for (var task in taskList) {
+        final now = getNow();
+        await txn.update(
           "tasks",
           {
             "order_num": task.orderNum,
+            "updated_at": now,
           },
-          id: task.id);
+          where: "id = ?",
+          whereArgs: [task.id.value],
+        );
+      }
     });
   }
 
