@@ -88,15 +88,15 @@ class EditTaskPage extends HookConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          ref
-              .read(taskListNotifierProvider.notifier)
-              .updateTask(task, textEditingController.text)
-              .then((_) {
-            isEditState.value = !isEditState.value;
-            if (!isEditState.value && Navigator.canPop(context)) {
+          isEditState.value = !isEditState.value;
+          if (!isEditState.value) {
+            ref
+                .read(taskListNotifierProvider.notifier)
+                .updateTask(task, textEditingController.text)
+                .then((_) {
               Navigator.pop(context);
-            }
-          });
+            });
+          }
         },
         child: Icon(
           isEditState.value ? Icons.check : Icons.edit,
