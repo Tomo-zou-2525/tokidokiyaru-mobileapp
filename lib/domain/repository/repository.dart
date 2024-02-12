@@ -11,11 +11,11 @@ Repository repository(RepositoryRef ref) =>
 abstract interface class Repository {
   Future<List<Task>> getTaskList();
 
-  Future<void> updateTaskList(List<Task> taskList);
+  Future<void> updateTaskListOrder(List<Task> taskList);
 
   Future<void> addTask(String name);
 
-  Future<void> updateTask(Task task);
+  Future<void> updateTaskName(Task task);
 
   Future<void> deleteTask(Task task);
 

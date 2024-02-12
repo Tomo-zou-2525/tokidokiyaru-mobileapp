@@ -106,7 +106,7 @@ class DAO implements Repository {
   }
 
   @override
-  Future<void> updateTaskList(List<Task> taskList) async {
+  Future<void> updateTaskListOrder(List<Task> taskList) async {
     // TODO: 実装する。とりあえず1秒待つ
     const duration = Duration(seconds: 1);
     await Future.delayed(duration);
@@ -123,7 +123,7 @@ class DAO implements Repository {
   }
 
   @override
-  Future<void> updateTask(Task task) async {
+  Future<void> updateTaskName(Task task) async {
     await updateById(
         "tasks",
         {

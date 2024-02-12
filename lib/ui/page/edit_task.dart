@@ -111,7 +111,7 @@ class EditTaskPage extends HookConsumerWidget {
           }
           ref
               .read(taskListNotifierProvider.notifier)
-              .updateTask(watchedTask, textEditingController.text)
+              .updateTaskName(watchedTask, textEditingController.text)
               .then((_) {
             Navigator.pop(context);
           });
