@@ -42,7 +42,7 @@ dependencies:
   flutter_launcher_icons: ^0.13.0
   flutter_overboard: ^3.1.1
   shared_preferences: ^2.0.15
-  flutter_native_splash: ^2.2.9
+  flutter_native_splash: ^2.2.8
   flutter_html: ^3.0.0-alpha.6
   http: ^1.1.0
   json_annotation: ^4.8.1
