@@ -24,4 +24,9 @@ samples, guidance on mobile development, and a full API reference.
 flutter build appbundle --release --no-tree-shake-icons
 ```
 ## iOS
-加筆中
+コマンドは不要  
+```
+- XCodeで ios/Runner.xcworkspaceを開く
+- Product > Build
+- Product > Archive
+```
