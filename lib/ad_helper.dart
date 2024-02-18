@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+
 class AdHelper {
   static String get bannerAdUnitId {
     if (Platform.isAndroid) {
@@ -10,4 +12,11 @@ class AdHelper {
       throw UnsupportedError('Unsupported platform');
     }
   }
+
+  static BannerAd createBannerAd() => BannerAd(
+        adUnitId: bannerAdUnitId,
+        size: AdSize.banner,
+        request: const AdRequest(),
+        listener: const BannerAdListener(),
+      );
 }
