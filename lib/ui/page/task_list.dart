@@ -99,16 +99,18 @@ class TaskListPage extends ConsumerWidget {
 
     return Scaffold(
       appBar: SimpleAppBar(title: 'やったこと一覧'),
-      body: Column(
-        children: [
-          Expanded(child: Center(child: mainWidget)),
-          Container(
-            alignment: Alignment.center,
-            width: MediaQuery.of(context).size.width,
-            height: 60,
-            child: adWidget,
-          ),
-        ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(child: Center(child: mainWidget)),
+            Container(
+              alignment: Alignment.center,
+              width: MediaQuery.of(context).size.width,
+              height: 60,
+              child: adWidget,
+            ),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -119,6 +121,8 @@ class TaskListPage extends ConsumerWidget {
         },
         child: const Icon(Icons.add),
       ),
+      floatingActionButtonLocation: CustomizeFloatingLocation(
+          FloatingActionButtonLocation.endFloat, 0, -50),
       endDrawer: Drawer(
         child: ListView(
           children: [
@@ -153,4 +157,16 @@ void _showTutorial(BuildContext context) {
       Navigator.pushNamed(context, '/tutorial');
     }
   });
+}
+
+class CustomizeFloatingLocation extends FloatingActionButtonLocation {
+  FloatingActionButtonLocation location;
+  double offsetX;
+  double offsetY;
+  CustomizeFloatingLocation(this.location, this.offsetX, this.offsetY);
+  @override
+  Offset getOffset(ScaffoldPrelayoutGeometry scaffoldGeometry) {
+    Offset offset = location.getOffset(scaffoldGeometry);
+    return Offset(offset.dx + offsetX, offset.dy + offsetY);
+  }
 }
