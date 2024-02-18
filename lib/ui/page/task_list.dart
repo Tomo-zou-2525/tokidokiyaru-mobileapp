@@ -4,6 +4,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tokidoki_mobile/ad_helper.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
+import 'package:tokidoki_mobile/ui/component/common/base_drawer.dart';
 import 'package:tokidoki_mobile/ui/component/loader.dart';
 import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
 import 'package:tokidoki_mobile/ui/component/snackbar.dart';
@@ -120,6 +121,7 @@ class TaskListPage extends ConsumerWidget {
         child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: CustomizeFloatingLocation(),
+      endDrawer: createBaseDrawer(context),
     );
   }
 }
