@@ -115,7 +115,7 @@ class TaskListPage extends ConsumerWidget {
         },
         child: const Icon(Icons.add),
       ),
-      floatingActionButtonLocation: CustomizeFloatingLocation(),
+      floatingActionButtonLocation: SimpleFloatingLocation(),
       endDrawer: const BaseDrawer(),
     );
   }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomizeFloatingLocation extends FloatingActionButtonLocation {
+class SimpleFloatingLocation extends FloatingActionButtonLocation {
   @override
   Offset getOffset(ScaffoldPrelayoutGeometry scaffoldGeometry) {
     final Offset offset =
