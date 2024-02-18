@@ -10,6 +10,7 @@ import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
 import 'package:tokidoki_mobile/ui/component/snackbar.dart';
 import 'package:tokidoki_mobile/ui/page/add_task.dart';
 import 'package:tokidoki_mobile/ui/page/edit_task.dart';
+import 'package:tokidoki_mobile/ui/style/customize_floating_location.dart';
 import 'package:tokidoki_mobile/usecase/state/app_lifecycle_state.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 
@@ -132,10 +133,4 @@ void _showTutorial(BuildContext context) {
       Navigator.pushNamed(context, '/tutorial');
     }
   });
-}
-
-class CustomizeFloatingLocation extends FloatingActionButtonLocation {
-  @override
-  Offset getOffset(ScaffoldPrelayoutGeometry scaffoldGeometry) =>
-      const Offset(0, -50);
 }
