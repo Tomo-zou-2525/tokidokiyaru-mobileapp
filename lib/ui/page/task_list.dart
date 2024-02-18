@@ -119,32 +119,7 @@ class TaskListPage extends ConsumerWidget {
         },
         child: const Icon(Icons.add),
       ),
-      floatingActionButtonLocation: CustomizeFloatingLocation(
-          FloatingActionButtonLocation.endFloat, 0, -50),
-      endDrawer: Drawer(
-        child: ListView(
-          children: [
-            ListTile(
-              title: const Text("このアプリについて"),
-              onTap: () {
-                Navigator.pushNamed(context, '/tutorial');
-              },
-            ),
-            ListTile(
-              title: const Text("利用規約"),
-              onTap: () {
-                Navigator.pushNamed(context, '/terms_of_service');
-              },
-            ),
-            ListTile(
-              title: const Text("プライバシーポリシー"),
-              onTap: () {
-                Navigator.pushNamed(context, '/privacy_policy');
-              },
-            ),
-          ],
-        ),
-      ),
+      floatingActionButtonLocation: CustomizeFloatingLocation(),
     );
   }
 }
@@ -158,13 +133,7 @@ void _showTutorial(BuildContext context) {
 }
 
 class CustomizeFloatingLocation extends FloatingActionButtonLocation {
-  FloatingActionButtonLocation location;
-  double offsetX;
-  double offsetY;
-  CustomizeFloatingLocation(this.location, this.offsetX, this.offsetY);
   @override
-  Offset getOffset(ScaffoldPrelayoutGeometry scaffoldGeometry) {
-    Offset offset = location.getOffset(scaffoldGeometry);
-    return Offset(offset.dx + offsetX, offset.dy + offsetY);
-  }
+  Offset getOffset(ScaffoldPrelayoutGeometry scaffoldGeometry) =>
+      const Offset(0, -50);
 }
