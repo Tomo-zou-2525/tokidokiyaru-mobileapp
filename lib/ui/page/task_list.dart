@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tokidoki_mobile/ad_helper.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
+import 'package:tokidoki_mobile/ui/component/admob/bottom_ad_banner.dart';
 import 'package:tokidoki_mobile/ui/component/common/base_drawer.dart';
 import 'package:tokidoki_mobile/ui/component/loader.dart';
 import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
@@ -103,12 +102,7 @@ class TaskListPage extends ConsumerWidget {
         child: Column(
           children: [
             Expanded(child: Center(child: mainWidget)),
-            Container(
-              alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width,
-              height: 60,
-              child: AdWidget(ad: AdHelper.createBannerAd()..load()),
-            ),
+            const BottomAdBanner(),
           ],
         ),
       ),
