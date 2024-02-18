@@ -95,8 +95,6 @@ class TaskListPage extends ConsumerWidget {
               )
             : createTaskListWidget(taskList, ref));
 
-    final adWidget = AdWidget(ad: AdHelper.createBannerAd()..load());
-
     return Scaffold(
       appBar: SimpleAppBar(title: 'やったこと一覧'),
       body: SafeArea(
@@ -107,7 +105,7 @@ class TaskListPage extends ConsumerWidget {
               alignment: Alignment.center,
               width: MediaQuery.of(context).size.width,
               height: 60,
-              child: adWidget,
+              child: AdWidget(ad: AdHelper.createBannerAd()..load()),
             ),
           ],
         ),
