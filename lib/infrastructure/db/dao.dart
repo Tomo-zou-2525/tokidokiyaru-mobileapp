@@ -104,7 +104,6 @@ class DAO implements Repository {
     return taskDTOs.map((e) => e.toEntity()).toList();
   }
 
-  // TODO: トランザクションの処理は共通化しつつ、共通で定義しているupdate関数を使えるように書き換える。
   @override
   Future<void> updateTaskOrder(List<Task> taskList) async {
     await db.transaction((txn) async {
