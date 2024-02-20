@@ -7,19 +7,18 @@ import 'package:tokidoki_mobile/infrastructure/db/dto/task.dart';
 import 'package:tokidoki_mobile/util/date.dart';
 
 // TODO: エラーハンドリング
-// TODO: トランザクション
 
 class DAO implements Repository {
   final Database db;
 
   DAO({required this.db});
 
-  String getNow() {
+  String _getNow() {
     return formatFromDateTime(DateTime.now(), DateFormatType.dbFormat);
   }
 
-  Future<int> add(String table, Map<String, Object?> values) async {
-    final now = getNow();
+  Future<int> _add(String table, Map<String, Object?> values) async {
+    final now = _getNow();
     values.remove("id");
     values.addAll({"created_at": now, "updated_at": now});
     return await db.insert(
@@ -28,13 +27,13 @@ class DAO implements Repository {
     );
   }
 
-  Future<int> update(
+  Future<int> _update(
     String table,
     Map<String, Object?> values, {
     String? where,
     List<Object?>? whereArgs,
   }) async {
-    final now = getNow();
+    final now = _getNow();
     values.remove("created_at");
     values.addAll({"updated_at": now});
     return await db.update(
@@ -45,9 +44,9 @@ class DAO implements Repository {
     );
   }
 
-  Future<int> updateById(String table, Map<String, Object?> values,
+  Future<int> _updateById(String table, Map<String, Object?> values,
       {required Id id}) async {
-    return await db.update(
+    return await _update(
       table,
       values,
       where: "id = ?",
@@ -55,7 +54,7 @@ class DAO implements Repository {
     );
   }
 
-  Future<int> deleteById(String table, {required Id id}) async {
+  Future<int> _deleteById(String table, {required Id id}) async {
     return await db.delete(
       table,
       where: "id = ?",
@@ -110,7 +109,7 @@ class DAO implements Repository {
   Future<void> updateTaskOrder(List<Task> taskList) async {
     await db.transaction((txn) async {
       for (var task in taskList) {
-        final now = getNow();
+        final now = _getNow();
         await txn.update(
           "tasks",
           {
@@ -126,7 +125,7 @@ class DAO implements Repository {
 
   @override
   Future<void> addTask(String name) async {
-    await add(
+    await _add(
       "tasks",
       {
         "name": name,
@@ -136,7 +135,7 @@ class DAO implements Repository {
 
   @override
   Future<void> updateTaskName(Task task) async {
-    await updateById(
+    await _updateById(
         "tasks",
         {
           "name": task.name,
@@ -146,12 +145,12 @@ class DAO implements Repository {
 
   @override
   Future<void> deleteTask(Task task) async {
-    await deleteById("tasks", id: task.id);
+    await _deleteById("tasks", id: task.id);
   }
 
   @override
   Future<void> addDone(Task task, DateTime doneAt) async {
-    await add(
+    await _add(
       "dones",
       {
         "done_at": formatFromDateTime(doneAt, DateFormatType.dbFormat),
@@ -162,6 +161,6 @@ class DAO implements Repository {
 
   @override
   Future<void> deleteDone(Done done) async {
-    await deleteById("dones", id: done.id);
+    await _deleteById("dones", id: done.id);
   }
 }
