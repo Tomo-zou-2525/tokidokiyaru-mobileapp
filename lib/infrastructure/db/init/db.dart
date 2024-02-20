@@ -10,6 +10,7 @@ class DB {
   }
 
   // 開発用。DBをリセットしたいときに使用する。
+  // ignore: unused_element
   static Future<void> _deleteDB(String path) async {
     await deleteDatabase(path);
   }
