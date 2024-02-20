@@ -12,12 +12,11 @@ import 'package:tokidoki_mobile/ui/page/terms_page.dart';
 import 'package:tokidoki_mobile/ui/page/tutorial_page.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   MobileAds.instance.initialize();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await Future.delayed(const Duration(seconds: 1));
   FlutterNativeSplash.remove();
