@@ -6,6 +6,8 @@ gen:
 	flutter pub run build_runner build --delete-conflicting-outputs
 gen_watch:
 	flutter pub run build_runner watch --delete-conflicting-outputs
+lint:
+	flutter analyze
 test:
 	flutter test
 update_icon:
