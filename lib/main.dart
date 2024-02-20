@@ -21,7 +21,7 @@ void main() async {
   await Future.delayed(const Duration(seconds: 1));
   FlutterNativeSplash.remove();
 
-  final db = await DB().open();
+  final db = await DB.open();
   runApp(
     ProviderScope(
         overrides: [repositoryProvider.overrideWithValue(DAO(db: db))],
