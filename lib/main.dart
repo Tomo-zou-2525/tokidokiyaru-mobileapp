@@ -4,7 +4,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tokidoki_mobile/domain/repository/repository.dart';
 import 'package:tokidoki_mobile/infrastructure/db/dao.dart';
-import 'package:tokidoki_mobile/infrastructure/db/init.dart';
+import 'package:tokidoki_mobile/infrastructure/db/init/db.dart';
 import 'package:tokidoki_mobile/ui/page/privacy_policy_page.dart';
 import 'package:tokidoki_mobile/ui/page/task_list.dart';
 import 'package:tokidoki_mobile/ui/page/terms_page.dart';
@@ -21,7 +21,7 @@ void main() async {
   await Future.delayed(const Duration(seconds: 1));
   FlutterNativeSplash.remove();
 
-  final db = await open();
+  final db = await DB.open();
   runApp(
     ProviderScope(
         overrides: [repositoryProvider.overrideWithValue(DAO(db: db))],
