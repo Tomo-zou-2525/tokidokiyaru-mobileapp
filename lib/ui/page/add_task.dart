@@ -31,17 +31,15 @@ class AddTaskPage extends ConsumerWidget {
                   ref
                       .read(taskListNotifierProvider.notifier)
                       .addTask(name)
-                      .then((result) => {
-                            if (result == Result.success)
-                              {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const TaskListPage(),
-                                    ))
-                              }
-                          });
+                      .then((result) {
+                    if (result == Result.success) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const TaskListPage(),
+                          ));
+                    }
+                  });
                 },
                 child: const Text('作成'),
               ),
