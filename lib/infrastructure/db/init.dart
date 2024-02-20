@@ -1,37 +1,28 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:tokidoki_mobile/infrastructure/db/migration.dart';
 
-// TODO: DBマイグレーションとかは別途検討。
+Future<void> _onConfigure(Database db) async {
+  await db.execute("PRAGMA foreign_keys = ON");
+}
+
+Future<void> _deleteDB(String path) async {
+  await deleteDatabase(path);
+}
 
 Future<Database> open() async {
   final path = join(await getDatabasesPath(), 'tokidokiyaru.db');
-  // TODO: DB綺麗にしたいときはコメントアウト外す。諸々整えたら消す。
-  // await deleteDatabase(path);
-  final db = await openDatabase(path, onCreate: (db, version) async {
-    await db.execute(
-      '''
-      CREATE TABLE tasks (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL UNIQUE,
-        order_num INTEGER NOT NULL DEFAULT 0,
-        created_at TEXT NOT NULL DEFAULT (datetime('now', 'localtime')),
-        updated_at TEXT NOT NULL DEFAULT (datetime('now', 'localtime'))
-      );
-      ''',
-    );
-    await db.execute(
-      '''
-      CREATE TABLE dones (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        task_id INTEGER NOT NULL,
-        done_at TEXT NOT NULL DEFAULT (datetime('now', 'localtime')),
-        created_at TEXT NOT NULL DEFAULT (datetime('now', 'localtime')),
-        updated_at TEXT NOT NULL DEFAULT (datetime('now', 'localtime')),
-        FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
-      );
-      ''',
-    );
-  }, version: 1);
+  final db = await openDatabase(path, version: 1, onConfigure: _onConfigure,
+      onCreate: (db, version) async {
+    executeScript(db, 0, version);
+  }, onUpgrade: (db, oldVersion, newVersion) async {
+    executeScript(db, oldVersion, newVersion);
+  }, onDowngrade: onDatabaseDowngradeDelete);
+
+  final tasks = await db.query("tasks");
+  print(tasks);
+  final dones = await db.query("dones");
+  print(dones);
 
   return db;
 }
