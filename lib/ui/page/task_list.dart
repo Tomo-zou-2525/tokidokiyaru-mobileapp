@@ -97,7 +97,7 @@ class TaskListPage extends ConsumerWidget {
             : createTaskListWidget(taskList, ref));
 
     return Scaffold(
-      appBar: SimpleAppBar(title: 'やったこと一覧'),
+      appBar: SimpleAppBar(title: 'やったこと一覧', automaticallyImplyLeading: false),
       body: SafeArea(
         child: Column(
           children: [
