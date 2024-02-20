@@ -9,8 +9,8 @@ import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
 import 'package:tokidoki_mobile/ui/component/snackBar/snackbar.dart';
 import 'package:tokidoki_mobile/ui/page/add_task.dart';
 import 'package:tokidoki_mobile/ui/page/edit_task.dart';
-import 'package:tokidoki_mobile/usecase/result.dart';
 import 'package:tokidoki_mobile/ui/style/customize_floating_location.dart';
+import 'package:tokidoki_mobile/usecase/result.dart';
 import 'package:tokidoki_mobile/usecase/state/app_lifecycle_state.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 
@@ -49,8 +49,8 @@ class TaskListPage extends ConsumerWidget {
                 )
               },
               trailing: ElevatedButton(
-                onPressed: () async {
-                  await ref
+                onPressed: () {
+                  ref
                       .read(taskListNotifierProvider.notifier)
                       .recordDoneAt(task)
                       .then((result) {
