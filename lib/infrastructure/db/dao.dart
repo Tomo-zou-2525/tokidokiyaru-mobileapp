@@ -27,18 +27,22 @@ class DAO implements Repository {
     );
   }
 
+  Map<String, Object?> _getUpdateValues(Map<String, Object?> values) {
+    final now = _getNow();
+    values.remove("created_at");
+    values.addAll({"updated_at": now});
+    return values;
+  }
+
   Future<int> _update(
     String table,
     Map<String, Object?> values, {
     String? where,
     List<Object?>? whereArgs,
   }) async {
-    final now = _getNow();
-    values.remove("created_at");
-    values.addAll({"updated_at": now});
     return await db.update(
       table,
-      values,
+      _getUpdateValues(values),
       where: where,
       whereArgs: whereArgs,
     );
@@ -108,13 +112,11 @@ class DAO implements Repository {
   Future<void> updateTaskOrder(List<Task> taskList) async {
     await db.transaction((txn) async {
       for (var task in taskList) {
-        final now = _getNow();
         await txn.update(
           "tasks",
-          {
+          _getUpdateValues({
             "order_num": task.orderNum,
-            "updated_at": now,
-          },
+          }),
           where: "id = ?",
           whereArgs: [task.id.value],
         );
