@@ -1,12 +1,11 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:tokidoki_mobile/domain/entity/done.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
+import 'package:tokidoki_mobile/domain/errors/error.dart';
 import 'package:tokidoki_mobile/domain/repository/repository.dart';
 import 'package:tokidoki_mobile/domain/valueObject/id.dart';
 import 'package:tokidoki_mobile/infrastructure/db/dto/task.dart';
 import 'package:tokidoki_mobile/util/date.dart';
-
-// TODO: エラーハンドリング
 
 class DAO implements Repository {
   final Database db;
@@ -126,22 +125,34 @@ class DAO implements Repository {
 
   @override
   Future<void> addTask(String name) async {
-    await _add(
-      "tasks",
-      {
-        "name": name,
-      },
-    );
+    try {
+      await _add(
+        "tasks",
+        {
+          "name": name,
+        },
+      );
+    } on DatabaseException catch (e) {
+      if (e.isUniqueConstraintError()) {
+        throw const DomainException(ErrorType.taskDuplicate);
+      }
+    }
   }
 
   @override
   Future<void> updateTaskName(Task task) async {
-    await _updateById(
-        "tasks",
-        {
-          "name": task.name,
-        },
-        id: task.id);
+    try {
+      await _updateById(
+          "tasks",
+          {
+            "name": task.name,
+          },
+          id: task.id);
+    } on DatabaseException catch (e) {
+      if (e.isUniqueConstraintError()) {
+        throw const DomainException(ErrorType.taskDuplicate);
+      }
+    }
   }
 
   @override

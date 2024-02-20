@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
+import 'package:tokidoki_mobile/domain/errors/error.dart';
 import 'package:tokidoki_mobile/ui/component/loader.dart';
 import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
 import 'package:tokidoki_mobile/ui/component/snackbar.dart';
 import 'package:tokidoki_mobile/ui/page/add_task.dart';
 import 'package:tokidoki_mobile/ui/page/edit_task.dart';
+import 'package:tokidoki_mobile/usecase/result.dart';
 import 'package:tokidoki_mobile/usecase/state/app_lifecycle_state.dart';
+import 'package:tokidoki_mobile/usecase/state/error.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 
 class TaskListPage extends ConsumerWidget {
@@ -49,7 +52,10 @@ class TaskListPage extends ConsumerWidget {
                   ref
                       .read(taskListNotifierProvider.notifier)
                       .recordDoneAt(task)
-                      .then((_) => showSnackbar(context, 'やったぜ！！'));
+                      .then((result) => {
+                            if (result == Result.success)
+                              {showSnackbar(context, 'やったぜ！！')}
+                          });
                 },
                 child: const Icon(Icons.punch_clock, size: 40),
               ),
@@ -57,13 +63,25 @@ class TaskListPage extends ConsumerWidget {
           ),
         );
       },
-      onReorder: (int oldIndex, int newIndex) {
+      onReorder: (int oldIndex, int newIndex) async {
         if (oldIndex < newIndex) {
           newIndex -= 1;
         }
         final task = taskList.removeAt(oldIndex);
         taskList.insert(newIndex, task);
-        ref.read(taskListNotifierProvider.notifier).sortTaskList(taskList);
+        await ref
+            .read(taskListNotifierProvider.notifier)
+            .sortTaskList(taskList)
+            .catchError((e) {
+          ref
+              .read(errorNotifierProvider.notifier)
+              .updateState(e.type);
+        }, test: (e) => e is DomainException)
+            .catchError((e) {
+          ref
+              .read(errorNotifierProvider.notifier)
+              .updateState(ErrorType.unexpected);
+        });
       },
     );
   }
