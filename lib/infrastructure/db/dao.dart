@@ -139,7 +139,7 @@ class DAO implements Repository {
     await updateById(
         "tasks",
         {
-          "order_num": task.name,
+          "name": task.name,
         },
         id: task.id);
   }
