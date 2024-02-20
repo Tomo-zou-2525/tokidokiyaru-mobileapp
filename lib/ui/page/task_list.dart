@@ -102,7 +102,7 @@ class TaskListPage extends ConsumerWidget {
         child: Column(
           children: [
             Expanded(child: Center(child: mainWidget)),
-            const BottomAdBanner(),
+            BottomAdBanner(),
           ],
         ),
       ),

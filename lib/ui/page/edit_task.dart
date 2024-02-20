@@ -100,7 +100,7 @@ class EditTaskPage extends HookConsumerWidget {
                 ],
               ),
             ),
-            const BottomAdBanner(),
+            BottomAdBanner(),
           ],
         ),
       ),

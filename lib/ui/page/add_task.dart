@@ -46,7 +46,7 @@ class AddTaskPage extends ConsumerWidget {
                 ),
               ]),
             ),
-            const BottomAdBanner(),
+            BottomAdBanner(),
           ],
         ),
       ),
