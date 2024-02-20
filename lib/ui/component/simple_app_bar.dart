@@ -4,5 +4,9 @@ class SimpleAppBar extends AppBar {
   SimpleAppBar({
     super.key,
     required String title,
-  }) : super(title: Text(title));
+    bool automaticallyImplyLeading = true,
+  }) : super(
+          title: Text(title),
+          automaticallyImplyLeading: automaticallyImplyLeading,
+        );
 }

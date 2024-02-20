@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
+import 'package:tokidoki_mobile/ui/component/admob/bottom_ad_banner.dart';
+import 'package:tokidoki_mobile/ui/component/common/base_drawer.dart';
 import 'package:tokidoki_mobile/ui/component/loader.dart';
 import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
 import 'package:tokidoki_mobile/ui/component/snackbar.dart';
 import 'package:tokidoki_mobile/ui/page/add_task.dart';
 import 'package:tokidoki_mobile/ui/page/edit_task.dart';
+import 'package:tokidoki_mobile/ui/style/customize_floating_location.dart';
 import 'package:tokidoki_mobile/usecase/state/app_lifecycle_state.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 
@@ -94,8 +97,15 @@ class TaskListPage extends ConsumerWidget {
             : createTaskListWidget(taskList, ref));
 
     return Scaffold(
-      appBar: SimpleAppBar(title: 'やったこと一覧'),
-      body: Center(child: mainWidget),
+      appBar: SimpleAppBar(title: 'やったこと一覧', automaticallyImplyLeading: false),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(child: Center(child: mainWidget)),
+            BottomAdBanner(),
+          ],
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
@@ -105,30 +115,8 @@ class TaskListPage extends ConsumerWidget {
         },
         child: const Icon(Icons.add),
       ),
-      endDrawer: Drawer(
-        child: ListView(
-          children: [
-            ListTile(
-              title: const Text("このアプリについて"),
-              onTap: () {
-                Navigator.pushNamed(context, '/tutorial');
-              },
-            ),
-            ListTile(
-              title: const Text("利用規約"),
-              onTap: () {
-                Navigator.pushNamed(context, '/terms_of_service');
-              },
-            ),
-            ListTile(
-              title: const Text("プライバシーポリシー"),
-              onTap: () {
-                Navigator.pushNamed(context, '/privacy_policy');
-              },
-            ),
-          ],
-        ),
-      ),
+      floatingActionButtonLocation: SimpleFloatingLocation(),
+      endDrawer: const BaseDrawer(),
     );
   }
 }
