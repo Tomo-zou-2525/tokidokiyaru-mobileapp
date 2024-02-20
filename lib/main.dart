@@ -18,6 +18,7 @@ void main() async {
     DeviceOrientation.portraitUp,
   ]);
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  // １秒長くスプラッシュスクリーンを表示するのが見映えが良い
   await Future.delayed(const Duration(seconds: 1));
   FlutterNativeSplash.remove();
 
