@@ -1,6 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 
-const migrationScripts = {
+const _migrationScripts = {
   1: [
     '''
       CREATE TABLE tasks (
@@ -26,7 +26,7 @@ const migrationScripts = {
 
 void executeScript(Database db, int oldVersion, int newVersion) async {
   for (int i = oldVersion + 1; i <= newVersion; i++) {
-    List<String>? queries = migrationScripts[i];
+    List<String>? queries = _migrationScripts[i];
     if (queries != null) {
       for (String query in queries) {
         await db.execute(query);
