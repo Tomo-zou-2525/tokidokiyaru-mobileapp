@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tokidoki_mobile/domain/errors/error.dart';
-import 'package:tokidoki_mobile/ui/component/errorSnackbar.dart';
+import 'package:tokidoki_mobile/ui/component/snackBar/errorSnackbar.dart';
 import 'package:tokidoki_mobile/ui/page/task_list.dart';
 import 'package:tokidoki_mobile/usecase/state/error.dart';
 
