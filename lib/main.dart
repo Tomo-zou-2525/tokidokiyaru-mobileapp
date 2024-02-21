@@ -42,7 +42,6 @@ class App extends StatelessWidget {
         '/terms_of_service': (context) => const TermsPage(),
         '/privacy_policy': (context) => const PrivacyPolicyPage(),
       },
-      initialRoute: "/",
       title: 'Tokidoki',
       theme: ThemeData(
         appBarTheme: const AppBarTheme(backgroundColor: Color(0xFFDBE1FF)),
