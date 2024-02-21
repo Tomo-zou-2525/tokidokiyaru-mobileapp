@@ -7,6 +7,7 @@ import 'package:tokidoki_mobile/ui/component/common/base_drawer.dart';
 import 'package:tokidoki_mobile/ui/component/dialog/delete_done_at_confirmation_dialog.dart';
 import 'package:tokidoki_mobile/ui/component/dialog/delete_task_confirmation_dialog.dart';
 import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
+import 'package:tokidoki_mobile/usecase/result.dart';
 import 'package:tokidoki_mobile/ui/style/customize_floating_location.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 
@@ -117,8 +118,12 @@ class EditTaskPage extends HookConsumerWidget {
           ref
               .read(taskListNotifierProvider.notifier)
               .updateTaskName(watchedTask, textEditingController.text)
-              .then((_) {
-            Navigator.pop(context);
+              .then((result) {
+            if (result == Result.success) {
+              Navigator.pop(context);
+            } else if (result == Result.failed) {
+              isEditState.value = !isEditState.value;
+            }
           });
         },
         child: Icon(

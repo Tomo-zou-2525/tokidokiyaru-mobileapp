@@ -4,6 +4,7 @@ import 'package:tokidoki_mobile/ui/component/admob/bottom_ad_banner.dart';
 import 'package:tokidoki_mobile/ui/component/common/base_drawer.dart';
 import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
 import 'package:tokidoki_mobile/ui/page/task_list.dart';
+import 'package:tokidoki_mobile/usecase/result.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 // import 'package:tokidoki_mobile/ui/style/customize_floating_location.dart';
 
@@ -34,13 +35,15 @@ class AddTaskPage extends ConsumerWidget {
                     ref
                         .read(taskListNotifierProvider.notifier)
                         .addTask(name)
-                        .then(
-                          (_) => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const TaskListPage(),
-                              )),
-                        );
+                        .then((result) {
+                    if (result == Result.success) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const TaskListPage(),
+                            ));
+                      }
+                  });
                   },
                   child: const Text('作成'),
                 ),

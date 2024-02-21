@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
+import 'package:tokidoki_mobile/usecase/result.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 
 class DeleteTaskConfirmationDialog extends ConsumerWidget {
@@ -26,7 +27,13 @@ class DeleteTaskConfirmationDialog extends ConsumerWidget {
             ref
                 .read(taskListNotifierProvider.notifier)
                 .deleteTask(task)
-                .then((_) => Navigator.pop(context, true));
+                .then((result) {
+              if (result == Result.success) {
+                Navigator.pop(context, true);
+              } else if (result == Result.failed) {
+                Navigator.pop(context, false);
+              }
+            });
           },
           child: const Text('削除'),
         ),

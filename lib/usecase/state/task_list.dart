@@ -1,7 +1,10 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:tokidoki_mobile/domain/entity/done.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
+import 'package:tokidoki_mobile/domain/errors/error.dart';
 import 'package:tokidoki_mobile/domain/repository/repository.dart';
+import 'package:tokidoki_mobile/usecase/result.dart';
+import 'package:tokidoki_mobile/usecase/state/error.dart';
 
 part 'task_list.g.dart';
 
@@ -14,49 +17,113 @@ class TaskListNotifier extends _$TaskListNotifier {
     return await repository.getTaskList();
   }
 
-  Future<void> getTaskList() async {
-    state = AsyncValue.data(await build());
+  _notifyError(ErrorType errorType) {
+    ref.read(errorNotifierProvider.notifier).updateState(errorType);
   }
 
-  Future<void> sortTaskList(List<Task> taskList) async {
+  Future<void> getTaskList() async {
+    try {
+      state = AsyncValue.data(await build());
+    } on DomainException catch (e) {
+      _notifyError(e.type);
+    } catch (_) {
+      _notifyError(ErrorType.unexpected);
+    }
+  }
+
+  Future<Result> sortTaskList(List<Task> taskList) async {
     final repository = ref.read(repositoryProvider);
     List<Task> newTaskList = [];
     taskList.asMap().forEach((index, task) {
       newTaskList.add(task.copyWith(orderNum: index + 1));
     });
     state = AsyncValue.data(newTaskList);
-    await repository.updateTaskOrder(newTaskList);
+    try {
+      await repository.updateTaskOrder(newTaskList);
+      return Result.success;
+    } on DomainException catch (e) {
+      _notifyError(e.type);
+      return Result.failed;
+    } catch (e) {
+      _notifyError(ErrorType.unexpected);
+      return Result.failed;
+    }
   }
 
-  Future<void> addTask(String name) async {
+  Future<Result> addTask(String name) async {
     final repository = ref.read(repositoryProvider);
-    await repository.addTask(name);
-    await getTaskList();
+    try {
+      await repository.addTask(name);
+      await getTaskList();
+      return Result.success;
+    } on DomainException catch (e) {
+      _notifyError(e.type);
+      return Result.failed;
+    } catch (e) {
+      _notifyError(ErrorType.unexpected);
+      return Result.failed;
+    }
   }
 
-  Future<void> updateTaskName(Task task, String name) async {
+  Future<Result> updateTaskName(Task task, String name) async {
     final repository = ref.read(repositoryProvider);
     final newTask = task.copyWith(name: name);
-    await repository.updateTaskName(newTask);
-    await getTaskList();
+    try {
+      await repository.updateTaskName(newTask);
+      await getTaskList();
+      return Result.success;
+    } on DomainException catch (e) {
+      _notifyError(e.type);
+      return Result.failed;
+    } catch (e) {
+      _notifyError(ErrorType.unexpected);
+      return Result.failed;
+    }
   }
 
-  Future<void> deleteTask(Task task) async {
+  Future<Result> deleteTask(Task task) async {
     final repository = ref.read(repositoryProvider);
-    await repository.deleteTask(task);
-    await getTaskList();
+    try {
+      await repository.deleteTask(task);
+      await getTaskList();
+      return Result.success;
+    } on DomainException catch (e) {
+      _notifyError(e.type);
+      return Result.failed;
+    } catch (e) {
+      _notifyError(ErrorType.unexpected);
+      return Result.failed;
+    }
   }
 
-  Future<void> recordDoneAt(Task task) async {
+  Future<Result> recordDoneAt(Task task) async {
     final repository = ref.read(repositoryProvider);
     final doneAt = DateTime.now();
-    await repository.addDone(task, doneAt);
-    await getTaskList();
+    try {
+      await repository.addDone(task, doneAt);
+      await getTaskList();
+      return Result.success;
+    } on DomainException catch (e) {
+      _notifyError(e.type);
+      return Result.failed;
+    } catch (e) {
+      _notifyError(ErrorType.unexpected);
+      return Result.failed;
+    }
   }
 
-  Future<void> deleteDoneAt(Done done) async {
+  Future<Result> deleteDoneAt(Done done) async {
     final repository = ref.read(repositoryProvider);
-    await repository.deleteDone(done);
-    await getTaskList();
+    try {
+      await repository.deleteDone(done);
+      await getTaskList();
+      return Result.success;
+    } on DomainException catch (e) {
+      _notifyError(e.type);
+      return Result.failed;
+    } catch (e) {
+      _notifyError(ErrorType.unexpected);
+      return Result.failed;
+    }
   }
 }

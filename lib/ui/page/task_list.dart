@@ -6,10 +6,11 @@ import 'package:tokidoki_mobile/ui/component/admob/bottom_ad_banner.dart';
 import 'package:tokidoki_mobile/ui/component/common/base_drawer.dart';
 import 'package:tokidoki_mobile/ui/component/loader.dart';
 import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
-import 'package:tokidoki_mobile/ui/component/snackbar.dart';
+import 'package:tokidoki_mobile/ui/component/snackBar/snackbar.dart';
 import 'package:tokidoki_mobile/ui/page/add_task.dart';
 import 'package:tokidoki_mobile/ui/page/edit_task.dart';
 import 'package:tokidoki_mobile/ui/style/customize_floating_location.dart';
+import 'package:tokidoki_mobile/usecase/result.dart';
 import 'package:tokidoki_mobile/usecase/state/app_lifecycle_state.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 
@@ -52,7 +53,11 @@ class TaskListPage extends ConsumerWidget {
                   ref
                       .read(taskListNotifierProvider.notifier)
                       .recordDoneAt(task)
-                      .then((_) => showSnackbar(context, 'やったぜ！！'));
+                      .then((result) {
+                    if (result == Result.success) {
+                      showSnackbar(context, 'やったぜ！！');
+                    }
+                  });
                 },
                 child: const Icon(Icons.punch_clock, size: 40),
               ),
@@ -60,13 +65,15 @@ class TaskListPage extends ConsumerWidget {
           ),
         );
       },
-      onReorder: (int oldIndex, int newIndex) {
+      onReorder: (int oldIndex, int newIndex) async {
         if (oldIndex < newIndex) {
           newIndex -= 1;
         }
         final task = taskList.removeAt(oldIndex);
         taskList.insert(newIndex, task);
-        ref.read(taskListNotifierProvider.notifier).sortTaskList(taskList);
+        await ref
+            .read(taskListNotifierProvider.notifier)
+            .sortTaskList(taskList);
       },
     );
   }
