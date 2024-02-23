@@ -21,7 +21,7 @@ class TaskListNotifier extends _$TaskListNotifier {
     ref.read(errorNotifierProvider.notifier).updateState(errorType);
   }
 
-  Future<void> getTaskList() async {
+  Future<void> updateState() async {
     try {
       state = AsyncValue.data(await build());
     } on DomainException catch (e) {
@@ -54,7 +54,7 @@ class TaskListNotifier extends _$TaskListNotifier {
     final repository = ref.read(repositoryProvider);
     try {
       await repository.addTask(name);
-      await getTaskList();
+      await updateState();
       return Result.success;
     } on DomainException catch (e) {
       _notifyError(e.type);
@@ -70,7 +70,7 @@ class TaskListNotifier extends _$TaskListNotifier {
     final newTask = task.copyWith(name: name);
     try {
       await repository.updateTaskName(newTask);
-      await getTaskList();
+      await updateState();
       return Result.success;
     } on DomainException catch (e) {
       _notifyError(e.type);
@@ -85,7 +85,7 @@ class TaskListNotifier extends _$TaskListNotifier {
     final repository = ref.read(repositoryProvider);
     try {
       await repository.deleteTask(task);
-      await getTaskList();
+      await updateState();
       return Result.success;
     } on DomainException catch (e) {
       _notifyError(e.type);
@@ -101,7 +101,7 @@ class TaskListNotifier extends _$TaskListNotifier {
     final doneAt = DateTime.now();
     try {
       await repository.addDone(task, doneAt);
-      await getTaskList();
+      await updateState();
       return Result.success;
     } on DomainException catch (e) {
       _notifyError(e.type);
@@ -116,7 +116,7 @@ class TaskListNotifier extends _$TaskListNotifier {
     final repository = ref.read(repositoryProvider);
     try {
       await repository.deleteDone(done);
-      await getTaskList();
+      await updateState();
       return Result.success;
     } on DomainException catch (e) {
       _notifyError(e.type);
