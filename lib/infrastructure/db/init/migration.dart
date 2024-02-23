@@ -24,7 +24,7 @@ const _migrationScripts = {
   ],
 };
 
-void executeScript(Database db, int oldVersion, int newVersion) async {
+Future<void> executeScript(Database db, int oldVersion, int newVersion) async {
   for (int i = oldVersion + 1; i <= newVersion; i++) {
     List<String>? queries = _migrationScripts[i];
     if (queries != null) {

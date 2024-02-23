@@ -10,7 +10,6 @@ class ErrorNotifier extends _$ErrorNotifier {
     return ErrorType.none;
   }
 
-  // データを変更する関数
   void updateState(ErrorType error) {
     state = error;
   }

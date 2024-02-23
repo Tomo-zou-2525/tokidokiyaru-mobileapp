@@ -22,7 +22,7 @@ class TaskListPage extends ConsumerWidget {
 
     ref.listen<AppLifecycleState>(appLifecycleStateProvider, (previous, next) {
       if (next.isResumed) {
-        ref.read(taskListNotifierProvider.notifier).getTaskList();
+        ref.read(taskListNotifierProvider.notifier).updateState();
       }
     });
 

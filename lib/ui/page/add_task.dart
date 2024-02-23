@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tokidoki_mobile/ui/component/admob/bottom_ad_banner.dart';
 import 'package:tokidoki_mobile/ui/component/common/base_drawer.dart';
 import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
-import 'package:tokidoki_mobile/ui/page/task_list.dart';
 import 'package:tokidoki_mobile/usecase/result.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 // import 'package:tokidoki_mobile/ui/style/customize_floating_location.dart';
@@ -36,14 +35,10 @@ class AddTaskPage extends ConsumerWidget {
                         .read(taskListNotifierProvider.notifier)
                         .addTask(name)
                         .then((result) {
-                    if (result == Result.success) {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const TaskListPage(),
-                            ));
+                      if (result == Result.success) {
+                        Navigator.pop(context);
                       }
-                  });
+                    });
                   },
                   child: const Text('作成'),
                 ),

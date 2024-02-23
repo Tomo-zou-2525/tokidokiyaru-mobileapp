@@ -67,17 +67,17 @@ class DAO implements Repository {
 
   @override
   Future<List<Task>> getTaskList() async {
-    List<Map<String, dynamic>> results = await db.rawQuery('''
+    final List<Map<String, dynamic>> result = await db.rawQuery('''
     SELECT
       tasks.id, tasks.name, tasks.order_num, tasks.created_at, tasks.updated_at,
       dones.id as done_id, dones.done_at as dones_done_at, dones.created_at as dones_created_at, dones.updated_at as dones_updated_at
     FROM tasks
     LEFT JOIN dones ON tasks.id = dones.task_id
     ORDER BY tasks.order_num ASC
-''');
+    ''');
 
     Map<int, Map<String, dynamic>> tasksMap = {};
-    for (var row in results) {
+    for (var row in result) {
       final taskId = row['id'] as int;
       if (!tasksMap.containsKey(taskId)) {
         tasksMap[taskId] = {
@@ -91,7 +91,7 @@ class DAO implements Repository {
       }
 
       if (row['done_id'] != null) {
-        var doneMap = {
+        final doneMap = {
           'id': row['done_id'],
           'task_id': taskId,
           'done_at': row['dones_done_at'],
@@ -104,7 +104,7 @@ class DAO implements Repository {
 
     final taskDTOs =
         tasksMap.values.map((taskMap) => TaskDTO.fromJson(taskMap)).toList();
-    return taskDTOs.map((e) => e.toEntity()).toList();
+    return taskDTOs.map((dto) => dto.toEntity()).toList();
   }
 
   @override
@@ -136,6 +136,7 @@ class DAO implements Repository {
       if (e.isUniqueConstraintError()) {
         throw const DomainException(ErrorType.taskDuplicate);
       }
+      rethrow;
     }
   }
 
@@ -152,6 +153,7 @@ class DAO implements Repository {
       if (e.isUniqueConstraintError()) {
         throw const DomainException(ErrorType.taskDuplicate);
       }
+      rethrow;
     }
   }
 
