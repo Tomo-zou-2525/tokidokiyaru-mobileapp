@@ -33,7 +33,10 @@ class TaskListView extends ConsumerWidget {
                 contentPadding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
                 title: Text(
                   task.name,
-                  style: AppTextStyle.largeBold.style,
+                  style: task.name.length <= 12
+                      ? AppTextStyle.largeBold.style
+                      : AppTextStyle.middleBold.style,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 subtitle: Text(task.lastDoneDate ?? '-'),
                 onTap: () => {
