@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
 import 'package:tokidoki_mobile/ui/component/snackBar/snackbar.dart';
 import 'package:tokidoki_mobile/ui/page/edit_task.dart';
+import 'package:tokidoki_mobile/ui/theme/app_text_style.dart';
+import 'package:tokidoki_mobile/ui/theme/app_theme_color.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 
 class TaskListView extends ConsumerWidget {
@@ -21,17 +23,19 @@ class TaskListView extends ConsumerWidget {
             child: Container(
               height: 80,
               decoration: BoxDecoration(
-                border:
-                    Border.all(color: Theme.of(context).colorScheme.secondary),
-                color: Theme.of(context).colorScheme.surface,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: AppThemeColor.blueBg.color,
+                  width: 2,
+                ),
               ),
               child: ListTile(
-                contentPadding: const EdgeInsets.all(8.0),
+                contentPadding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
                 title: Text(
-                  // TODO: 実行したことがない場合の表記は別途考える。空文字でも良いかも。
-                  '${task.name} ${task.lastDoneDate ?? '未実施'}',
-                  style: const TextStyle(fontSize: 20),
+                  task.name,
+                  style: AppTextStyle.largeBold.style,
                 ),
+                subtitle: Text(task.lastDoneDate ?? '-'),
                 onTap: () => {
                   Navigator.push(
                     context,
