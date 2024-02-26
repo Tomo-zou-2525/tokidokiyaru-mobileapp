@@ -1,7 +1,7 @@
 import 'package:formz/formz.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:tokidoki_mobile/ui/page/common_validation/task_form.dart';
-import 'package:tokidoki_mobile/ui/page/common_validation/task_validation.dart';
+import 'package:tokidoki_mobile/ui/common_validation/task_form.dart';
+import 'package:tokidoki_mobile/ui/common_validation/task_validation.dart';
 
 part 'add_task_form_controller.g.dart';
 

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:tokidoki_mobile/ui/page/common_validation/task_validation.dart';
+import 'package:tokidoki_mobile/ui/common_validation/task_validation.dart';
 
 part 'task_form.freezed.dart';
 
