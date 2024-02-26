@@ -1,12 +1,12 @@
 import 'package:formz/formz.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:tokidoki_mobile/ui/page/add_task/validation/task_form.dart';
-import 'package:tokidoki_mobile/ui/page/add_task/validation/task_validation.dart';
+import 'package:tokidoki_mobile/ui/page/common_validation/task_form.dart';
+import 'package:tokidoki_mobile/ui/page/common_validation/task_validation.dart';
 
-part 'task_form_controller.g.dart';
+part 'add_task_form_controller.g.dart';
 
 @riverpod
-class TaskFormController extends _$TaskFormController {
+class AddTaskFormController extends _$AddTaskFormController {
   @override
   TaskForm build() {
     return TaskForm(

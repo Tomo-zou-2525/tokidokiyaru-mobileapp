@@ -4,7 +4,7 @@ import 'package:tokidoki_mobile/ui/component/admob/bottom_ad_banner.dart';
 import 'package:tokidoki_mobile/ui/component/common/base_drawer.dart';
 import 'package:tokidoki_mobile/ui/component/form_error_message.dart';
 import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
-import 'package:tokidoki_mobile/ui/page/add_task/validation/task_form_controller.dart';
+import 'package:tokidoki_mobile/ui/page/add_task/validation/add_task_form_controller.dart';
 import 'package:tokidoki_mobile/usecase/result.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 // import 'package:tokidoki_mobile/ui/style/customize_floating_location.dart';
@@ -16,7 +16,7 @@ class AddTaskPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final taskForm = ref.watch(taskFormControllerProvider);
+    final taskForm = ref.watch(addTaskFormControllerProvider);
 
     return Scaffold(
       appBar: SimpleAppBar(title: 'タスク作成'),
@@ -30,7 +30,7 @@ class AddTaskPage extends ConsumerWidget {
                     hintText: 'タスク名を入力してください',
                   ),
                   onChanged: ref
-                      .read(taskFormControllerProvider.notifier)
+                      .read(addTaskFormControllerProvider.notifier)
                       .onChangeTaskName,
                 ),
                 FormErrorMessage(
