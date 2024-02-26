@@ -16,7 +16,7 @@ class AddTaskPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     String name = '';
     return Scaffold(
-      appBar: SimpleAppBar(title: 'タスク作成'),
+      appBar: SimpleAppBar(title: 'Create Task'),
       body: SafeArea(
         child: Column(
           children: [
