@@ -1,27 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'task_form_controller.dart';
+part of 'edit_task_form_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$taskFormControllerHash() =>
-    r'6a205323a949d30dd72f36879c1f6f11a23cdfd2';
+String _$editTaskFormControllerHash() =>
+    r'267907c895b6e48f190469794abebe3a1db414e9';
 
-/// See also [TaskFormController].
-@ProviderFor(TaskFormController)
-final taskFormControllerProvider =
-    AutoDisposeNotifierProvider<TaskFormController, TaskForm>.internal(
-  TaskFormController.new,
-  name: r'taskFormControllerProvider',
+/// See also [EditTaskFormController].
+@ProviderFor(EditTaskFormController)
+final editTaskFormControllerProvider =
+    AutoDisposeNotifierProvider<EditTaskFormController, TaskForm>.internal(
+  EditTaskFormController.new,
+  name: r'editTaskFormControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$taskFormControllerHash,
+      : _$editTaskFormControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$TaskFormController = AutoDisposeNotifier<TaskForm>;
+typedef _$EditTaskFormController = AutoDisposeNotifier<TaskForm>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
