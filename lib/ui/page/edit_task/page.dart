@@ -8,7 +8,7 @@ import 'package:tokidoki_mobile/ui/component/dialog/delete_done_at_confirmation_
 import 'package:tokidoki_mobile/ui/component/dialog/delete_task_confirmation_dialog.dart';
 import 'package:tokidoki_mobile/ui/component/form_error_message.dart';
 import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
-import 'package:tokidoki_mobile/ui/page/edit_task/validation/edit_task_form_controller.dart';
+import 'package:tokidoki_mobile/ui/page/edit_task/form/edit_task_form_controller.dart';
 import 'package:tokidoki_mobile/ui/style/customize_floating_location.dart';
 import 'package:tokidoki_mobile/usecase/result.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';

@@ -4,7 +4,7 @@ import 'package:tokidoki_mobile/ui/component/admob/bottom_ad_banner.dart';
 import 'package:tokidoki_mobile/ui/component/common/base_drawer.dart';
 import 'package:tokidoki_mobile/ui/component/form_error_message.dart';
 import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
-import 'package:tokidoki_mobile/ui/page/add_task/validation/add_task_form_controller.dart';
+import 'package:tokidoki_mobile/ui/page/add_task/form/add_task_form_controller.dart';
 import 'package:tokidoki_mobile/usecase/result.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 // import 'package:tokidoki_mobile/ui/style/customize_floating_location.dart';
