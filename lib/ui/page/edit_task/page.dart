@@ -13,7 +13,6 @@ import 'package:tokidoki_mobile/ui/style/customize_floating_location.dart';
 import 'package:tokidoki_mobile/usecase/result.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 
-// TODO: doneAt削除後にタスクが更新されていないので修正する
 class EditTaskPage extends HookConsumerWidget {
   final Task task;
 
@@ -21,7 +20,7 @@ class EditTaskPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final taskForm = ref.watch(editTaskFormControllerProvider);
+    final taskForm = ref.watch(editTaskFormControllerProvider(task));
     final ValueNotifier<bool> isEditState = useState(false);
     final editButtonEnabled = taskForm.isValid || !isEditState.value;
 
@@ -49,12 +48,15 @@ class EditTaskPage extends HookConsumerWidget {
                     Column(
                       children: [
                         const Text('タスク名を変更'),
-                        TextField(
+                        TextFormField(
+                          initialValue:
+                              editTaskFormControllerProvider(task).task.name,
                           decoration: const InputDecoration(
                             hintText: 'タスク名を入力してください',
                           ),
                           onChanged: ref
-                              .read(editTaskFormControllerProvider.notifier)
+                              .read(
+                                  editTaskFormControllerProvider(task).notifier)
                               .onChangeTaskName,
                         ),
                         FormErrorMessage(
