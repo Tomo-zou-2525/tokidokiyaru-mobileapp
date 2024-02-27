@@ -13,7 +13,7 @@ enum TaskNameInputError {
 }
 
 class TaskNameInput extends FormzInput<String, TaskNameInputError> {
-  const TaskNameInput.pure() : super.pure('');
+  const TaskNameInput.pure({String value = ''}) : super.pure('');
   const TaskNameInput.dirty({String value = ''}) : super.dirty(value);
 
   @override
