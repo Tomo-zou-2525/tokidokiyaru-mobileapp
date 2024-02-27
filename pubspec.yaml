@@ -49,6 +49,7 @@ dependencies:
   sqflite: ^2.3.0
   path: ^1.8.3
   google_mobile_ads: ^1.2.0
+  formz: ^0.7.0
 
 dev_dependencies:
   flutter_test:

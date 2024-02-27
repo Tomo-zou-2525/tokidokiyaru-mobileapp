@@ -6,9 +6,11 @@ import 'package:tokidoki_mobile/ui/component/admob/bottom_ad_banner.dart';
 import 'package:tokidoki_mobile/ui/component/common/base_drawer.dart';
 import 'package:tokidoki_mobile/ui/component/dialog/delete_done_at_confirmation_dialog.dart';
 import 'package:tokidoki_mobile/ui/component/dialog/delete_task_confirmation_dialog.dart';
+import 'package:tokidoki_mobile/ui/component/form_error_message.dart';
 import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
-import 'package:tokidoki_mobile/usecase/result.dart';
+import 'package:tokidoki_mobile/ui/page/edit_task/validation/edit_task_form_controller.dart';
 import 'package:tokidoki_mobile/ui/style/customize_floating_location.dart';
+import 'package:tokidoki_mobile/usecase/result.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 
 // TODO: doneAt削除後にタスクが更新されていないので修正する
@@ -19,10 +21,9 @@ class EditTaskPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    TextEditingController textEditingController =
-        TextEditingController(text: task.name);
-
+    final taskForm = ref.watch(editTaskFormControllerProvider);
     final ValueNotifier<bool> isEditState = useState(false);
+    final editButtonEnabled = taskForm.isValid || !isEditState.value;
 
     /*
     FIXME:
@@ -49,10 +50,16 @@ class EditTaskPage extends HookConsumerWidget {
                       children: [
                         const Text('タスク名を変更'),
                         TextField(
-                          controller: textEditingController,
                           decoration: const InputDecoration(
                             hintText: 'タスク名を入力してください',
                           ),
+                          onChanged: ref
+                              .read(editTaskFormControllerProvider.notifier)
+                              .onChangeTaskName,
+                        ),
+                        FormErrorMessage(
+                          errorMessage:
+                              taskForm.nameInput.displayError?.errorMessage,
                         ),
                       ],
                     ),
@@ -106,30 +113,33 @@ class EditTaskPage extends HookConsumerWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          isEditState.value = !isEditState.value;
-          if (isEditState.value) {
-            return;
-          }
-          if (textEditingController.text == watchedTask.name) {
-            Navigator.pop(context);
-            return;
-          }
-          ref
-              .read(taskListNotifierProvider.notifier)
-              .updateTaskName(watchedTask, textEditingController.text)
-              .then((result) {
-            if (result == Result.success) {
-              Navigator.pop(context);
-            } else if (result == Result.failed) {
-              isEditState.value = !isEditState.value;
-            }
-          });
-        },
-        child: Icon(
-          isEditState.value ? Icons.check : Icons.edit,
-        ),
-      ),
+          onPressed: editButtonEnabled
+              ? () {
+                  isEditState.value = !isEditState.value;
+                  if (isEditState.value) {
+                    return;
+                  }
+                  if (taskForm.nameInput.value == watchedTask.name) {
+                    Navigator.pop(context);
+                    return;
+                  }
+                  ref
+                      .read(taskListNotifierProvider.notifier)
+                      .updateTaskName(watchedTask, taskForm.nameInput.value)
+                      .then((result) {
+                    if (result == Result.success) {
+                      Navigator.pop(context);
+                    } else if (result == Result.failed) {
+                      isEditState.value = !isEditState.value;
+                    }
+                  });
+                }
+              : null,
+          // TODO: 非活性のときのボタンの色。適当なので後で修正する。
+          backgroundColor: editButtonEnabled ? null : Colors.grey.shade400,
+          child: Icon(
+            isEditState.value ? Icons.check : Icons.edit,
+          )),
       floatingActionButtonLocation: SimpleFloatingLocation(),
       endDrawer: const BaseDrawer(),
     );

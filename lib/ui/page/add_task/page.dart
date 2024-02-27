@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tokidoki_mobile/ui/component/admob/bottom_ad_banner.dart';
 import 'package:tokidoki_mobile/ui/component/common/base_drawer.dart';
+import 'package:tokidoki_mobile/ui/component/form_error_message.dart';
 import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
+import 'package:tokidoki_mobile/ui/page/add_task/validation/add_task_form_controller.dart';
 import 'package:tokidoki_mobile/usecase/result.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 // import 'package:tokidoki_mobile/ui/style/customize_floating_location.dart';
@@ -14,7 +16,8 @@ class AddTaskPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    String name = '';
+    final taskForm = ref.watch(addTaskFormControllerProvider);
+
     return Scaffold(
       appBar: SimpleAppBar(title: 'タスク作成'),
       body: SafeArea(
@@ -23,23 +26,29 @@ class AddTaskPage extends ConsumerWidget {
             Expanded(
               child: Column(children: [
                 TextField(
-                    decoration: const InputDecoration(
-                      hintText: 'タスク名を入力してください',
-                    ),
-                    onChanged: (text) {
-                      name = text;
-                    }),
+                  decoration: const InputDecoration(
+                    hintText: 'タスク名を入力してください',
+                  ),
+                  onChanged: ref
+                      .read(addTaskFormControllerProvider.notifier)
+                      .onChangeTaskName,
+                ),
+                FormErrorMessage(
+                    errorMessage:
+                        taskForm.nameInput.displayError?.errorMessage),
                 ElevatedButton(
-                  onPressed: () {
-                    ref
-                        .read(taskListNotifierProvider.notifier)
-                        .addTask(name)
-                        .then((result) {
-                      if (result == Result.success) {
-                        Navigator.pop(context);
-                      }
-                    });
-                  },
+                  onPressed: taskForm.isValid
+                      ? () {
+                          ref
+                              .read(taskListNotifierProvider.notifier)
+                              .addTask(taskForm.nameInput.value)
+                              .then((result) {
+                            if (result == Result.success) {
+                              Navigator.pop(context);
+                            }
+                          });
+                        }
+                      : null,
                   child: const Text('作成'),
                 ),
               ]),
