@@ -5,11 +5,9 @@ import 'package:tokidoki_mobile/ui/component/common/base_drawer.dart';
 import 'package:tokidoki_mobile/ui/component/form_error_message.dart';
 import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
 import 'package:tokidoki_mobile/ui/page/add_task/form/add_task_form_controller.dart';
+import 'package:tokidoki_mobile/ui/theme/app_text_style.dart';
 import 'package:tokidoki_mobile/usecase/result.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
-// import 'package:tokidoki_mobile/ui/style/customize_floating_location.dart';
-
-// TODO: 一覧にタスクを表示するために仮実装しただけ。後でデザインは整える。
 
 class AddTaskPage extends ConsumerWidget {
   const AddTaskPage({Key? key}) : super(key: key);
@@ -21,52 +19,62 @@ class AddTaskPage extends ConsumerWidget {
     return Scaffold(
       appBar: SimpleAppBar(title: 'Create Task'),
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: Column(children: [
-                TextField(
-                  decoration: const InputDecoration(
-                    hintText: 'タスク名を入力してください',
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: Column(children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Task',
+                        style: AppTextStyle.largeBold.style,
+                      ),
+                      const SizedBox(height: 4),
+                      TextField(
+                        decoration: const InputDecoration(
+                          hintText: 'タスク名を入力してください',
+                          border: OutlineInputBorder(),
+                        ),
+                        onChanged: ref
+                            .read(addTaskFormControllerProvider.notifier)
+                            .onChangeTaskName,
+                      ),
+                      const SizedBox(height: 2),
+                      FormErrorMessage(
+                        errorMessage:
+                            taskForm.nameInput.displayError?.errorMessage ?? '',
+                      ),
+                    ],
                   ),
-                  onChanged: ref
-                      .read(addTaskFormControllerProvider.notifier)
-                      .onChangeTaskName,
-                ),
-                FormErrorMessage(
-                    errorMessage:
-                        taskForm.nameInput.displayError?.errorMessage),
-                ElevatedButton(
-                  onPressed: taskForm.isValid
-                      ? () {
-                          ref
-                              .read(taskListNotifierProvider.notifier)
-                              .addTask(taskForm.nameInput.value)
-                              .then((result) {
-                            if (result == Result.success) {
-                              Navigator.pop(context);
-                            }
-                          });
-                        }
-                      : null,
-                  child: const Text('作成'),
-                ),
-              ]),
-            ),
-            BottomAdBanner(),
-          ],
+                  const SizedBox(height: 8),
+                  ElevatedButton(
+                    onPressed: taskForm.isValid
+                        ? () {
+                            ref
+                                .read(taskListNotifierProvider.notifier)
+                                .addTask(taskForm.nameInput.value)
+                                .then((result) {
+                              if (result == Result.success) {
+                                Navigator.pop(context);
+                              }
+                            });
+                          }
+                        : null,
+                    style: ElevatedButton.styleFrom(
+                      fixedSize: const Size.fromWidth(200),
+                    ),
+                    child: Text('作成', style: AppTextStyle.middleBold.style),
+                  ),
+                ]),
+              ),
+              BottomAdBanner(),
+            ],
+          ),
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     Navigator.push(
-      //       context,
-      //       MaterialPageRoute(builder: (context) => const AddTaskPage()),
-      //     );
-      //   },
-      //   child: const Icon(Icons.add),
-      // ),
-      // floatingActionButtonLocation: SimpleFloatingLocation(),
       endDrawer: const BaseDrawer(),
     );
   }
