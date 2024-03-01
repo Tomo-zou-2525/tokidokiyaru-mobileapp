@@ -77,49 +77,6 @@ class EditTaskPage extends HookConsumerWidget {
                           ),
                         ],
                       ),
-                    // const SizedBox(height: 8),
-                    // if (isEditState.value)
-                    //   Column(
-                    //     children: [
-                    //       ElevatedButton(
-                    //         onPressed: editButtonEnabled
-                    //             ? () {
-                    //                 isEditState.value = !isEditState.value;
-                    //                 if (isEditState.value) {
-                    //                   return;
-                    //                 }
-                    //                 if (taskForm.nameInput.value ==
-                    //                     watchedTask.name) {
-                    //                   Navigator.pop(context);
-                    //                   return;
-                    //                 }
-                    //                 ref
-                    //                     .read(taskListNotifierProvider.notifier)
-                    //                     .updateTaskName(watchedTask,
-                    //                         taskForm.nameInput.value)
-                    //                     .then((result) {
-                    //                   if (result == Result.success) {
-                    //                     Navigator.pop(context);
-                    //                   } else if (result == Result.failed) {
-                    //                     isEditState.value = !isEditState.value;
-                    //                   }
-                    //                 });
-                    //               }
-                    //             : null,
-                    //         style: ElevatedButton.styleFrom(
-                    //           fixedSize: const Size.fromWidth(200),
-                    //         ),
-                    //         child: const Text(
-                    //           'タスクを更新',
-                    //           style: TextStyle(
-                    //             fontSize: 14,
-                    //             fontWeight: FontWeight.w700,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       const SizedBox(height: 40),
-                    //     ],
-                    // ),
                     if (isEditState.value) const SizedBox(height: 32),
                     Text(
                       '実施履歴',
@@ -189,15 +146,6 @@ class EditTaskPage extends HookConsumerWidget {
           ),
         ),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () {
-      //     isEditState.value = !isEditState.value;
-      //   },
-      //   backgroundColor: isEditState.value ? AppThemeColor.pink.color : null,
-      //   child: Icon(
-      //     isEditState.value ? Icons.cancel_outlined : Icons.edit,
-      //   ),
-      // ),
       floatingActionButton: FloatingActionButton(
           onPressed: editButtonEnabled
               ? () {
