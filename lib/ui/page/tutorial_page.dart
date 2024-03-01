@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_overboard/flutter_overboard.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tokidoki_mobile/ui/theme/app_theme_color.dart';
 
 class TutorialPage extends StatefulWidget {
   const TutorialPage({Key? key}) : super(key: key);
@@ -41,29 +42,31 @@ class TutorialPageState extends State<TutorialPage>
 
   final pages = [
     _SimplePageModel(
-      title: 'こんなことを思ったことはありませんか？',
-      imageAssetPath: 'assets/images/feather_white.png',
-      body: '「最後に髪を切ったのはいつだっけ？」\n「最後に大掃除をしたのはいつだっけ？」\n「最後に車のオイルを交換したのはいつだっけ？」',
-      backgroundColor: const Color(0xFFDBE1FF),
-    ),
-    _SimplePageModel(
-      title: 'このアプリの目的',
-      imageAssetPath: 'assets/images/feather_white.png',
+      title: "”ときどき”やること",
+      imageAssetPath: "assets/images/1.png",
       body:
-          '私たちは生活の中で、”時々”やらなきゃいけないことがあると思います。この”TOKIDOKI”というアプリは、通常のTODOアプリとは異なり、”あまりやらないけど、でも何回もやる必要があるタスク”を管理するために生まれたアプリです。',
-      backgroundColor: const Color(0xFFDBE1FF),
+          "車のオイルを交換したのはいつだっけ？\n押入れの掃除をしたのはいつだっけ？\n歯医者に行ったのはいつだっけ？\n\nそんな、”ときどき”やらなきゃいけないタスクの中で、私たちは生活しています。",
+      backgroundColor: AppThemeColor.blueMain.color,
     ),
     _SimplePageModel(
-      title: "どうやって使うの？",
-      imageAssetPath: 'assets/images/feather_white.png',
-      body: '使い方はとてもシンプル。タスクを登録しておき、「打刻ボタン」を押すだけ！このメモが、未来のあなたをきっと助けてくれることでしょう。',
-      backgroundColor: const Color(0xFFDBE1FF),
+      title: "”Tokidoki”と\nToDoアプリのちがい",
+      imageAssetPath: "assets/images/2.png",
+      body:
+          "１回やったら終わりじゃないタスクって、通常のToDoアプリだと、意外と管理が難しいのではないでしょうか。\n\nそんなタスクたちを管理するために”Tokidoki”は生まれました。",
+      backgroundColor: AppThemeColor.blueMain.color,
     ),
+    // _SimplePageModel(
+    //   title: "どうやって使うの？",
+    //   imageAssetPath: "assets/images/3.png",
+    //   body: "使い方はとてもシンプル。タスクを登録しておき、「打刻ボタン」を押すだけ！このメモが、未来のあなたをきっと助けてくれることでしょう。",
+    //   backgroundColor: AppThemeColor.blueMain.color,
+    // ),
     _SimplePageModel(
-      title: "Let's Start!",
-      imageAssetPath: 'assets/images/note.png',
-      body: '日々の生活をよりよくしていくための強力なツールとして、”TOKIDOKI”を是非とも活用してください！',
-      backgroundColor: const Color(0xFFDBE1FF),
+      title: "Let’s Tokidoki!",
+      imageAssetPath: "assets/images/4.png",
+      body:
+          "使い方はとてもシンプル。タスクを登録しておき、「打刻ボタン」を押すだけ！\n\n日々の生活をよりよくしていくための強力なツールとして、”Tokidoki”を是非とも活用してください！",
+      backgroundColor: AppThemeColor.blueMain.color,
     ),
   ];
 }
