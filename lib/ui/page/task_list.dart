@@ -6,7 +6,7 @@ import 'package:tokidoki_mobile/ui/component/common/base_drawer.dart';
 import 'package:tokidoki_mobile/ui/component/loader.dart';
 import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
 import 'package:tokidoki_mobile/ui/component/task_list_view.dart';
-import 'package:tokidoki_mobile/ui/page/add_task.dart';
+import 'package:tokidoki_mobile/ui/page/add_task/page.dart';
 import 'package:tokidoki_mobile/ui/style/customize_floating_location.dart';
 import 'package:tokidoki_mobile/usecase/state/app_lifecycle_state.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
