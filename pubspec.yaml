@@ -81,6 +81,7 @@ flutter:
   assets:
     - assets/images/feather_blue.png
     - assets/images/feather_white.png
+    - assets/images/feather_blue_skeleton.png
     - assets/images/1.png
     - assets/images/2.png
     - assets/images/3.png

@@ -2,6 +2,7 @@ import 'dart:ui';
 
 enum AppThemeColor {
   blueMain,
+  snow,
   black,
   white,
   grayBorder,
@@ -13,6 +14,8 @@ extension AppThemeColorExtension on AppThemeColor {
     switch (this) {
       case AppThemeColor.blueMain:
         return const Color(0xFF38BDF2);
+      case AppThemeColor.snow:
+        return const Color(0xFFE1FDFC);
       case AppThemeColor.black:
         return const Color(0xFF212121);
       case AppThemeColor.white:

@@ -16,6 +16,7 @@ class TaskListView extends ConsumerWidget {
       ReorderableListView.builder(
         itemCount: taskList.length,
         itemBuilder: (BuildContext context, int index) {
+          const double radius = 30;
           final task = taskList[index];
           return Container(
             key: ValueKey(task.id),
@@ -44,14 +45,36 @@ class TaskListView extends ConsumerWidget {
                   ),
                 )
               },
-              trailing: ElevatedButton(
-                onPressed: () {
+              trailing: GestureDetector(
+                onTap: () {
                   ref
                       .read(taskListNotifierProvider.notifier)
                       .recordDoneAt(task)
                       .then((_) => showSnackbar(context, 'やったぜ！！'));
                 },
-                child: const Icon(Icons.punch_clock, size: 40),
+                child: GestureDetector(
+                  onTap: () {
+                    ref
+                        .read(taskListNotifierProvider.notifier)
+                        .recordDoneAt(task)
+                        .then((_) => showSnackbar(context, 'やったぜ！！'));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: AppThemeColor.snow.color,
+                      borderRadius: BorderRadius.circular(radius),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(radius),
+                      child: Image.asset(
+                        'assets/images/feather_blue_skeleton.png',
+                        width: radius * 2,
+                        height: radius * 2,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ),
           );
