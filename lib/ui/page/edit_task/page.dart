@@ -82,32 +82,36 @@ class EditTaskPage extends HookConsumerWidget {
                       '実施履歴',
                       style: AppTextStyle.largeBold.style,
                     ),
-                    Column(
-                      children: watchedTask.dones
-                          .map((done) => ListTile(
-                                title: Text(
-                                  done.doneDateAtString,
-                                  style: AppTextStyle.middleBold.style,
-                                ),
-                                trailing: isEditState.value
-                                    ? ElevatedButton(
-                                        child: Icon(
-                                          Icons.delete,
-                                          color: AppThemeColor.pink.color,
-                                        ),
-                                        onPressed: () {
-                                          showDialog(
-                                            context: context,
-                                            builder: (BuildContext context) {
-                                              return DeleteDoneAtConfirmationDialog(
-                                                  done: done);
-                                            },
-                                          );
-                                        },
-                                      )
-                                    : null,
-                              ))
-                          .toList(),
+                    SizedBox(
+                      height: isEditState.value ? 360 : 560,
+                      child: ListView(
+                        children: watchedTask.dones
+                            .map((done) => ListTile(
+                                  title: Text(
+                                    done.doneDateAtString,
+                                    style: AppTextStyle.middleBold.style,
+                                  ),
+                                  trailing: isEditState.value
+                                      ? ElevatedButton(
+                                          child: Icon(
+                                            Icons.delete,
+                                            color: AppThemeColor.pink.color,
+                                          ),
+                                          onPressed: () {
+                                            showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return DeleteDoneAtConfirmationDialog(
+                                                  done: done,
+                                                );
+                                              },
+                                            );
+                                          },
+                                        )
+                                      : null,
+                                ))
+                            .toList(),
+                      ),
                     ),
                     const SizedBox(height: 32),
                     if (isEditState.value)
