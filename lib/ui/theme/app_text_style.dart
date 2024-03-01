@@ -24,12 +24,12 @@ extension AppTextStyleExtension on AppTextStyle {
         );
       case AppTextStyle.middleRegular:
         return const TextStyle(
-          fontSize: 14,
+          fontSize: 16,
           fontWeight: FontWeight.w400,
         );
       case AppTextStyle.middleBold:
         return const TextStyle(
-          fontSize: 14,
+          fontSize: 16,
           fontWeight: FontWeight.w700,
         );
       case AppTextStyle.largeBold:
