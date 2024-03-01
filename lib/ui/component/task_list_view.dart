@@ -39,7 +39,7 @@ class TaskListView extends ConsumerWidget {
                     : AppTextStyle.middleBold.style,
                 overflow: TextOverflow.ellipsis,
               ),
-              subtitle: Text(task.lastDoneDate ?? '-'),
+              subtitle: Text(task.lastDoneDateAt ?? '-'),
               onTap: () => {
                 Navigator.push(
                   context,
