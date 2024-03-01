@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
 import 'package:tokidoki_mobile/ui/component/snackBar/snackbar.dart';
 import 'package:tokidoki_mobile/ui/page/edit_task/page.dart';
+import 'package:tokidoki_mobile/ui/theme/app_text_style.dart';
+import 'package:tokidoki_mobile/ui/theme/app_theme_color.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 
 class TaskListView extends ConsumerWidget {
@@ -14,40 +16,67 @@ class TaskListView extends ConsumerWidget {
       ReorderableListView.builder(
         itemCount: taskList.length,
         itemBuilder: (BuildContext context, int index) {
+          const double radius = 30;
           final task = taskList[index];
-          return Padding(
+          return Container(
             key: ValueKey(task.id),
-            padding: const EdgeInsets.all(1.0),
-            child: Container(
-              height: 80,
-              decoration: BoxDecoration(
-                border:
-                    Border.all(color: Theme.of(context).colorScheme.secondary),
-                color: Theme.of(context).colorScheme.surface,
+            height: 80,
+            decoration: BoxDecoration(
+              color: index % 2 == 0
+                  ? AppThemeColor.white.color
+                  : AppThemeColor.lightYellow.color,
+              border: Border(
+                bottom: BorderSide(
+                    width: 1.5, color: AppThemeColor.grayBorder.color),
               ),
-              child: ListTile(
-                contentPadding: const EdgeInsets.all(8.0),
-                title: Text(
-                  // TODO: 実行したことがない場合の表記は別途考える。空文字でも良いかも。
-                  '${task.name} ${task.lastDoneDate ?? '未実施'}',
-                  style: const TextStyle(fontSize: 20),
-                ),
-                onTap: () => {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EditTaskPage(task: task),
-                    ),
-                  )
+            ),
+            child: ListTile(
+              contentPadding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
+              title: Text(
+                task.name,
+                style: task.name.length <= 12
+                    ? AppTextStyle.largeBold.style
+                    : AppTextStyle.middleBold.style,
+                overflow: TextOverflow.ellipsis,
+              ),
+              subtitle: Text(task.lastDoneDate ?? '-'),
+              onTap: () => {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => EditTaskPage(task: task),
+                  ),
+                )
+              },
+              trailing: GestureDetector(
+                onTap: () {
+                  ref
+                      .read(taskListNotifierProvider.notifier)
+                      .recordDoneAt(task)
+                      .then((_) => showSnackbar(context, 'やったぜ！！'));
                 },
-                trailing: ElevatedButton(
-                  onPressed: () {
+                child: GestureDetector(
+                  onTap: () {
                     ref
                         .read(taskListNotifierProvider.notifier)
                         .recordDoneAt(task)
                         .then((_) => showSnackbar(context, 'やったぜ！！'));
                   },
-                  child: const Icon(Icons.punch_clock, size: 40),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: AppThemeColor.snow.color,
+                      borderRadius: BorderRadius.circular(radius),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(radius),
+                      child: Image.asset(
+                        'assets/images/feather_blue_skeleton.png',
+                        width: radius * 2,
+                        height: radius * 2,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),

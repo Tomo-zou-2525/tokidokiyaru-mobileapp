@@ -19,7 +19,7 @@ class AddTaskPage extends ConsumerWidget {
     final taskForm = ref.watch(addTaskFormControllerProvider);
 
     return Scaffold(
-      appBar: SimpleAppBar(title: 'タスク作成'),
+      appBar: SimpleAppBar(title: 'Create Task'),
       body: SafeArea(
         child: Column(
           children: [

@@ -10,6 +10,8 @@ import 'package:tokidoki_mobile/ui/page/home.dart';
 import 'package:tokidoki_mobile/ui/page/privacy_policy_page.dart';
 import 'package:tokidoki_mobile/ui/page/terms_page.dart';
 import 'package:tokidoki_mobile/ui/page/tutorial_page.dart';
+import 'package:tokidoki_mobile/ui/theme/app_text_style.dart';
+import 'package:tokidoki_mobile/ui/theme/app_theme_color.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -44,8 +46,14 @@ class App extends StatelessWidget {
       },
       title: 'Tokidoki',
       theme: ThemeData(
-        appBarTheme: const AppBarTheme(backgroundColor: Color(0xFFDBE1FF)),
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2764EF)),
+        appBarTheme: AppBarTheme(
+          titleTextStyle: AppTextStyle.bigBold.style,
+          backgroundColor: AppThemeColor.blueMain.color,
+        ),
+        scaffoldBackgroundColor: AppThemeColor.white.color,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: AppThemeColor.blueMain.color,
+        ),
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
