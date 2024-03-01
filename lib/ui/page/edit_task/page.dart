@@ -170,7 +170,8 @@ class EditTaskPage extends HookConsumerWidget {
                 }
               : null,
           // TODO: 非活性のときのボタンの色。適当なので後で修正する。
-          backgroundColor: editButtonEnabled ? null : Colors.grey.shade400,
+          backgroundColor:
+              editButtonEnabled ? null : AppThemeColor.graySub.color,
           child: Icon(
             isEditState.value ? Icons.check : Icons.edit,
           )),
