@@ -37,9 +37,7 @@ class TaskListPage extends ConsumerWidget {
                 'タスクを追加して下さい。',
                 style: TextStyle(fontSize: 20),
               )
-            : Padding(
-                padding: const EdgeInsets.all(8),
-                child: TaskListView(taskList)));
+            : TaskListView(taskList));
 
     return Scaffold(
       appBar: SimpleAppBar(title: 'Tasks', automaticallyImplyLeading: false),

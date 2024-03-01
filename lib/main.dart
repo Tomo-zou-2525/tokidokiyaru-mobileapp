@@ -48,20 +48,12 @@ class App extends StatelessWidget {
       theme: ThemeData(
         appBarTheme: AppBarTheme(
           titleTextStyle: AppTextStyle.bigBold.style,
-          backgroundColor: AppThemeColor.blueBg.color,
+          backgroundColor: AppThemeColor.blueMain.color,
         ),
+        scaffoldBackgroundColor: AppThemeColor.white.color,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: AppThemeColor.blueBg.color,
-        ).copyWith(
-          primary: AppThemeColor.blueMain.color,
-          secondary: AppThemeColor.greenMain.color,
+          seedColor: AppThemeColor.blueMain.color,
         ),
-        iconTheme: IconThemeData(
-          color: AppThemeColor.blueMain.color,
-        ),
-
-        // appBarTheme: const AppBarTheme(backgroundColor: Color(0xFFDBE1FF)),
-        // colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2764EF)),
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,

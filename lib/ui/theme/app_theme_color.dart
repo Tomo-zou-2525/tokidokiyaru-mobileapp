@@ -1,26 +1,26 @@
 import 'dart:ui';
 
 enum AppThemeColor {
+  blueMain,
   black,
   white,
-  blueMain,
-  blueBg,
-  greenMain,
+  grayBorder,
+  grayBg,
 }
 
 extension AppThemeColorExtension on AppThemeColor {
   Color get color {
     switch (this) {
+      case AppThemeColor.blueMain:
+        return const Color(0xFF38BDF2);
       case AppThemeColor.black:
-        return const Color(0xFF000000);
+        return const Color(0xFF212121);
       case AppThemeColor.white:
         return const Color(0xFFFFFFFF);
-      case AppThemeColor.blueMain:
-        return const Color(0xFF2764EF);
-      case AppThemeColor.blueBg:
-        return const Color(0xFF45D1FD);
-      case AppThemeColor.greenMain:
-        return const Color(0xFF37AD1B);
+      case AppThemeColor.grayBorder:
+        return const Color(0xFF999999);
+      case AppThemeColor.grayBg:
+        return const Color(0xFFF8F8F8);
     }
   }
 }
