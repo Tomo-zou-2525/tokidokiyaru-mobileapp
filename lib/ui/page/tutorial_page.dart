@@ -42,20 +42,20 @@ class TutorialPageState extends State<TutorialPage>
   final pages = [
     _SimplePageModel(
       title: 'こんなことを思ったことはありませんか？',
-      imageAssetPath: 'assets/images/note.png',
+      imageAssetPath: 'assets/images/feather_white.png',
       body: '「最後に髪を切ったのはいつだっけ？」\n「最後に大掃除をしたのはいつだっけ？」\n「最後に車のオイルを交換したのはいつだっけ？」',
       backgroundColor: const Color(0xFFDBE1FF),
     ),
     _SimplePageModel(
       title: 'このアプリの目的',
-      imageAssetPath: 'assets/images/note.png',
+      imageAssetPath: 'assets/images/feather_white.png',
       body:
           '私たちは生活の中で、”時々”やらなきゃいけないことがあると思います。この”TOKIDOKI”というアプリは、通常のTODOアプリとは異なり、”あまりやらないけど、でも何回もやる必要があるタスク”を管理するために生まれたアプリです。',
       backgroundColor: const Color(0xFFDBE1FF),
     ),
     _SimplePageModel(
       title: "どうやって使うの？",
-      imageAssetPath: 'assets/images/note.png',
+      imageAssetPath: 'assets/images/feather_white.png',
       body: '使い方はとてもシンプル。タスクを登録しておき、「打刻ボタン」を押すだけ！このメモが、未来のあなたをきっと助けてくれることでしょう。',
       backgroundColor: const Color(0xFFDBE1FF),
     ),
