@@ -7,6 +7,7 @@ enum AppThemeColor {
   white,
   grayBorder,
   grayBg,
+  lightYellow,
 }
 
 extension AppThemeColorExtension on AppThemeColor {
@@ -24,6 +25,8 @@ extension AppThemeColorExtension on AppThemeColor {
         return const Color(0xFF999999);
       case AppThemeColor.grayBg:
         return const Color(0xFFF8F8F8);
+      case AppThemeColor.lightYellow:
+        return const Color(0xFFFFFBF0);
     }
   }
 }

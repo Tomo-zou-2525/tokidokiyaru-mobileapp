@@ -22,6 +22,9 @@ class TaskListView extends ConsumerWidget {
             key: ValueKey(task.id),
             height: 80,
             decoration: BoxDecoration(
+              color: index % 2 == 0
+                  ? AppThemeColor.white.color
+                  : AppThemeColor.lightYellow.color,
               border: Border(
                 bottom: BorderSide(
                     width: 1.5, color: AppThemeColor.grayBorder.color),
