@@ -85,7 +85,7 @@ class EditTaskPage extends HookConsumerWidget {
                           ),
                         ],
                       ),
-                    if (isEditState.value) const SizedBox(height: 32),
+                    if (isEditState.value) const SizedBox(height: 8),
                     Text(
                       '実施履歴',
                       style: AppTextStyle.largeBold.style,
