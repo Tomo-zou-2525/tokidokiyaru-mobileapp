@@ -12,7 +12,7 @@ class Home extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen<ErrorType>(errorNotifierProvider, (previous, next) {
       if (next != ErrorType.none) {
-        showErrorSnackbar(context, ref, next.message);
+        showErrorSnackbar(ref, next.message);
       }
     });
 

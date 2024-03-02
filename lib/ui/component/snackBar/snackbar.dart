@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:tokidoki_mobile/main.dart';
 
 ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showSnackbar(
-    BuildContext context, String message) {
+    String message) {
+  ScaffoldMessengerState scaffoldMessangerState = scaffoldKey.currentState!;
   final snackBar = SnackBar(
     content: Text(message),
     action: SnackBarAction(
       label: 'close',
-      onPressed: () => ScaffoldMessenger.of(context).hideCurrentSnackBar(),
+      onPressed: () => scaffoldMessangerState.hideCurrentSnackBar(),
     ),
   );
-  return ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  return scaffoldMessangerState.showSnackBar(snackBar);
 }

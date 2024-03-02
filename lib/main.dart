@@ -32,12 +32,15 @@ void main() async {
   );
 }
 
+final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
+
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      scaffoldMessengerKey: scaffoldKey,
       home: const Home(),
       routes: {
         '/tutorial': (context) => const TutorialPage(),
