@@ -40,21 +40,21 @@ class TutorialPageState extends State<TutorialPage>
     );
   }
 
-  final List<_SimplePageModel> pages = [
-    _SimplePageModel(
+  final List<SimplePageModel> pages = [
+    SimplePageModel(
       title: "”ときどき”やること",
       imageAssetPath: "assets/images/1.png",
       body:
           "車のオイルを交換したのはいつ？\n押入れの掃除をしたのはいつ？\n歯医者に行ったのはいつ？\n\nそんな、”ときどき”必要なタスクの中で、私たちは生活しています。",
       backgroundColor: AppThemeColor.blueMain.color,
     ),
-    _SimplePageModel(
+    SimplePageModel(
       title: "”Tokidoki”と、\nToDoアプリの違い",
       imageAssetPath: "assets/images/2.png",
       body: "１回やって終わるならTodoアプリ。\n\nでも、何度も繰り返したいタスクの管理には”Tokidoki”がピッタリです。",
       backgroundColor: AppThemeColor.blueMain.color,
     ),
-    _SimplePageModel(
+    SimplePageModel(
       title: "Let’s Tokidoki!",
       imageAssetPath: "assets/images/4.png",
       body:
@@ -64,8 +64,8 @@ class TutorialPageState extends State<TutorialPage>
   ];
 }
 
-class _SimplePageModel extends PageModel {
-  _SimplePageModel({
+class SimplePageModel extends PageModel {
+  SimplePageModel({
     required String title,
     required String imageAssetPath,
     required String body,
