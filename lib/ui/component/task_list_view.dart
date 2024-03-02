@@ -17,6 +17,13 @@ class TaskListView extends ConsumerWidget {
         itemCount: taskList.length,
         itemBuilder: (BuildContext context, int index) {
           const double radius = 30;
+          onIconTap(BuildContext context, Task task) {
+            ref
+                .read(taskListNotifierProvider.notifier)
+                .recordDoneAt(task)
+                .then((_) => showSnackbar(context, 'お疲れさまでした！次もがんばりましょう！'));
+          }
+
           final task = taskList[index];
           return Container(
             key: ValueKey(task.id),
@@ -39,7 +46,7 @@ class TaskListView extends ConsumerWidget {
                     : AppTextStyle.middleBold.style,
                 overflow: TextOverflow.ellipsis,
               ),
-              subtitle: Text(task.lastDoneDate ?? '-'),
+              subtitle: Text(task.lastDoneDateAt ?? '-'),
               onTap: () => {
                 Navigator.push(
                   context,
@@ -49,19 +56,9 @@ class TaskListView extends ConsumerWidget {
                 )
               },
               trailing: GestureDetector(
-                onTap: () {
-                  ref
-                      .read(taskListNotifierProvider.notifier)
-                      .recordDoneAt(task)
-                      .then((_) => showSnackbar(context, 'やったぜ！！'));
-                },
+                onTap: () => onIconTap(context, task),
                 child: GestureDetector(
-                  onTap: () {
-                    ref
-                        .read(taskListNotifierProvider.notifier)
-                        .recordDoneAt(task)
-                        .then((_) => showSnackbar(context, 'やったぜ！！'));
-                  },
+                  onTap: () => onIconTap(context, task),
                   child: Container(
                     decoration: BoxDecoration(
                       color: AppThemeColor.snow.color,

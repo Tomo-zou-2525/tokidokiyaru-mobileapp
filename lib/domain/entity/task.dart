@@ -15,5 +15,6 @@ abstract class Task implements _$Task {
     required List<Done> dones,
   }) = _Task;
 
-  String? get lastDoneDate => dones.isEmpty ? null : dones.last.doneDateString;
+  String? get lastDoneDateAt =>
+      dones.isEmpty ? null : dones.last.doneDateAtString;
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tokidoki_mobile/ui/component/common/show_how_to_sort_manual.dart';
 
 class BaseDrawer extends StatelessWidget {
   const BaseDrawer({super.key});
@@ -23,6 +24,13 @@ class BaseDrawer extends StatelessWidget {
               title: const Text("プライバシーポリシー"),
               onTap: () {
                 Navigator.pushNamed(context, '/privacy_policy');
+              },
+            ),
+            ListTile(
+              title: const Text("タスクのソートについて"),
+              onTap: () {
+                Navigator.pop(context);
+                showHowToSortManual(context);
               },
             ),
           ],

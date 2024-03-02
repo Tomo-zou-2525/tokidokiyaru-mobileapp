@@ -3,8 +3,8 @@ import 'package:formz/formz.dart';
 const taskLengthLimit = 30;
 
 enum TaskNameInputError {
-  empty(errorMessage: '未入力です'),
-  tooLonger(errorMessage: '$taskLengthLimit文字以下で入力してください'),
+  empty(errorMessage: '未入力です。'),
+  tooLonger(errorMessage: '$taskLengthLimit文字以下で入力してください。'),
   ;
 
   const TaskNameInputError({required this.errorMessage});

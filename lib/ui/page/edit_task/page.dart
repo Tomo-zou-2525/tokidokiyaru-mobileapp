@@ -10,6 +10,8 @@ import 'package:tokidoki_mobile/ui/component/form_error_message.dart';
 import 'package:tokidoki_mobile/ui/component/simple_app_bar.dart';
 import 'package:tokidoki_mobile/ui/page/edit_task/form/edit_task_form_controller.dart';
 import 'package:tokidoki_mobile/ui/style/customize_floating_location.dart';
+import 'package:tokidoki_mobile/ui/theme/app_text_style.dart';
+import 'package:tokidoki_mobile/ui/theme/app_theme_color.dart';
 import 'package:tokidoki_mobile/usecase/result.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
 
@@ -36,82 +38,123 @@ class EditTaskPage extends HookConsumerWidget {
             orElse: () => task) ??
         task;
 
+    // デバイスごとに異なるSafeAreaの高さを取得する
+    EdgeInsets padding = MediaQuery.of(context).padding;
+    double safeAreaHeight =
+        MediaQuery.of(context).size.height - padding.top - padding.bottom;
+
     return Scaffold(
       appBar: SimpleAppBar(title: watchedTask.name),
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: Column(
-                children: [
-                  if (isEditState.value)
-                    Column(
-                      children: [
-                        const Text('タスク名を変更'),
-                        TextFormField(
-                          initialValue:
-                              editTaskFormControllerProvider(task).task.name,
-                          decoration: const InputDecoration(
-                            hintText: 'タスク名を入力してください',
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    if (isEditState.value)
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Edit Task',
+                            style: AppTextStyle.largeBold.style,
                           ),
-                          onChanged: ref
-                              .read(
-                                  editTaskFormControllerProvider(task).notifier)
-                              .onChangeTaskName,
-                        ),
-                        FormErrorMessage(
-                          errorMessage:
-                              taskForm.nameInput.displayError?.errorMessage,
-                        ),
-                      ],
+                          const SizedBox(height: 4),
+                          TextFormField(
+                            initialValue:
+                                editTaskFormControllerProvider(task).task.name,
+                            decoration: const InputDecoration(
+                              hintText: 'タスク名を入力してください',
+                              border: OutlineInputBorder(),
+                            ),
+                            onChanged: ref
+                                .read(editTaskFormControllerProvider(task)
+                                    .notifier)
+                                .onChangeTaskName,
+                          ),
+                          const SizedBox(height: 2),
+                          FormErrorMessage(
+                            errorMessage:
+                                taskForm.nameInput.displayError?.errorMessage ??
+                                    '',
+                          ),
+                        ],
+                      ),
+                    if (isEditState.value) const SizedBox(height: 32),
+                    Text(
+                      '実施履歴',
+                      style: AppTextStyle.largeBold.style,
                     ),
-                  const Text('実施履歴'),
-                  Column(
-                    children: watchedTask.dones
-                        .map((done) => ListTile(
-                              title: Text(done.doneDateAtString),
-                              trailing: isEditState.value
-                                  ? ElevatedButton(
-                                      child: const Icon(Icons.delete),
-                                      onPressed: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return DeleteDoneAtConfirmationDialog(
-                                                done: done);
+                    SizedBox(
+                      height: isEditState.value
+                          ? (safeAreaHeight - 250) * 0.6
+                          : (safeAreaHeight - 100) * 0.7,
+                      child: ListView(
+                        children: watchedTask.dones
+                            .map((done) => ListTile(
+                                  title: Text(
+                                    done.doneDateAtString,
+                                    style: AppTextStyle.middleBold.style,
+                                  ),
+                                  trailing: isEditState.value
+                                      ? ElevatedButton(
+                                          child: Icon(
+                                            Icons.delete,
+                                            color: AppThemeColor.pink.color,
+                                          ),
+                                          onPressed: () {
+                                            showDialog(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return DeleteDoneAtConfirmationDialog(
+                                                  done: done,
+                                                );
+                                              },
+                                            );
                                           },
-                                        );
-                                      },
-                                    )
-                                  : null,
-                            ))
-                        .toList(),
-                  ),
-                  if (isEditState.value)
-                    ElevatedButton(
-                      onPressed: () {
-                        showDialog<bool>(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return DeleteTaskConfirmationDialog(
-                                task: watchedTask);
-                          },
-                        ).then((result) {
-                          if (result == true) {
-                            Navigator.pop(context);
-                          }
-                        });
-                      },
-                      style:
-                          ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                      child: const Text('タスクを削除',
-                          style: TextStyle(color: Colors.white)),
+                                        )
+                                      : null,
+                                ))
+                            .toList(),
+                      ),
                     ),
-                ],
+                    const SizedBox(height: 32),
+                    if (isEditState.value)
+                      ElevatedButton(
+                        onPressed: () {
+                          showDialog<bool>(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return DeleteTaskConfirmationDialog(
+                                  task: watchedTask);
+                            },
+                          ).then((result) {
+                            if (result == true) {
+                              Navigator.pop(context);
+                            }
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppThemeColor.pink.color,
+                          fixedSize: const Size.fromWidth(200),
+                        ),
+                        child: Text(
+                          'タスクを削除',
+                          style: TextStyle(
+                            color: AppThemeColor.black.color,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
               ),
-            ),
-            BottomAdBanner(),
-          ],
+              BottomAdBanner(),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -137,8 +180,8 @@ class EditTaskPage extends HookConsumerWidget {
                   });
                 }
               : null,
-          // TODO: 非活性のときのボタンの色。適当なので後で修正する。
-          backgroundColor: editButtonEnabled ? null : Colors.grey.shade400,
+          backgroundColor:
+              editButtonEnabled ? null : AppThemeColor.graySub.color,
           child: Icon(
             isEditState.value ? Icons.check : Icons.edit,
           )),

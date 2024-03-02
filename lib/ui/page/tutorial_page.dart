@@ -40,39 +40,32 @@ class TutorialPageState extends State<TutorialPage>
     );
   }
 
-  final pages = [
-    _SimplePageModel(
+  final List<SimplePageModel> pages = [
+    SimplePageModel(
       title: "”ときどき”やること",
       imageAssetPath: "assets/images/1.png",
       body:
-          "車のオイルを交換したのはいつだっけ？\n押入れの掃除をしたのはいつだっけ？\n歯医者に行ったのはいつだっけ？\n\nそんな、”ときどき”やらなきゃいけないタスクの中で、私たちは生活しています。",
+          "車のオイルを交換したのはいつ？\n押入れの掃除をしたのはいつ？\n歯医者に行ったのはいつ？\n\nそんな、”ときどき”必要なタスクの中で、私たちは生活しています。",
       backgroundColor: AppThemeColor.blueMain.color,
     ),
-    _SimplePageModel(
-      title: "”Tokidoki”と\nToDoアプリのちがい",
+    SimplePageModel(
+      title: "”Tokidoki”と、\nToDoアプリの違い",
       imageAssetPath: "assets/images/2.png",
-      body:
-          "１回やったら終わりじゃないタスクって、通常のToDoアプリだと、意外と管理が難しいのではないでしょうか。\n\nそんなタスクたちを管理するために”Tokidoki”は生まれました。",
+      body: "１回やって終わるならTodoアプリ。\n\nでも、何度も繰り返したいタスクの管理には”Tokidoki”がピッタリです。",
       backgroundColor: AppThemeColor.blueMain.color,
     ),
-    // _SimplePageModel(
-    //   title: "どうやって使うの？",
-    //   imageAssetPath: "assets/images/3.png",
-    //   body: "使い方はとてもシンプル。タスクを登録しておき、「打刻ボタン」を押すだけ！このメモが、未来のあなたをきっと助けてくれることでしょう。",
-    //   backgroundColor: AppThemeColor.blueMain.color,
-    // ),
-    _SimplePageModel(
+    SimplePageModel(
       title: "Let’s Tokidoki!",
       imageAssetPath: "assets/images/4.png",
       body:
-          "使い方はとてもシンプル。タスクを登録しておき、「打刻ボタン」を押すだけ！\n\n日々の生活をよりよくしていくための強力なツールとして、”Tokidoki”を是非とも活用してください！",
+          "使い方はとてもシンプル。タスクを登録しておき、ボタンを押すだけ！\n\n日々の生活をよりよくしていくための強力なツールとして、”Tokidoki”を是非とも活用してください！",
       backgroundColor: AppThemeColor.blueMain.color,
     ),
   ];
 }
 
-class _SimplePageModel extends PageModel {
-  _SimplePageModel({
+class SimplePageModel extends PageModel {
+  SimplePageModel({
     required String title,
     required String imageAssetPath,
     required String body,
