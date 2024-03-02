@@ -17,6 +17,7 @@ class AddTaskPage extends ConsumerWidget {
     final taskForm = ref.watch(addTaskFormControllerProvider);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: SimpleAppBar(title: 'Create Task'),
       body: SafeArea(
         child: Padding(

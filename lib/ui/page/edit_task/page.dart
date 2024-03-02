@@ -46,6 +46,7 @@ class EditTaskPage extends HookConsumerWidget {
         MediaQuery.of(context).size.height - padding.top - padding.bottom;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: SimpleAppBar(title: watchedTask.name),
       body: SafeArea(
         child: Padding(
