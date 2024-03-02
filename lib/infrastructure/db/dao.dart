@@ -66,14 +66,14 @@ class DAO implements Repository {
   }
 
   @override
-  Future<List<Task>> getTaskList() async {
+  Future<List<Task>> getTaskList({int? maxDonesPerTask}) async {
     final List<Map<String, dynamic>> result = await db.rawQuery('''
     SELECT
       tasks.id, tasks.name, tasks.order_num, tasks.created_at, tasks.updated_at,
       dones.id as done_id, dones.done_at as dones_done_at, dones.created_at as dones_created_at, dones.updated_at as dones_updated_at
     FROM tasks
     LEFT JOIN dones ON tasks.id = dones.task_id
-    ORDER BY tasks.order_num ASC
+    ORDER BY tasks.order_num ASC, dones.created_at DESC
     ''');
 
     Map<int, Map<String, dynamic>> tasksMap = {};
@@ -90,7 +90,8 @@ class DAO implements Repository {
         };
       }
 
-      if (row['done_id'] != null) {
+      if (row['done_id'] != null &&
+          tasksMap[taskId]?['dones'].length < maxDonesPerTask) {
         final doneMap = {
           'id': row['done_id'],
           'task_id': taskId,

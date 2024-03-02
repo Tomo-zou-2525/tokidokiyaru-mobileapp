@@ -14,7 +14,7 @@ class TaskListNotifier extends _$TaskListNotifier {
   Future<List<Task>> build() async {
     state = const AsyncValue.loading();
     final repository = ref.read(repositoryProvider);
-    return await repository.getTaskList();
+    return await repository.getTaskList(maxDonesPerTask: 10);
   }
 
   _notifyError(ErrorType errorType) {
