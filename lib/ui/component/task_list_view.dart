@@ -17,11 +17,11 @@ class TaskListView extends ConsumerWidget {
         itemCount: taskList.length,
         itemBuilder: (BuildContext context, int index) {
           const double radius = 30;
-          onIconTap(BuildContext context, Task task) {
-            ref
+          onIconTap(BuildContext context, Task task) async {
+            await ref
                 .read(taskListNotifierProvider.notifier)
-                .recordDoneAt(task)
-                .then((_) => showSnackbar(context, 'お疲れさまでした！次もがんばりましょう！'));
+                .recordDoneAt(task);
+            showSnackbar('お疲れさまでした！次もがんばりましょう！');
           }
 
           final task = taskList[index];
