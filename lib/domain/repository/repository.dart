@@ -9,7 +9,7 @@ Repository repository(RepositoryRef ref) =>
     throw UnimplementedError('Provider was not initialized');
 
 abstract interface class Repository {
-  Future<List<Task>> getTaskList();
+  Future<List<Task>> getTaskList({int? maxDonesPerTask});
 
   Future<void> updateTaskOrder(List<Task> taskList);
 

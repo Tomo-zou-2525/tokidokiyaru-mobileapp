@@ -7,7 +7,7 @@ class FakeRepository implements Repository {
   FakeRepository({this.taskList = const []});
 
   @override
-  Future<List<Task>> getTaskList() async {
+  Future<List<Task>> getTaskList({int? maxDonesPerTask}) async {
     Future.delayed(const Duration(seconds: 0));
     return taskList;
   }

@@ -17,7 +17,7 @@ class API implements Repository {
   final _client = CustomHttpClient();
 
   @override
-  Future<List<Task>> getTaskList() async {
+  Future<List<Task>> getTaskList({int? maxDonesPerTask}) async {
     final response = await _client.get('$_baseEndpoint/tasks?user_id=1');
     final jsonTasks = (jsonDecode(response.body) as List)
         .map((item) => item as Map<String, dynamic>)
