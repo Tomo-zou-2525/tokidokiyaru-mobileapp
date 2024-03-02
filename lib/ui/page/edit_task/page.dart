@@ -38,6 +38,11 @@ class EditTaskPage extends HookConsumerWidget {
             orElse: () => task) ??
         task;
 
+    // デバイスごとに異なるSafeAreaの高さを取得する
+    EdgeInsets padding = MediaQuery.of(context).padding;
+    double safeAreaHeight =
+        MediaQuery.of(context).size.height - padding.top - padding.bottom;
+
     return Scaffold(
       appBar: SimpleAppBar(title: watchedTask.name),
       body: SafeArea(
@@ -83,7 +88,9 @@ class EditTaskPage extends HookConsumerWidget {
                       style: AppTextStyle.largeBold.style,
                     ),
                     SizedBox(
-                      height: isEditState.value ? 360 : 560,
+                      height: isEditState.value
+                          ? (safeAreaHeight - 250) * 0.6
+                          : (safeAreaHeight - 100) * 0.7,
                       child: ListView(
                         children: watchedTask.dones
                             .map((done) => ListTile(
@@ -173,7 +180,6 @@ class EditTaskPage extends HookConsumerWidget {
                   });
                 }
               : null,
-          // TODO: 非活性のときのボタンの色。適当なので後で修正する。
           backgroundColor:
               editButtonEnabled ? null : AppThemeColor.graySub.color,
           child: Icon(
