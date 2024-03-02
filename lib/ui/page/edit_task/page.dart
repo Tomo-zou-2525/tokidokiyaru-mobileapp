@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:tokidoki_mobile/ad_helper.dart';
 import 'package:tokidoki_mobile/domain/entity/task.dart';
 import 'package:tokidoki_mobile/ui/component/admob/bottom_ad_banner.dart';
 import 'package:tokidoki_mobile/ui/component/common/base_drawer.dart';
@@ -14,6 +15,7 @@ import 'package:tokidoki_mobile/ui/theme/app_text_style.dart';
 import 'package:tokidoki_mobile/ui/theme/app_theme_color.dart';
 import 'package:tokidoki_mobile/usecase/result.dart';
 import 'package:tokidoki_mobile/usecase/state/task_list.dart';
+import 'package:tokidoki_mobile/util/bool.dart';
 
 class EditTaskPage extends HookConsumerWidget {
   final Task task;
@@ -173,6 +175,10 @@ class EditTaskPage extends HookConsumerWidget {
                       .updateTaskName(watchedTask, taskForm.nameInput.value)
                       .then((result) {
                     if (result == Result.success) {
+                      // 30%の確率で広告を表示
+                      if (getRandBool(30)) {
+                        AdHelper().showInterstitialAd();
+                      }
                       Navigator.pop(context);
                     } else if (result == Result.failed) {
                       isEditState.value = !isEditState.value;
