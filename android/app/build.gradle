@@ -58,8 +58,9 @@ android {
         minSdkVersion 19 // GoogleAdMobで最低限必要
         // minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
-        versionCode flutterVersionCode.toInteger()
-        versionName '2' // 直接指定しないとなぜかエラーになる
+        // 直接指定しないとなぜかエラーになる
+        versionCode 2
+        versionName '1.0.0'
         multiDexEnabled true // 64K問題対策
     }
 
